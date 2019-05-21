@@ -12,4 +12,10 @@ public interface TMDBApi {
             @Query("language") String language,
             @Query("page") int page
     );
+
+    @GET("genre/movie/list")
+    Call<GenresResponse> getGenres(
+            @Query("api_key") String apiKey,
+            @Query("language") String language
+    );
 }

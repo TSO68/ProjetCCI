@@ -14,9 +14,11 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
     private List<Movie> movies;
+    private List<Genre> allGenres;
 
-    public MoviesAdapter(List<Movie> movies) {
+    public MoviesAdapter(List<Movie> movies, List<Genre> allGenres) {
         this.movies = movies;
+        this.allGenres = allGenres;
     }
 
     @Override
@@ -49,11 +51,24 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             genres = itemView.findViewById(R.id.item_movie_genre);
         }
 
+        private String getGenres(List<Integer> genreIds) {
+            List<String> movieGenres = new ArrayList<>();
+            for (Integer genreId : genreIds) {
+                for (Genre genre : allGenres) {
+                    if (genre.getId() == genreId) {
+                        movieGenres.add(genre.getName());
+                        break;
+                    }
+                }
+            }
+            return TextUtils.join(", ", movieGenres);
+        }
+
         public void bind(Movie movie) {
             releaseDate.setText(movie.getReleaseDate().split("-")[0]);
             title.setText(movie.getTitle());
             rating.setText(String.valueOf(movie.getRating()));
-            genres.setText("");
+            genres.setText(getGenres(movie.getGenreIds()));
         }
     }
 }
