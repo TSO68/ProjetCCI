@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
+
+    private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
 
     private List<Movie> movies;
     private List<Genre> allGenres;
@@ -42,6 +47,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         TextView title;
         TextView rating;
         TextView genres;
+        ImageView poster;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
@@ -49,6 +55,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             title = itemView.findViewById(R.id.item_movie_title);
             rating = itemView.findViewById(R.id.item_movie_rating);
             genres = itemView.findViewById(R.id.item_movie_genre);
+            poster = itemView.findViewById(R.id.item_movie_poster);
         }
 
         private String getGenres(List<Integer> genreIds) {
@@ -69,6 +76,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             title.setText(movie.getTitle());
             rating.setText(String.valueOf(movie.getRating()));
             genres.setText(getGenres(movie.getGenreIds()));
+            Glide.with(itemView)
+                    .load(IMAGE_BASE_URL + movie.getPosterPath())
+                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                    .into(poster);
         }
     }
 }
