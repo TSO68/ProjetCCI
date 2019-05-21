@@ -13,4 +13,6 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="rechercher">Rechercher...</string>
+    <string name="movie_image_description">Image from the show</string>
 </resources>
