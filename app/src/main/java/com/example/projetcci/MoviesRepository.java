@@ -2,6 +2,8 @@ package com.example.projetcci;
 
 import android.support.annotation.NonNull;
 
+import java.util.Locale;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -11,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MoviesRepository {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
-    private static final String LANGUAGE = "fr-FR";
+    //private static final String LANGUAGE = "fr-FR";
 
     private static MoviesRepository repository;
 
@@ -34,8 +36,16 @@ public class MoviesRepository {
         return repository;
     }
 
+    public String getLocale() {
+        String countryCode = Locale.getDefault().getCountry();
+        String languageCode = Locale.getDefault().getLanguage();
+        String localeCode = languageCode + "-" + countryCode;
+
+        return localeCode;
+    }
+
     public void getMovies(final OnGetMoviesCallback callback) {
-        api.getMovies("d8cff699df1fc04a54ef922fa6ea35bc", LANGUAGE, 1)
+        api.getMovies("d8cff699df1fc04a54ef922fa6ea35bc", this.getLocale(), 1)
                 .enqueue(new Callback<MoviesResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
@@ -59,7 +69,7 @@ public class MoviesRepository {
     }
 
     public void getGenres(final OnGetGenresCallback callback) {
-        api.getGenres("d8cff699df1fc04a54ef922fa6ea35bc", LANGUAGE)
+        api.getGenres("d8cff699df1fc04a54ef922fa6ea35bc", this.getLocale())
                 .enqueue(new Callback<GenresResponse>() {
                     @Override
                     public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
