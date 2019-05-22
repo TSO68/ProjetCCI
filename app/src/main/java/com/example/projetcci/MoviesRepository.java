@@ -1,6 +1,7 @@
 package com.example.projetcci;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.Locale;
 
@@ -44,15 +45,16 @@ public class MoviesRepository {
         return localeCode;
     }
 
-    public void getMovies(final OnGetMoviesCallback callback) {
-        api.getMovies("d8cff699df1fc04a54ef922fa6ea35bc", this.getLocale(), 1)
+    public void getMovies(int page, final OnGetMoviesCallback callback) {
+        Log.d("MoviesRepository", "Next Page = " + page);
+        api.getMovies("d8cff699df1fc04a54ef922fa6ea35bc", this.getLocale(), page)
                 .enqueue(new Callback<MoviesResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
                         if (response.isSuccessful()) {
                             MoviesResponse moviesResponse = response.body();
                             if (moviesResponse != null && moviesResponse.getMovies() != null) {
-                                callback.onSuccess(moviesResponse.getMovies());
+                                callback.onSuccess(moviesResponse.getPage(), moviesResponse.getMovies());
                             } else {
                                 callback.onError();
                             }
