@@ -1,17 +1,14 @@
 package com.example.projetcci;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Genre {
 
-    @SerializedName("id")
-    @Expose
     private int id;
-
-    @SerializedName("name")
-    @Expose
     private String name;
+
+    public Genre(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public int getId() {
         return id;

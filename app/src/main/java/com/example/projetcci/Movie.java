@@ -1,46 +1,37 @@
 package com.example.projetcci;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class Movie {
 
-    private int myId;
-
-    @SerializedName("id")
-    @Expose
     private int id;
-
-    @SerializedName("title")
-    @Expose
     private String title;
-
-    @SerializedName("poster_path")
-    @Expose
+    private String overview;
     private String posterPath;
-
-    @SerializedName("release_date")
-    @Expose
-    private String releaseDate;
-
+    private String backdropPath;
     private int myRating;
+    private double TMDBRating;
+    private String releaseDate;
+    //private List<Genre> genres;
+    private int toSee;
+    private int seen;
+    private int favorite;
 
-    @SerializedName("vote_average")
-    @Expose
-    private float rating;
-
-    @SerializedName("genre_ids")
-    @Expose
-    private List<Integer> genreIds;
-
-    public int getMyId() {
-        return myId;
-    }
-
-    public void setMyId(int myId) {
-        this.myId = myId;
+    public Movie(int id, String title, String overview, String posterPath, String backdropPath, 
+                 int myRating, double TMDBRating, String releaseDate, /*List<Genre> genres, */
+                 int toSee, int seen, int favorite) {
+        this.id = id;
+        this.title = title;
+        this.overview = overview;
+        this.posterPath = posterPath;
+        this.backdropPath = backdropPath;
+        this.myRating = myRating;
+        this.TMDBRating = TMDBRating;
+        this.releaseDate = releaseDate;
+        //this.genres = genres;
+        this.toSee = toSee;
+        this.seen = seen;
+        this.favorite = favorite;
     }
 
     public int getId() {
@@ -59,6 +50,14 @@ public class Movie {
         this.title = title;
     }
 
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
     public String getPosterPath() {
         return posterPath;
     }
@@ -67,12 +66,12 @@ public class Movie {
         this.posterPath = posterPath;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getBackdropPath() {
+        return backdropPath;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
     }
 
     public int getMyRating() {
@@ -83,19 +82,51 @@ public class Movie {
         this.myRating = myRating;
     }
 
-    public float getRating() {
-        return rating;
+    public double getTMDBRating() {
+        return TMDBRating;
     }
 
-    public void setRating(float rating) {
-        this.rating = rating;
+    public void setTMDBRating(double TMDBRating) {
+        this.TMDBRating = TMDBRating;
     }
 
-    public List<Integer> getGenreIds() {
-        return genreIds;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    /*public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }*/
+
+    public int getToSee() {
+        return toSee;
+    }
+
+    public void setToSee(int toSee) {
+        this.toSee = toSee;
+    }
+
+    public int getSeen() {
+        return seen;
+    }
+
+    public void setSeen(int seen) {
+        this.seen = seen;
+    }
+
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
     }
 }

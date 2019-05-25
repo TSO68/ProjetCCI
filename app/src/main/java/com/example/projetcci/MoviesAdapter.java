@@ -19,11 +19,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
 
     private List<Movie> movies;
-    private List<Genre> allGenres;
+    //private List<Genre> allGenres;
 
-    public MoviesAdapter(List<Movie> movies, List<Genre> allGenres) {
+    public MoviesAdapter(List<Movie> movies/*, List<Genre> allGenres*/) {
         this.movies = movies;
-        this.allGenres = allGenres;
+        //this.allGenres = allGenres;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             poster = itemView.findViewById(R.id.item_movie_poster);
         }
 
-        private String getGenres(List<Integer> genreIds) {
+        /*private String getGenres(List<Integer> genreIds) {
             List<String> movieGenres = new ArrayList<>();
             for (Integer genreId : genreIds) {
                 for (Genre genre : allGenres) {
@@ -74,13 +74,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                 }
             }
             return TextUtils.join(", ", movieGenres);
-        }
+        }*/
 
         public void bind(Movie movie) {
             releaseDate.setText(movie.getReleaseDate().split("-")[0]);
             title.setText(movie.getTitle());
-            rating.setText(String.valueOf(movie.getRating()));
-            genres.setText(getGenres(movie.getGenreIds()));
+            rating.setText(String.valueOf(movie.getTMDBRating()));
+            //genres.setText(getGenres(movie.getGenres()));
             Glide.with(itemView)
                     .load(IMAGE_BASE_URL + movie.getPosterPath())
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))

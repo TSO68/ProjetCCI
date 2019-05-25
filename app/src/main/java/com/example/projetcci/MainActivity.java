@@ -1,12 +1,10 @@
 package com.example.projetcci;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+import android.text.TextUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -16,22 +14,37 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.example.projetcci.Constants.BASE_URL;
+import static com.example.projetcci.Constants.API_KEY;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RecyclerView moviesList;
+    private RecyclerView moviesView;
     private MoviesAdapter adapter;
+    private GridLayoutManager gridLayoutManager;
 
-    private MoviesRepository moviesRepository;
+    private List<Movie> moviesList;
+    private List<Genre> genresList;
 
-    private List<Genre> movieGenres;
-
-    private boolean isFetchingMovies;
     private int currentPage = 1;
+    private boolean search=false;
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,75 +60,69 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        moviesRepository = MoviesRepository.getInstance();
+        moviesView = (RecyclerView) findViewById(R.id.movies_list);
+        moviesList = new ArrayList<>();
+        load_movies(currentPage);
+        gridLayoutManager = new GridLayoutManager(this,1);
+        moviesView.setLayoutManager(gridLayoutManager);
+        adapter = new MoviesAdapter(moviesList);
+        moviesView.setAdapter(adapter);
 
-        moviesList = findViewById(R.id.movies_list);
-        moviesList.setLayoutManager(new LinearLayoutManager(this));
-
-        setupOnScrollListener();
-
-        getGenres();
     }
 
-    private void getMovies(int page) {
-        isFetchingMovies = true;
-        moviesRepository.getMovies(page, new OnGetMoviesCallback() {
-            @Override
-            public void onSuccess(int page, List<Movie> movies) {
-                Log.d("MoviesRepository", "Current Page = " + page);
-                if (adapter == null) {
-                    adapter = new MoviesAdapter(movies, movieGenres);
-                    moviesList.setAdapter(adapter);
-                } else {
-                    adapter.appendMovies(movies);
-                }
-                currentPage = page;
-                isFetchingMovies = false;
-            }
+    public String getLocale() {
+        String countryCode = Locale.getDefault().getCountry();
+        String languageCode = Locale.getDefault().getLanguage();
+        String localeCode = languageCode + "-" + countryCode;
 
-            @Override
-            public void onError() {
-                showError();
-            }
-        });
+        return localeCode;
     }
 
-    private void getGenres() {
-        moviesRepository.getGenres(new OnGetGenresCallback() {
+    private void load_movies(int id) {
+
+        AsyncTask<Integer, Void, Void> task = new AsyncTask<Integer, Void, Void>() {
             @Override
-            public void onSuccess(List<Genre> genres) {
-                movieGenres = genres;
-                getMovies(currentPage);
-            }
+            protected Void doInBackground(Integer... integers) {
 
-            @Override
-            public void onError() {
-                showError();
-            }
-        });
-    }
+                OkHttpClient client = new OkHttpClient();
 
-    private void showError() {
-        Toast.makeText(MainActivity.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
-    }
+                Request request = new Request.Builder()
+                        .url(BASE_URL + "/discover/movie?api_key=" + API_KEY + "&language=" + getLocale() + "&sort_by=popularity.desc&include_adult=false&include_video=false&page=" + integers[0])
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    JSONObject root = new JSONObject(response.body().string());
+                    JSONArray array = root.getJSONArray("results");
 
-    private void setupOnScrollListener() {
-        final LinearLayoutManager manager = new LinearLayoutManager(this);
-        moviesList.setLayoutManager(manager);
-        moviesList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                int totalItemCount = manager.getItemCount();
-                int visibleItemCount = manager.getChildCount();
-                int firstVisibleItem = manager.findFirstVisibleItemPosition();
+                    for (int i = 0; i < array.length(); i++) {
 
-                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
-                    if (!isFetchingMovies) {
-                        getMovies(currentPage + 1);
+                        JSONObject object = array.getJSONObject(i);
+                        Movie data = new Movie(object.getInt("id"), object.getString("title"),
+                                object.getString("overview"), object.getString("poster_path"),
+                                object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
+                                object.getString("release_date"), 0, 0, 0);
+                        if (TextUtils.isEmpty(data.getOverview())) {
+                            data.setOverview("Pas de description disponible");
+                        }
+                        moviesList.add(data);
                     }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    System.out.println("End of content");
                 }
+                return null;
             }
-        });
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                adapter.notifyDataSetChanged();
+            }
+        };
+
+        task.execute(id);
     }
 
     @Override
