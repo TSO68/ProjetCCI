@@ -1,5 +1,6 @@
 package com.example.projetcci;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +15,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SearchView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,10 +42,9 @@ public class MainActivity extends AppCompatActivity
     private GridLayoutManager gridLayoutManager;
 
     private List<Movie> moviesList;
-    private List<Genre> genresList;
 
     private int currentPage = 1;
-    private boolean search=false;
+    private boolean movieSearch = false;
 
     private static final String TAG = "MainActivity";
 
@@ -50,14 +52,17 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         moviesView = (RecyclerView) findViewById(R.id.movies_list);
@@ -68,14 +73,69 @@ public class MainActivity extends AppCompatActivity
         adapter = new MoviesAdapter(moviesList);
         moviesView.setAdapter(adapter);
 
+        final SearchView searchMovies = findViewById(R.id.searchView);
+        searchMovies.setFocusable(false);
+
+        searchMovies.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                load_search(query);
+                if (TextUtils.isEmpty(query)){
+                    currentPage=1;
+                    movieSearch = false;
+                    moviesList.clear();
+                    load_movies(currentPage);
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(searchMovies.getWindowToken(), 0);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() > 0) {
+                    load_search(newText);
+                } else {
+                    currentPage=1;
+                    movieSearch = false;
+                    moviesList.clear();
+                    load_movies(currentPage);
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(searchMovies.getWindowToken(), 0);
+                    return false;
+                }
+                return false; }
+        });
+
+        searchMovies.setOnCloseListener(new SearchView.OnCloseListener() {
+
+            @Override
+            public boolean onClose() {
+                currentPage=1;
+                movieSearch = false;
+                moviesList.clear();
+                load_movies(currentPage);
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchMovies.getWindowToken(), 0);
+                return false;
+            }
+        });
+
+        moviesView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == moviesList.size()-1){
+                    if (!movieSearch) {
+                        currentPage = currentPage + 1;
+                        load_movies(currentPage);
+                    }
+                }
+            }
+        });
     }
 
     public String getLocale() {
-        String countryCode = Locale.getDefault().getCountry();
-        String languageCode = Locale.getDefault().getLanguage();
-        String localeCode = languageCode + "-" + countryCode;
-
-        return localeCode;
+        return Locale.getDefault().getCountry() + "-" + Locale.getDefault().getLanguage();
     }
 
     private void load_movies(int id) {
@@ -123,6 +183,55 @@ public class MainActivity extends AppCompatActivity
         };
 
         task.execute(id);
+    }
+
+    private void load_search(final String search){
+
+        AsyncTask<String,Void,Void> task = new AsyncTask<String, Void, Void>() {
+            @Override
+            protected Void doInBackground(String... strings) {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(BASE_URL + "/search/movie?api_key=" + API_KEY + "&language=" + getLocale() + "&query=" +strings[0])
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    JSONObject root = new JSONObject(response.body().string());
+                    JSONArray array = root.getJSONArray("results");
+                    if (array.length()!=0){
+                        moviesList.clear();
+                        movieSearch=true;
+                        for (int i = 0; i < array.length(); i++){
+
+                            JSONObject object = array.getJSONObject(i);
+                            Movie data = new Movie(object.getInt("id"), object.getString("title"),
+                                    object.getString("overview"), object.getString("poster_path"),
+                                    object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
+                                    object.getString("release_date"), 0, 0, 0);
+                            if (TextUtils.isEmpty(data.getOverview())) {
+                                data.setOverview("Pas de description disponible");
+                            }
+                            moviesList.add(data);
+                        }
+                    }else{
+                        movieSearch=false;
+                        currentPage=1;
+                        //  Toast.makeText(getApplicationContext(), "Aucun résultat disponible" ,Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    System.out.println("End of content");
+                }
+
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                adapter.notifyDataSetChanged();
+            }
+        };
+        task.execute(search);
     }
 
     @Override
