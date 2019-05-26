@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         moviesView = (RecyclerView) findViewById(R.id.movies_list);
         moviesList = new ArrayList<>();
         load_movies(currentPage);
-        gridLayoutManager = new GridLayoutManager(this,1);
+        gridLayoutManager = new GridLayoutManager(this,2);
         moviesView.setLayoutManager(gridLayoutManager);
         adapter = new MoviesAdapter(moviesList);
         moviesView.setAdapter(adapter);

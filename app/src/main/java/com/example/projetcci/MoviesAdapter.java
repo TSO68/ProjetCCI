@@ -56,10 +56,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
         public MovieViewHolder(View itemView) {
             super(itemView);
-            releaseDate = itemView.findViewById(R.id.item_movie_release_date);
+            //releaseDate = itemView.findViewById(R.id.item_movie_release_date);
             title = itemView.findViewById(R.id.item_movie_title);
-            rating = itemView.findViewById(R.id.item_movie_rating);
-            genres = itemView.findViewById(R.id.item_movie_genre);
+            title.setSelected(true);
+            //rating = itemView.findViewById(R.id.item_movie_rating);
+            //genres = itemView.findViewById(R.id.item_movie_genre);
             poster = itemView.findViewById(R.id.item_movie_poster);
         }
 
@@ -77,9 +78,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         }*/
 
         public void bind(Movie movie) {
-            releaseDate.setText(movie.getReleaseDate().split("-")[0]);
+            //releaseDate.setText(movie.getReleaseDate().split("-")[0]);
             title.setText(movie.getTitle());
-            rating.setText(String.valueOf(movie.getTMDBRating()));
+            //rating.setText(String.valueOf(movie.getTMDBRating()));
             //genres.setText(getGenres(movie.getGenres()));
             Glide.with(itemView)
                     .load(IMAGE_BASE_URL + movie.getPosterPath())
