@@ -135,7 +135,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public String getLocale() {
-        return Locale.getDefault().getCountry() + "-" + Locale.getDefault().getLanguage();
+        String countryCode = Locale.getDefault().getCountry();
+        String languageCode = Locale.getDefault().getLanguage();
+        String localeCode = languageCode + "-" + countryCode;
+
+        return localeCode;
     }
 
     private void load_movies(int id) {

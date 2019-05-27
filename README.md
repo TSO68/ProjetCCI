@@ -12,7 +12,7 @@
 ## API
 
 * [TheMoviesDB API](https://www.themoviedb.org/?language=fr)
-* [Fournisseur de données](https://developers.themoviedb.org/3/getting-started/introduction)
+* [Documentation API](https://developers.themoviedb.org/3/getting-started/introduction)
 
 ## Librairies
 
