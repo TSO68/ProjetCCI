@@ -15,4 +15,5 @@
     <string name="menu_send">Send</string>
     <string name="rechercher">Rechercher...</string>
     <string name="movie_image_description">Image from the show</string>
+    <string name="no_description">Pas de description disponible</string>
 </resources>

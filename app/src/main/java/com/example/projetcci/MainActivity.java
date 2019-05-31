@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity
         load_movies(currentPage);
         gridLayoutManager = new GridLayoutManager(this,2);
         moviesView.setLayoutManager(gridLayoutManager);
-        adapter = new MoviesAdapter(moviesList);
+        adapter = new MoviesAdapter(this, moviesList);
         moviesView.setAdapter(adapter);
 
         final SearchView searchMovies = findViewById(R.id.searchView);
@@ -161,13 +163,27 @@ public class MainActivity extends AppCompatActivity
                     for (int i = 0; i < array.length(); i++) {
 
                         JSONObject object = array.getJSONObject(i);
+
+                        JSONArray genresIds = object.optJSONArray("genre_ids");
+                        ArrayList<String> genre = new ArrayList<String>();
+
+                        for (int j = 0; j < genresIds.length(); j++) {
+                            genre.add(genresIds.getString(j));
+                        }
+
                         Movie data = new Movie(object.getInt("id"), object.getString("title"),
                                 object.getString("overview"), object.getString("poster_path"),
                                 object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
-                                object.getString("release_date"), 0, 0, 0);
+                                object.getString("release_date"), genre, 0,0,0);
                         if (TextUtils.isEmpty(data.getOverview())) {
-                            data.setOverview("Pas de description disponible");
+                            data.setOverview(getString(R.string.no_description));
                         }
+
+                        if (object == null) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Object is null", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+
                         moviesList.add(data);
                     }
 
@@ -205,16 +221,31 @@ public class MainActivity extends AppCompatActivity
                     if (array.length()!=0){
                         moviesList.clear();
                         movieSearch=true;
-                        for (int i = 0; i < array.length(); i++){
+
+                        for (int i = 0; i < array.length(); i++) {
 
                             JSONObject object = array.getJSONObject(i);
+
+                            JSONArray genresIds = object.optJSONArray("genre_ids");
+                            ArrayList<String> genre = new ArrayList<String>();
+
+                            for (int j = 0; j < genresIds.length(); j++) {
+                                genre.add(genresIds.getString(j));
+                            }
+
                             Movie data = new Movie(object.getInt("id"), object.getString("title"),
                                     object.getString("overview"), object.getString("poster_path"),
                                     object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
-                                    object.getString("release_date"), 0, 0, 0);
+                                    object.getString("release_date"), genre, 0,0,0);
                             if (TextUtils.isEmpty(data.getOverview())) {
-                                data.setOverview("Pas de description disponible");
+                                data.setOverview(getString(R.string.no_description));
                             }
+
+                            if (object == null) {
+                                Toast toast = Toast.makeText(getApplicationContext(), "Object is null", Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+
                             moviesList.add(data);
                         }
                     }else{

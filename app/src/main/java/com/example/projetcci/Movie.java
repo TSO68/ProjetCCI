@@ -1,8 +1,9 @@
 package com.example.projetcci;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Movie {
+public class Movie implements Serializable {
 
     private int id;
     private String title;
@@ -12,13 +13,13 @@ public class Movie {
     private int myRating;
     private double TMDBRating;
     private String releaseDate;
-    //private List<Genre> genres;
+    private ArrayList<String> genres;
     private int toSee;
     private int seen;
     private int favorite;
 
     public Movie(int id, String title, String overview, String posterPath, String backdropPath, 
-                 int myRating, double TMDBRating, String releaseDate, /*List<Genre> genres, */
+                 int myRating, double TMDBRating, String releaseDate, ArrayList<String> genres,
                  int toSee, int seen, int favorite) {
         this.id = id;
         this.title = title;
@@ -28,7 +29,7 @@ public class Movie {
         this.myRating = myRating;
         this.TMDBRating = TMDBRating;
         this.releaseDate = releaseDate;
-        //this.genres = genres;
+        this.genres = genres;
         this.toSee = toSee;
         this.seen = seen;
         this.favorite = favorite;
@@ -98,13 +99,13 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    /*public List<Genre> getGenres() {
+    public ArrayList<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
-    }*/
+    }
 
     public int getToSee() {
         return toSee;
