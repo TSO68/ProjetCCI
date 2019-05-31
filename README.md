@@ -2,12 +2,15 @@
 
 ## TODO
 
-* Afficher la page des détails de chaque film
 * Gestion de la base de données locale SQLite avec statuts du visionnage, note perso etc...
 * Connexion avec l'API perso
 * Gestion des citations et des remarques
 * Gestion de l'authentification
 * Envoi de notifications
+
+### Non prioritaire
+* Améliorer le design de la page détail
+* Améliorer le design général
 
 ## API
 
