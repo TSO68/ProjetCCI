@@ -13,7 +13,7 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="rechercher">Rechercher...</string>
+    <string name="search_hint">Search a movie…</string>
     <string name="movie_image_description">Image from the show</string>
-    <string name="no_description">Pas de description disponible</string>
+    <string name="no_description">No description available</string>
 </resources>

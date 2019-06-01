@@ -2,8 +2,10 @@ package com.example.projetcci;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.Window;
 import android.widget.ImageView;
@@ -17,9 +19,10 @@ import static com.example.projetcci.Constants.IMAGE_BASE_URL;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    private ImageView image;
-    private TextView title, overview, releaseDate,synopsys,titre;
-    private static final String TAG = "Movidetail";
+    private ImageView backdrop_image, poster;
+    private TextView title, overview, releaseDate, genresList;
+    private RatingBar rating;
+    private static final String TAG = "MovieDetails";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,25 +30,37 @@ public class MovieDetailActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_movie_detail);
 
-        final FloatingActionButton seen = findViewById(R.id.buttonseen);
-        final FloatingActionButton tosee =findViewById(R.id.buttontosee);
+        /*final FloatingActionButton seen = findViewById(R.id.buttonseen);
+        final FloatingActionButton tosee =findViewById(R.id.buttontosee);*/
 
         final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
 
-        image = findViewById(R.id.backdrop);
-        title = findViewById(R.id.title);
-        releaseDate = findViewById(R.id.releaseDate);
-        RatingBar rating = (RatingBar) findViewById(R.id.ratingBar);
-        overview = findViewById(R.id.overview);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(details.getTitle());
+
+        backdrop_image = findViewById(R.id.movie_backdrop_image);
+        poster = findViewById(R.id.movie_poster);
+        title = findViewById(R.id.movie_title);
+        releaseDate = findViewById(R.id.movie_release_date);
+        rating = (RatingBar) findViewById(R.id.movie_rating_bar);
+        overview = findViewById(R.id.movie_overview);
+        genresList = findViewById(R.id.movie_genres);
 
         if (details != null){
 
             Glide.with(this)
                     .load(IMAGE_BASE_URL + details.getBackdropPath())
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
-                    .into(image);
+                    .into(backdrop_image);
+            Glide.with(this)
+                    .load(IMAGE_BASE_URL + details.getPosterPath())
+                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                    .into(poster);
             title.setText(details.getTitle());
-            releaseDate.setText(details.getReleaseDate());
+
+            String correctDate = formatDate(details.getReleaseDate());
+            releaseDate.setText(correctDate);
+
             overview.setText(details.getOverview());
             double d = details.getTMDBRating();
             float f = (float) d;
@@ -57,8 +72,17 @@ public class MovieDetailActivity extends AppCompatActivity {
                 genreStr += str + ", ";
             }
             genreStr = genreStr.length() > 0 ? genreStr.substring(0,genreStr.length() - 2) : genreStr;
-            //title.setText(genreStr);
+            genresList.setText(genreStr);
         }
+    }
+
+    public static String formatDate(@NonNull String date) {
+        String tempDate = date.replaceAll("-","");
+        String day = tempDate.substring(6, 8);
+        String month = tempDate.substring(4, 6);
+        String year = tempDate.substring(0, 4);
+        String newDate = day + "/" + month + "/" + year;
+        return newDate;
     }
 
     private String getGenreName(@NonNull String genreId) {

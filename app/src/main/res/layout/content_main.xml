@@ -9,7 +9,7 @@
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:queryHint="Rechercher un film"
+        android:queryHint="@string/search_hint"
         android:iconifiedByDefault="false"
         android:layout_marginTop="65dp"
         android:layout_marginBottom="10dp"
