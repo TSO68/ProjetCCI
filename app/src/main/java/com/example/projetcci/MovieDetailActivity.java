@@ -36,6 +36,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
 
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(details.getTitle());
 
         backdrop_image = findViewById(R.id.movie_backdrop_image);
@@ -151,5 +152,11 @@ public class MovieDetailActivity extends AppCompatActivity {
                 genreName = "Movie";
         }
         return genreName;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }
