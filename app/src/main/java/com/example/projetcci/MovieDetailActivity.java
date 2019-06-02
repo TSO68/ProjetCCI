@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Menu;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -157,6 +158,12 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp(){
         finish();
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.save_menu, menu);
         return true;
     }
 }
