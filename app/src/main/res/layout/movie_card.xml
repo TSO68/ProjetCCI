@@ -8,7 +8,8 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip">
 
         <RelativeLayout
             android:layout_width="170dip"
@@ -28,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/item_movie_poster"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dip"
+                android:layout_marginBottom="5dip"
                 android:layout_marginTop="5dip"
                 android:textSize="15sp"
                 android:textAlignment="center"
