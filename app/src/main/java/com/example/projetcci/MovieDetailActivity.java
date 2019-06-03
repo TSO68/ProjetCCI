@@ -1,7 +1,7 @@
 package com.example.projetcci;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +16,24 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Locale;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.example.projetcci.Constants.API_KEY;
+import static com.example.projetcci.Constants.BASE_URL;
 import static com.example.projetcci.Constants.IMAGE_BASE_URL;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
     private ImageView backdrop_image, poster;
-    private TextView title, overview, releaseDate, genresList;
+    private TextView title, overview, releaseDate, runtime, genresList;
     private RatingBar rating;
     private static final String TAG = "MovieDetails";
 
@@ -31,10 +43,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_movie_detail);
 
-        /*final FloatingActionButton seen = findViewById(R.id.buttonseen);
-        final FloatingActionButton tosee =findViewById(R.id.buttontosee);*/
-
         final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
+
+        new loadDetails().execute();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -44,6 +55,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         poster = findViewById(R.id.movie_poster);
         title = findViewById(R.id.movie_title);
         releaseDate = findViewById(R.id.movie_release_date);
+        runtime = findViewById(R.id.movie_runtime);
         rating = (RatingBar) findViewById(R.id.movie_rating_bar);
         overview = findViewById(R.id.movie_overview);
         genresList = findViewById(R.id.movie_genres);
@@ -76,6 +88,14 @@ public class MovieDetailActivity extends AppCompatActivity {
             genreStr = genreStr.length() > 0 ? genreStr.substring(0,genreStr.length() - 2) : genreStr;
             genresList.setText(genreStr);
         }
+    }
+
+    public String getLocale() {
+        String countryCode = Locale.getDefault().getCountry();
+        String languageCode = Locale.getDefault().getLanguage();
+        String localeCode = languageCode + "-" + countryCode;
+
+        return localeCode;
     }
 
     public static String formatDate(@NonNull String date) {
@@ -165,5 +185,41 @@ public class MovieDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.save_menu, menu);
         return true;
+    }
+
+    private class loadDetails extends AsyncTask<Void,Void,Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+            final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
+            int idMovie = details.getId();
+
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "/movie/" + idMovie + "?api_key=" + API_KEY + "&language=" + getLocale())
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                JSONObject root = new JSONObject(response.body().string());
+
+                int time = root.getInt("runtime");
+                return time;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            } catch (JSONException e) {
+                System.out.println("End of content");
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Integer time) {
+            runtime.setText(time + " min");
+        }
     }
 }
