@@ -9,12 +9,13 @@
 * Envoi de notifications
 
 ### Non prioritaire
+* Récupérer plus d'informations sur la page de détails
 * Améliorer le design de la page détail
 * Améliorer le design général
 
 ## API
 
-* [TheMoviesDB API](https://www.themoviedb.org/?language=fr)
+* [TheMovieDB API](https://www.themoviedb.org/?language=fr)
 * [Documentation API](https://developers.themoviedb.org/3/getting-started/introduction)
 
 ## Librairies
