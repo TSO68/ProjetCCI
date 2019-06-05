@@ -16,10 +16,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import okhttp3.OkHttpClient;
@@ -33,7 +35,7 @@ import static com.example.projetcci.Constants.IMAGE_BASE_URL;
 public class MovieDetailActivity extends AppCompatActivity {
 
     private ImageView backdrop_image, poster;
-    private TextView title, overview, releaseDate, runtime, genresList;
+    private TextView title, overview, releaseDate, runtime, genresList, castList;
     private RatingBar rating;
     private static final String TAG = "MovieDetails";
 
@@ -46,6 +48,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
 
         new loadDetails().execute();
+        new loadCast().execute();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -59,6 +62,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         rating = (RatingBar) findViewById(R.id.movie_rating_bar);
         overview = findViewById(R.id.movie_overview);
         genresList = findViewById(R.id.movie_genres);
+        castList = findViewById(R.id.movie_cast);
 
         if (details != null){
 
@@ -220,6 +224,60 @@ public class MovieDetailActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer time) {
             runtime.setText(time + " min");
+        }
+    }
+
+    private class loadCast extends AsyncTask<Void,Void, ArrayList<String>> {
+
+        @Override
+        protected ArrayList<String> doInBackground(Void... voids) {
+
+            final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
+            int idMovie = details.getId();
+
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "/movie/" + idMovie + "/credits?api_key=" + API_KEY)
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                JSONObject root = new JSONObject(response.body().string());
+                JSONArray array = root.getJSONArray("cast");
+
+                ArrayList<String> cast = new ArrayList<String>();
+
+                for (int i = 0; i < 10; i++) {
+
+                    JSONObject object = array.getJSONObject(i);
+
+                    String name = object.getString("name");
+                    String character = object.getString("character");
+                    String member = name + " (" + character + ")";
+
+                    cast.add(member);
+                }
+
+                return cast;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            } catch (JSONException e) {
+                System.out.println("End of content");
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> cast) {
+            String castStr = "";
+            for (String str : cast) {
+                castStr += str + ", ";
+            }
+            castStr = castStr.length() > 0 ? castStr.substring(0,castStr.length() - 2) : castStr;
+            castList.setText(castStr);
         }
     }
 }

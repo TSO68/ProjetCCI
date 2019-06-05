@@ -124,6 +124,33 @@
                 android:justificationMode="inter_word"
                 android:layout_margin="16dp" />
 
+            <TextView
+                android:id="@+id/cast_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/movie_overview"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="Distribution"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/secondDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/cast_title"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/movie_cast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/secondDivider"
+                android:justificationMode="inter_word"
+                android:layout_margin="16dp" />
+
         </RelativeLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>
