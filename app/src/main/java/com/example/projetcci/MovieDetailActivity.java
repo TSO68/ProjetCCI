@@ -8,10 +8,12 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -45,13 +47,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_movie_detail);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        final MovieManager m = new MovieManager(this);
+        m.open();
+
         final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
 
         new loadDetails().execute();
         new loadCast().execute();
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(details.getTitle());
 
         backdrop_image = findViewById(R.id.movie_backdrop_image);
@@ -63,6 +69,26 @@ public class MovieDetailActivity extends AppCompatActivity {
         overview = findViewById(R.id.movie_overview);
         genresList = findViewById(R.id.movie_genres);
         castList = findViewById(R.id.movie_cast);
+
+        if(m.CheckMovie(details.getId())){
+            Movie movie = m.getMovie(details.getId());
+            details.setSeen(movie.getSeen());
+            details.setToSee(movie.getToSee());
+            if (movie.getSeen() == 1){
+                actionBar.setIcon(R.drawable.ic_close);
+            }else {
+                actionBar.setIcon(R.drawable.ic_done);
+            }
+            if (movie.getFavorite() ==1 ){
+                actionBar.setIcon(R.drawable.ic_star);
+            }else{
+                actionBar.setIcon(R.drawable.ic_star_border);
+            }
+        }else{
+            m.createMovie(details);
+            actionBar.setIcon(R.drawable.ic_done);
+            actionBar.setIcon(R.drawable.ic_star_border);
+        }
 
         if (details != null){
 
@@ -189,6 +215,41 @@ public class MovieDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.save_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
+
+        switch (item.getItemId()){
+            case R.id.action_seen:
+                if(details.getSeen() == 1){
+                    details.setSeen(0);
+                    item.setIcon(R.drawable.ic_close);
+                    Toast.makeText(getApplicationContext(),"Retiré des films vus", Toast.LENGTH_LONG).show();
+                }else{
+                    details.setSeen(1);
+                    item.setIcon(R.drawable.ic_done);
+                    Toast.makeText(getApplicationContext(),"Ajouté aux films vus", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            case R.id.action_save:
+                if(details.getSeen() == 1){
+                    details.setSeen(0);
+                    item.setIcon(R.drawable.ic_star_border);
+                    Toast.makeText(getApplicationContext(),"Retiré des coups de coeur", Toast.LENGTH_LONG).show();
+                }else{
+                    details.setSeen(1);
+                    item.setIcon(R.drawable.ic_star);
+                    Toast.makeText(getApplicationContext(),"Ajouté aux coups de coeur", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            case R.id.action_settings:
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private class loadDetails extends AsyncTask<Void,Void,Integer> {
