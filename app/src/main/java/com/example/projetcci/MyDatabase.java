@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MyDatabase extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "db.mymovies";
+    private static final String DATABASE_NAME = "mymovies.sqlite";
     private static final int DATABASE_VERSION = 1;
     private static MyDatabase sInstance;
 

@@ -1,7 +1,10 @@
 package com.example.projetcci;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -39,6 +44,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ImageView backdrop_image, poster;
     private TextView title, overview, releaseDate, runtime, genresList, castList;
     private RatingBar rating;
+    private Button tosee, seen, favorite;
+    private Drawable playlist_add, playlist_add_check, done, close, star, star_border;
+
     private static final String TAG = "MovieDetails";
 
     @Override
@@ -49,6 +57,21 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        tosee = findViewById(R.id.button_to_see);
+        seen = findViewById(R.id.button_seen);
+        favorite = findViewById(R.id.button_favorite);
+
+        playlist_add = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_playlist_add);
+        playlist_add_check = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_playlist_add_check);
+        done = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_done);
+        close = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_close);
+        star = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star);
+        star_border = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_border);
+        //done = getApplicationContext().getResources().getDrawable(R.drawable.ic_done);
+        //close = getApplicationContext().getResources().getDrawable(R.drawable.ic_close);
+        //star = getApplicationContext().getResources().getDrawable(R.drawable.ic_star);
+        //star_border = getApplicationContext().getResources().getDrawable(R.drawable.ic_star_border);
 
         final MovieManager m = new MovieManager(this);
         m.open();
@@ -70,24 +93,106 @@ public class MovieDetailActivity extends AppCompatActivity {
         genresList = findViewById(R.id.movie_genres);
         castList = findViewById(R.id.movie_cast);
 
+        tosee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(details.getToSee() == 1){
+                    details.setToSee(0);
+                    tosee.setCompoundDrawablesWithIntrinsicBounds(null, playlist_add,null,null);
+                    //seen.setImageResource(R.drawable.ic_done);
+                    Toast.makeText(getApplicationContext(),"Retiré des films à voir", Toast.LENGTH_SHORT).show();
+                }else{
+                    details.setToSee(1);
+                    tosee.setCompoundDrawablesWithIntrinsicBounds(null, playlist_add_check,null,null);
+                    //seen.setImageResource(R.drawable.ic_close);
+                    Toast.makeText(getApplicationContext(),"Ajouté aux films à voir", Toast.LENGTH_SHORT).show();
+                }
+                m.updateMovie(details);
+            }
+        });
+
+        seen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(details.getSeen() == 1){
+                    details.setSeen(0);
+                    seen.setCompoundDrawablesWithIntrinsicBounds(null, done,null,null);
+                    //seen.setImageResource(R.drawable.ic_done);
+                    Toast.makeText(getApplicationContext(),"Retiré des films vus", Toast.LENGTH_SHORT).show();
+                }else{
+                    details.setSeen(1);
+                    seen.setCompoundDrawablesWithIntrinsicBounds(null, close,null,null);
+                    //seen.setImageResource(R.drawable.ic_close);
+                    Toast.makeText(getApplicationContext(),"Ajouté aux films vus", Toast.LENGTH_SHORT).show();
+                }
+                m.updateMovie(details);
+            }
+        });
+
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(details.getFavorite() == 1){
+                    details.setFavorite(0);
+                    favorite.setCompoundDrawablesWithIntrinsicBounds( null, star_border, null, null);
+                    //favorite.setImageResource(R.drawable.ic_star_border);
+                    Toast.makeText(getApplicationContext(),"Retiré des favoris", Toast.LENGTH_SHORT).show();
+                }else{
+                    details.setFavorite(1);
+                    favorite.setCompoundDrawablesWithIntrinsicBounds( null, star, null, null);
+                    //favorite.setImageResource(R.drawable.ic_star);
+                    Toast.makeText(getApplicationContext(),"Ajouté aux favoris", Toast.LENGTH_SHORT).show();
+                }
+                m.updateMovie(details);
+            }
+        });
+
         if(m.CheckMovie(details.getId())){
             Movie movie = m.getMovie(details.getId());
-            details.setSeen(movie.getSeen());
             details.setToSee(movie.getToSee());
-            if (movie.getSeen() == 1){
+            details.setSeen(movie.getSeen());
+            details.setFavorite(movie.getFavorite());
+
+            if (movie.getToSee() == 1){
                 actionBar.setIcon(R.drawable.ic_close);
+                //seen.setImageResource(R.drawable.ic_close);
+                tosee.setCompoundDrawablesWithIntrinsicBounds(null, playlist_add_check,null,null);
             }else {
                 actionBar.setIcon(R.drawable.ic_done);
+                //seen.setImageResource(R.drawable.ic_done);
+                tosee.setCompoundDrawablesWithIntrinsicBounds(null, playlist_add,null,null);
             }
-            if (movie.getFavorite() ==1 ){
+
+            if (movie.getSeen() == 1){
+                actionBar.setIcon(R.drawable.ic_close);
+                //seen.setImageResource(R.drawable.ic_close);
+                seen.setCompoundDrawablesWithIntrinsicBounds(null, close,null,null );
+            }else {
+                actionBar.setIcon(R.drawable.ic_done);
+                //seen.setImageResource(R.drawable.ic_done);
+                seen.setCompoundDrawablesWithIntrinsicBounds(null, done,null,null);
+            }
+
+            if (movie.getFavorite() == 1){
                 actionBar.setIcon(R.drawable.ic_star);
+                //favorite.setImageResource(R.drawable.ic_star);
+                favorite.setCompoundDrawablesWithIntrinsicBounds(null, star,null,null);
             }else{
                 actionBar.setIcon(R.drawable.ic_star_border);
+                //favorite.setImageResource(R.drawable.ic_star_border);
+                favorite.setCompoundDrawablesWithIntrinsicBounds(null, star_border,null,null);
             }
         }else{
             m.createMovie(details);
             actionBar.setIcon(R.drawable.ic_done);
             actionBar.setIcon(R.drawable.ic_star_border);
+
+            /*seen.setImageResource(R.drawable.ic_done);
+            favorite.setImageResource(R.drawable.ic_star_border);*/
+
+            tosee.setCompoundDrawablesWithIntrinsicBounds(null, playlist_add,null,null);
+            seen.setCompoundDrawablesWithIntrinsicBounds( null, done, null, null );
+            favorite.setCompoundDrawablesWithIntrinsicBounds( null, star_border, null, null);
         }
 
         if (details != null){
@@ -139,7 +244,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private String getGenreName(@NonNull String genreId) {
         String genreName;
-        
+
         switch(genreId)
         {
             case "28":
@@ -217,40 +322,47 @@ public class MovieDetailActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
+        m.open();
+
+        Movie movie = m.getMovie(details.getId());
+        details.setSeen(movie.getSeen());
+        details.setFavorite(movie.getFavorite());
 
         switch (item.getItemId()){
             case R.id.action_seen:
                 if(details.getSeen() == 1){
                     details.setSeen(0);
-                    item.setIcon(R.drawable.ic_close);
+                    item.setIcon(R.drawable.ic_done);
                     Toast.makeText(getApplicationContext(),"Retiré des films vus", Toast.LENGTH_LONG).show();
                 }else{
                     details.setSeen(1);
-                    item.setIcon(R.drawable.ic_done);
+                    item.setIcon(R.drawable.ic_close);
                     Toast.makeText(getApplicationContext(),"Ajouté aux films vus", Toast.LENGTH_LONG).show();
                 }
+                m.updateMovie(details);
                 return true;
             case R.id.action_save:
-                if(details.getSeen() == 1){
-                    details.setSeen(0);
+                if(details.getFavorite() == 1){
+                    details.setFavorite(0);
                     item.setIcon(R.drawable.ic_star_border);
                     Toast.makeText(getApplicationContext(),"Retiré des coups de coeur", Toast.LENGTH_LONG).show();
                 }else{
-                    details.setSeen(1);
+                    details.setFavorite(1);
                     item.setIcon(R.drawable.ic_star);
                     Toast.makeText(getApplicationContext(),"Ajouté aux coups de coeur", Toast.LENGTH_LONG).show();
                 }
+                m.updateMovie(details);
                 return true;
             case R.id.action_settings:
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     private class loadDetails extends AsyncTask<Void,Void,Integer> {
 

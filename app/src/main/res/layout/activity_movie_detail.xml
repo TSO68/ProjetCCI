@@ -151,6 +151,36 @@
                 android:justificationMode="inter_word"
                 android:layout_margin="16dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/movie_cast"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_to_see"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_playlist_add"
+                    android:text="À voir" />
+
+                <Button
+                    android:id="@+id/button_seen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_done"
+                    android:text="Vu" />
+
+                <Button
+                    android:id="@+id/button_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_star_border"
+                    android:text="Favori" />
+            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>
