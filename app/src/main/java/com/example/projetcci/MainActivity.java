@@ -1,6 +1,7 @@
 package com.example.projetcci;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -306,14 +307,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent;
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_search) {
+            intent = new Intent(getApplicationContext(), MainActivity.class);
+            getApplicationContext().startActivity(intent);
+        } else if (id == R.id.nav_to_see) {
+            intent = new Intent(getApplicationContext(), ToSeeActivity.class);
+            getApplicationContext().startActivity(intent);
+        } else if (id == R.id.nav_seen) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_favorite) {
 
         } else if (id == R.id.nav_share) {
 
