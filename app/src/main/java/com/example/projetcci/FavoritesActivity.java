@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToSeeActivity extends AppCompatActivity
+public class FavoritesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView moviesView;
@@ -55,7 +55,7 @@ public class ToSeeActivity extends AppCompatActivity
 
         final MovieManager m = new MovieManager(this);
         m.open();
-        Cursor c = m.getMoviesToSee();
+        Cursor c = m.getMoviesFavorite();
         if (c.moveToFirst())
         {
             do {
@@ -141,3 +141,4 @@ public class ToSeeActivity extends AppCompatActivity
         return true;
     }
 }
+

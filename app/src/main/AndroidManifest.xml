@@ -12,11 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".FavoritesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".SeenActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ToSeeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MovieDetailActivity" />
         <activity
             android:name=".MainActivity"

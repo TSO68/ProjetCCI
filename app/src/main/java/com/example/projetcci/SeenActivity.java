@@ -128,7 +128,8 @@ public class SeenActivity extends AppCompatActivity
             intent = new Intent(getApplicationContext(), SeenActivity.class);
             getApplicationContext().startActivity(intent);
         } else if (id == R.id.nav_favorite) {
-
+            intent = new Intent(getApplicationContext(), FavoritesActivity.class);
+            getApplicationContext().startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
