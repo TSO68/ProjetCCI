@@ -316,7 +316,8 @@ public class MainActivity extends AppCompatActivity
             intent = new Intent(getApplicationContext(), ToSeeActivity.class);
             getApplicationContext().startActivity(intent);
         } else if (id == R.id.nav_seen) {
-
+            intent = new Intent(getApplicationContext(), SeenActivity.class);
+            getApplicationContext().startActivity(intent);
         } else if (id == R.id.nav_favorite) {
 
         } else if (id == R.id.nav_share) {

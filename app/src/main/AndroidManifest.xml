@@ -11,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ToSeeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+        <activity
+            android:name=".SeenActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ToSeeActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MovieDetailActivity" />
         <activity
             android:name=".MainActivity"
