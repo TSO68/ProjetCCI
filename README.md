@@ -1,7 +1,6 @@
 # Projet d'application Android / CCI
 
 ## TODO
-* Gestion de la base de données locale SQLite avec statuts du visionnage, note perso à améliorer + affichage des pages concernées
 * Connexion avec l'API perso
 * Gestion des citations et des remarques
 * Gestion de l'authentification
@@ -9,6 +8,8 @@
 
 ### Non prioritaire
 * Récupérer plus d'informations sur la page de détails
+* Récupérer les genres pour les films de la BDD locale
+* Améliorer la gestion de la base de données locales (id local, note perso, etc...)
 * Améliorer le design de la page détail
 * Améliorer le design général
 
