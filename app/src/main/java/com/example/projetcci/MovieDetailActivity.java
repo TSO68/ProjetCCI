@@ -99,11 +99,11 @@ public class MovieDetailActivity extends AppCompatActivity {
                 if(details.getToSee() == 1){
                     details.setToSee(0);
                     tosee.setCompoundDrawablesWithIntrinsicBounds(null, playlist_add,null,null);
-                    Toast.makeText(getApplicationContext(),"Retiré des films à voir", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.remove_to_see), Toast.LENGTH_SHORT).show();
                 }else{
                     details.setToSee(1);
                     tosee.setCompoundDrawablesWithIntrinsicBounds(null, playlist_add_check,null,null);
-                    Toast.makeText(getApplicationContext(),"Ajouté aux films à voir", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.add_to_see), Toast.LENGTH_SHORT).show();
                 }
                 m.updateMovie(details);
             }
@@ -117,11 +117,11 @@ public class MovieDetailActivity extends AppCompatActivity {
                 if(details.getSeen() == 1){
                     details.setSeen(0);
                     seen.setCompoundDrawablesWithIntrinsicBounds(null, done,null,null);
-                    Toast.makeText(getApplicationContext(),"Retiré des films vus", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.remove_seen), Toast.LENGTH_SHORT).show();
                 }else{
                     details.setSeen(1);
                     seen.setCompoundDrawablesWithIntrinsicBounds(null, close,null,null);
-                    Toast.makeText(getApplicationContext(),"Ajouté aux films vus", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.add_seen), Toast.LENGTH_SHORT).show();
                 }
                 m.updateMovie(details);
             }
@@ -134,11 +134,11 @@ public class MovieDetailActivity extends AppCompatActivity {
                 if(details.getFavorite() == 1){
                     details.setFavorite(0);
                     favorite.setCompoundDrawablesWithIntrinsicBounds( null, star_border, null, null);
-                    Toast.makeText(getApplicationContext(),"Retiré des favoris", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.remove_favorite), Toast.LENGTH_SHORT).show();
                 }else{
                     details.setFavorite(1);
                     favorite.setCompoundDrawablesWithIntrinsicBounds( null, star, null, null);
-                    Toast.makeText(getApplicationContext(),"Ajouté aux favoris", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),getString(R.string.add_favorite), Toast.LENGTH_SHORT).show();
                 }
                 m.updateMovie(details);
             }
