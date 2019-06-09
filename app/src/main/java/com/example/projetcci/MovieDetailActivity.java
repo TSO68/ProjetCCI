@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -37,6 +36,9 @@ import static com.example.projetcci.Constants.API_KEY;
 import static com.example.projetcci.Constants.BASE_URL;
 import static com.example.projetcci.Constants.IMAGE_BASE_URL;
 
+/**
+ * Display detaillled informations of each movie
+ */
 public class MovieDetailActivity extends AppCompatActivity {
 
     private ImageView backdrop_image, poster;
@@ -60,6 +62,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         seen = findViewById(R.id.button_seen);
         favorite = findViewById(R.id.button_favorite);
 
+        //Retrieve drawable to display
         playlist_add = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_playlist_add);
         playlist_add_check = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_playlist_add_check);
         done = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_done);
@@ -67,9 +70,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         star = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star);
         star_border = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_border);
 
+        //Open DB
         final MovieManager m = new MovieManager(this);
         m.open();
 
+        //Get values from the concerned list activity (Main, ToSee, etc...)
         final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
 
         new loadDetails().execute();
@@ -87,6 +92,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         genresList = findViewById(R.id.movie_genres);
         castList = findViewById(R.id.movie_cast);
 
+        //Set the movie as to see and update DB
         tosee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +109,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
 
+        //Set the movie as seen and update DB
+        //Update icons of each button
         seen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +127,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
 
+        //Set the movie as favorite and update the DB
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,6 +144,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
 
+        //Check if movie exists and DB, add it if not
+        //Set icons of each button
         if(m.CheckMovie(details.getId())){
             Movie movie = m.getMovie(details.getId());
             details.setToSee(movie.getToSee());
@@ -166,6 +177,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             favorite.setCompoundDrawablesWithIntrinsicBounds( null, star_border, null, null);
         }
 
+        //Display details
         if (details != null){
 
             Glide.with(this)
@@ -178,6 +190,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                     .into(poster);
             title.setText(details.getTitle());
 
+            //Correct date style
             String correctDate = formatDate(details.getReleaseDate());
             releaseDate.setText(correctDate);
 
@@ -196,6 +209,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Search the Locale of the device
+     * @return a string with language-country of the device
+     */
     public String getLocale() {
         String countryCode = Locale.getDefault().getCountry();
         String languageCode = Locale.getDefault().getLanguage();
@@ -204,15 +221,30 @@ public class MovieDetailActivity extends AppCompatActivity {
         return localeCode;
     }
 
-    public static String formatDate(@NonNull String date) {
-        String tempDate = date.replaceAll("-","");
-        String day = tempDate.substring(6, 8);
-        String month = tempDate.substring(4, 6);
-        String year = tempDate.substring(0, 4);
-        String newDate = day + "/" + month + "/" + year;
-        return newDate;
+    /**
+     *
+     * @param date string of the date retrieved from API
+     * @return reformatted date if needed
+     */
+    public String formatDate(@NonNull String date) {
+        //Format date if Locale if the device isn't US based
+        if (!getLocale().equals("en-US")) {
+            String tempDate = date.replaceAll("-","");
+            String day = tempDate.substring(6, 8);
+            String month = tempDate.substring(4, 6);
+            String year = tempDate.substring(0, 4);
+            String newDate = day + "/" + month + "/" + year;
+            return newDate;
+        }else{
+            return date;
+        }
     }
 
+    /**
+     * Get the genre name of each id
+     * @param genreId from API
+     * @return genre name
+     */
     private String getGenreName(@NonNull String genreId) {
         String genreName;
 
@@ -281,12 +313,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         return genreName;
     }
 
-    @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
-    }
-
+    /**
+     * Retrieve some additionnal details of each movie, that "discover" didn't display
+     */
     private class loadDetails extends AsyncTask<Void,Void,Integer> {
 
         @Override
@@ -305,6 +334,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 Response response = client.newCall(request).execute();
                 JSONObject root = new JSONObject(response.body().string());
 
+                //Get JSON with result from request
                 int time = root.getInt("runtime");
                 return time;
 
@@ -317,12 +347,19 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Set the textView runtime
+         * @param time retrieved from API
+         */
         @Override
         protected void onPostExecute(Integer time) {
             runtime.setText(time + " min");
         }
     }
 
+    /**
+     * Retrieve cast of each movie
+     */
     private class loadCast extends AsyncTask<Void,Void, ArrayList<String>> {
 
         @Override
@@ -338,6 +375,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                     .build();
 
             try {
+                //Get JSON with results from request
                 Response response = client.newCall(request).execute();
                 JSONObject root = new JSONObject(response.body().string());
                 JSONArray array = root.getJSONArray("cast");
@@ -348,10 +386,12 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                     JSONObject object = array.getJSONObject(i);
 
+                    //Get actor and character names and put it in one single string
                     String name = object.getString("name");
                     String character = object.getString("character");
                     String member = name + " (" + character + ")";
 
+                    //Add it to a List
                     cast.add(member);
                 }
 
@@ -366,6 +406,10 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Set the textView castList
+         * @param cast retrieved from API
+         */
         @Override
         protected void onPostExecute(ArrayList<String> cast) {
             String castStr = "";
@@ -375,5 +419,11 @@ public class MovieDetailActivity extends AppCompatActivity {
             castStr = castStr.length() > 0 ? castStr.substring(0,castStr.length() - 2) : castStr;
             castList.setText(castStr);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

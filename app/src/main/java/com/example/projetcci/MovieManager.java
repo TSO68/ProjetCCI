@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * Manage local database
+ */
 public class MovieManager {
 
     private static final String TABLE_NAME = "movies";
@@ -23,6 +26,7 @@ public class MovieManager {
     public static final String KEY_SEEN = "seen";
     public static final String KEY_FAVORITE = "favorite";
 
+    //Create the table movies in the DB
     public static final String CREATE_MOVIE_TABLE = "CREATE TABLE "+TABLE_NAME+
             " (" +
             " "+KEY_ID_MOVIE+" INTEGER primary key," +
@@ -40,21 +44,28 @@ public class MovieManager {
     private MyDatabase myDataBaseSQLite;
     private SQLiteDatabase db;
 
+    //Get the DB instance
     public MovieManager(Context context)
     {
         myDataBaseSQLite = MyDatabase.getInstance(context);
     }
 
+    //Allow to open the DB
     public void open()
     {
         db = myDataBaseSQLite.getWritableDatabase();
     }
 
+    //Allow to close the DB
     public void close()
     {
         db.close();
     }
 
+    /**
+     * Create a movie in DB
+     * @param movie object
+     */
     public long createMovie(Movie movie) {
 
         ContentValues values = new ContentValues();
@@ -80,6 +91,10 @@ public class MovieManager {
         return db.insert(TABLE_NAME,null,values);
     }
 
+    /**
+     * Update a movie in DB
+     * @param movie object
+     */
     public int updateMovie(Movie movie) {
 
         ContentValues values = new ContentValues();
@@ -106,6 +121,10 @@ public class MovieManager {
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
 
+    /**
+     * Delete a movie in DB
+     * @param movie object
+     */
     public int deleteMovie(Movie movie) {
 
         String where = KEY_ID_MOVIE + " = ?";
@@ -114,6 +133,10 @@ public class MovieManager {
         return db.delete(TABLE_NAME, where, whereArgs);
     }
 
+    /**
+     * Get movie informations from DB
+     * @param id of the movie
+     */
     public Movie getMovie(int id) {
 
         ArrayList<String> genres = new ArrayList<String>();
@@ -149,6 +172,10 @@ public class MovieManager {
         return a;
     }
 
+    /**
+     * Check if movie exists in DB
+     * @param id of the movie
+     */
     public Boolean CheckMovie(int id) {
 
         ArrayList<String> genres = new ArrayList<String>();
@@ -166,18 +193,30 @@ public class MovieManager {
 
     }
 
+    /**
+     * Get list of movies to see
+     */
     public Cursor getMoviesToSee(){
         return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_TOSEE + "=1",null);
     }
 
+    /**
+     * Get list of movies seen
+     */
     public Cursor getMoviesSeen(){
         return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_SEEN + "=1",null);
     }
 
+    /**
+     * Get list of favorites movies
+     */
     public Cursor getMoviesFavorite(){
         return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_FAVORITE + "=1",null);
     }
 
+    /**
+     * Get all movies in DB
+     */
     public Cursor getMovies() {
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }

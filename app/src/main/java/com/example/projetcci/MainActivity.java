@@ -37,6 +37,9 @@ import okhttp3.Response;
 import static com.example.projetcci.Constants.BASE_URL;
 import static com.example.projetcci.Constants.API_KEY;
 
+/**
+ * Display the "discover" list from TMDB and search movies
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         final SearchView searchMovies = findViewById(R.id.searchView);
         searchMovies.setFocusable(false);
 
+        //Search new movies on submit in the SearchView
         searchMovies.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -94,6 +98,7 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
 
+            //Search new movies on each change in the SearchView
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.length() > 0) {
@@ -110,8 +115,8 @@ public class MainActivity extends AppCompatActivity
                 return false; }
         });
 
+        //Reload the "discover" list when the Searchview is emptied
         searchMovies.setOnCloseListener(new SearchView.OnCloseListener() {
-
             @Override
             public boolean onClose() {
                 currentPage=1;
@@ -124,6 +129,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //Add new movies on display when scrolling
         moviesView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -137,6 +143,10 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * Search the Locale of the device
+     * @return a string with language-country of the device
+     */
     public String getLocale() {
         String countryCode = Locale.getDefault().getCountry();
         String languageCode = Locale.getDefault().getLanguage();
@@ -145,6 +155,10 @@ public class MainActivity extends AppCompatActivity
         return localeCode;
     }
 
+    /**
+     * Load movies from the "discover" list of TMDB API
+     * @param id number of the page from the list
+     */
     private void load_movies(int id) {
 
         AsyncTask<Integer, Void, Void> task = new AsyncTask<Integer, Void, Void>() {
@@ -157,6 +171,7 @@ public class MainActivity extends AppCompatActivity
                         .url(BASE_URL + "/discover/movie?api_key=" + API_KEY + "&language=" + getLocale() + "&sort_by=popularity.desc&include_adult=false&include_video=false&page=" + integers[0])
                         .build();
                 try {
+                    //Get JSON with results from request
                     Response response = client.newCall(request).execute();
                     JSONObject root = new JSONObject(response.body().string());
                     JSONArray array = root.getJSONArray("results");
@@ -165,6 +180,7 @@ public class MainActivity extends AppCompatActivity
 
                         JSONObject object = array.getJSONObject(i);
 
+                        //Get the genre ids list of each movies
                         JSONArray genresIds = object.optJSONArray("genre_ids");
                         ArrayList<String> genre = new ArrayList<String>();
 
@@ -172,19 +188,23 @@ public class MainActivity extends AppCompatActivity
                             genre.add(genresIds.getString(j));
                         }
 
+                        //Get datas of each movies
                         Movie data = new Movie(object.getInt("id"), object.getString("title"),
                                 object.getString("overview"), object.getString("poster_path"),
                                 object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
                                 object.getString("release_date"), genre, 0,0,0);
+                        //Replace overview if empty
                         if (TextUtils.isEmpty(data.getOverview())) {
                             data.setOverview(getString(R.string.no_description));
                         }
 
+                        //Show if JSON is null
                         if (object == null) {
                             Toast toast = Toast.makeText(getApplicationContext(), "Object is null", Toast.LENGTH_LONG);
                             toast.show();
                         }
 
+                        //Add data to the list of movies
                         moviesList.add(data);
                     }
 
@@ -206,6 +226,10 @@ public class MainActivity extends AppCompatActivity
         task.execute(id);
     }
 
+    /**
+     * Get movies from the user's search
+     * @param search string get from the SearchView
+     */
     private void load_search(final String search){
 
         AsyncTask<String,Void,Void> task = new AsyncTask<String, Void, Void>() {
@@ -216,10 +240,11 @@ public class MainActivity extends AppCompatActivity
                         .url(BASE_URL + "/search/movie?api_key=" + API_KEY + "&language=" + getLocale() + "&query=" +strings[0])
                         .build();
                 try {
+                    //Get JSON with results from request
                     Response response = client.newCall(request).execute();
                     JSONObject root = new JSONObject(response.body().string());
                     JSONArray array = root.getJSONArray("results");
-                    if (array.length()!=0){
+                    if (array.length()!=0){ //If results exist
                         moviesList.clear();
                         movieSearch=true;
 
@@ -227,6 +252,7 @@ public class MainActivity extends AppCompatActivity
 
                             JSONObject object = array.getJSONObject(i);
 
+                            //Get the genre ids list of each movies
                             JSONArray genresIds = object.optJSONArray("genre_ids");
                             ArrayList<String> genre = new ArrayList<String>();
 
@@ -234,22 +260,26 @@ public class MainActivity extends AppCompatActivity
                                 genre.add(genresIds.getString(j));
                             }
 
+                            //Get datas of each movies
                             Movie data = new Movie(object.getInt("id"), object.getString("title"),
                                     object.getString("overview"), object.getString("poster_path"),
                                     object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
                                     object.getString("release_date"), genre, 0,0,0);
+                            //Replace overview if empty
                             if (TextUtils.isEmpty(data.getOverview())) {
                                 data.setOverview(getString(R.string.no_description));
                             }
 
+                            //Show if JSON is null
                             if (object == null) {
                                 Toast toast = Toast.makeText(getApplicationContext(), "Object is null", Toast.LENGTH_LONG);
                                 toast.show();
                             }
 
+                            //Add data to the list of movies
                             moviesList.add(data);
                         }
-                    }else{
+                    }else{ //If no results
                         movieSearch=false;
                         currentPage=1;
                         //  Toast.makeText(getApplicationContext(), "Aucun résultat disponible" ,Toast.LENGTH_SHORT).show();
@@ -270,6 +300,7 @@ public class MainActivity extends AppCompatActivity
         task.execute(search);
     }
 
+    //When back button is pressed
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -302,6 +333,9 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Open the drawer menu and send user on the desired activity
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

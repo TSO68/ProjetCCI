@@ -17,6 +17,9 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Display the list of favorite movies
+ */
 public class FavoritesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,6 +56,7 @@ public class FavoritesActivity extends AppCompatActivity
 
         ArrayList<String> genresList = new ArrayList<String>();
 
+        //Open the DB and retrieve informations of favorite movies
         final MovieManager m = new MovieManager(this);
         m.open();
         Cursor c = m.getMoviesFavorite();
@@ -79,6 +83,7 @@ public class FavoritesActivity extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
+    //When back button is pressed
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -111,6 +116,9 @@ public class FavoritesActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Open the drawer menu and send the user on the desired activity
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

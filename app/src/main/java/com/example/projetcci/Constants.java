@@ -1,5 +1,8 @@
 package com.example.projetcci;
 
+/**
+ * Constants for TMDB API
+ */
 public final class Constants {
 
     public static final String BASE_URL = "https://api.themoviedb.org/3";

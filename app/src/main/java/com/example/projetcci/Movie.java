@@ -3,6 +3,9 @@ package com.example.projetcci;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class with informations needed from each movie
+ */
 public class Movie implements Serializable {
 
     private int id;

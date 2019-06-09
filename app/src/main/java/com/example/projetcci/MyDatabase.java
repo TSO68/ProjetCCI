@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Create the local database
+ */
 public class MyDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "mymovies.sqlite";
