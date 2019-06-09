@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ProjetCCI</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="add_favorite">Ajouté aux favoris</string>
+    <string name="add_seen">Ajouté aux films vus</string>
+    <string name="add_to_see">Ajouté aux films à voir</string>
+    <string name="button_favorite">Favori</string>
+    <string name="button_seen">Vu</string>
+    <string name="button_to_see">A voir</string>
+    <string name="cast">Distribution</string>
+    <string name="menu_favorite">Favoris</string>
+    <string name="menu_search">Rechercher</string>
+    <string name="menu_seen">Vus</string>
+    <string name="menu_send">Envoyer</string>
+    <string name="menu_share">Partager</string>
+    <string name="menu_to_see">À voir</string>
+    <string name="movie_image_description">Image du film</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="navigation_drawer_close">Fermer le menu</string>
+    <string name="navigation_drawer_open">Ouvrir le menu</string>
+    <string name="no_cast">Pas d\'informations disponibles sur la distribution du film</string>
+    <string name="no_description">Pas de résumé du film disponible</string>
+    <string name="remove_favorite">Retiré des favoris</string>
+    <string name="remove_seen">Retiré des films vus</string>
+    <string name="remove_to_see">Retiré des films à voir</string>
+    <string name="search_hint">Rechercher un film…</string>
+</resources>
