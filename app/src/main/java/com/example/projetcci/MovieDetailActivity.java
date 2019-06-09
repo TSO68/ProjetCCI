@@ -336,6 +336,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                 //Get JSON with result from request
                 int time = root.getInt("runtime");
+
                 return time;
 
             } catch (IOException e) {
@@ -353,6 +354,10 @@ public class MovieDetailActivity extends AppCompatActivity {
          */
         @Override
         protected void onPostExecute(Integer time) {
+            //Replace if time is null in TMDB API
+            if (String.valueOf(time).equals("null")){
+                time = 0;
+            }
             runtime.setText(time + " min");
         }
     }
@@ -413,11 +418,18 @@ public class MovieDetailActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<String> cast) {
             String castStr = "";
-            for (String str : cast) {
-                castStr += str + ", ";
+
+            //Replace if cast is null in TMDB API
+            if (cast == null) {
+                castStr = getResources().getString(R.string.no_cast);
+                castList.setText(castStr);
+            }else {
+                for (String str : cast) {
+                    castStr += str + ", ";
+                }
+                castStr = castStr.length() > 0 ? castStr.substring(0,castStr.length() - 2) : castStr;
+                castList.setText(castStr);
             }
-            castStr = castStr.length() > 0 ? castStr.substring(0,castStr.length() - 2) : castStr;
-            castList.setText(castStr);
         }
     }
 
