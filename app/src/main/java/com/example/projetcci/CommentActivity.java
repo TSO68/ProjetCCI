@@ -19,6 +19,9 @@ import java.util.HashMap;
 
 import static com.example.projetcci.Constants.CUSTOM_BASE_URL;
 
+/**
+ * Send comments on remote database
+ */
 public class CommentActivity extends AppCompatActivity {
 
     EditText editAuthor, editText;
@@ -40,6 +43,7 @@ public class CommentActivity extends AppCompatActivity {
 
         btnSend = (Button) findViewById(R.id.btnSend);
 
+        //Send the comment
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +52,10 @@ public class CommentActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Create the comment and put it in a Hashmap, call the request
+     * with the AsyncTask below
+     */
     private void createComment() {
         String author = editAuthor.getText().toString().trim();
         String text = editText.getText().toString().trim();
@@ -71,11 +79,20 @@ public class CommentActivity extends AppCompatActivity {
         request.execute();
     }
 
+    /**
+     * Class which calls the RequestHandler for the adequate request
+     */
     private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         String url;
         HashMap<String, String> params;
         int requestCode;
 
+        /**
+         * Constructor of the API request
+         * @param url of the request
+         * @param params Hashmap with the author and the text
+         * @param requestCode request code
+         */
         PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode) {
             this.url = url;
             this.params = params;
@@ -86,6 +103,7 @@ public class CommentActivity extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             RequestHandler requestHandler = new RequestHandler();
 
+            //Controls if the request match the code
             if (requestCode == CODE_POST_REQUEST) {
                 return requestHandler.sendPostRequest(url, params);
             }
@@ -93,6 +111,10 @@ public class CommentActivity extends AppCompatActivity {
             return null;
         }
 
+        /**
+         * Show a Toast message if the request works
+         * @param s the request
+         */
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -108,6 +130,9 @@ public class CommentActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Back to previous activity
+     */
     @Override
     public boolean onSupportNavigateUp(){
         finish();

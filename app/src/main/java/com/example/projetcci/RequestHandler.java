@@ -14,22 +14,26 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * Call the custom API
+ */
 public class RequestHandler {
-    //Method to send httpPostRequest
-    //This method is taking two arguments
-    //First argument is the URL of the script to which we will send the request
-    //Other is an HashMap with name value pairs containing the data to be send with the request
+
+    /**
+     * Method to send httpPostRequest
+     * @param requestURL URL of the script to which the request will be sent
+     * @param postDataParams HashMap with name value pairs containing the data to be send with the request
+     * @return
+     */
     public String sendPostRequest(String requestURL,
                                   HashMap<String, String> postDataParams) {
-        //Creating a URL
+        //Creating the URL
         URL url;
 
-        //StringBuilder object to store the message retrieved from the server
+        //StringBuilder : object to store the message retrieved from the server
         StringBuilder sb = new StringBuilder();
         try {
-            //Initializing Url
             url = new URL(requestURL);
-
 
             //Creating an htmlurl connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -72,6 +76,12 @@ public class RequestHandler {
         return sb.toString();
     }
 
+    /**
+     * Get the data string for the POST request
+     * @param params Hashmap with the data for the request
+     * @return the result of the POST request
+     * @throws UnsupportedEncodingException
+     */
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;

@@ -433,6 +433,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Back to previous activity
+     */
     @Override
     public boolean onSupportNavigateUp(){
         finish();
