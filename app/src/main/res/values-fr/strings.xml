@@ -13,7 +13,7 @@
     <string name="menu_search">Rechercher</string>
     <string name="menu_seen">Vus</string>
     <string name="menu_send">Envoyer</string>
-    <string name="menu_share">Partager</string>
+    <string name="menu_share">Donner votre avis</string>
     <string name="menu_to_see">À voir</string>
     <string name="movie_image_description">Image du film</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -27,4 +27,11 @@
     <string name="remove_seen">Retiré des films vus</string>
     <string name="remove_to_see">Retiré des films à voir</string>
     <string name="search_hint">Rechercher un film…</string>
+    <string name="comment_text">Votre commentaire</string>
+    <string name="comment_explanation">Cet espace vous permet de donner votre avis sur l\'application, vos idées d\'améliorations ou tout ce qui peut aider notre équipe de développeurs d\'élite</string>
+    <string name="comment_author">Votre nom</string>
+    <string name="comment_send">Envoyer</string>
+    <string name="comment_sent">Commentaire envoyé</string>
+    <string name="error_author">Veuillez saisir un nom</string>
+    <string name="error_text">Veuillez saisir un commentaire</string>
 </resources>

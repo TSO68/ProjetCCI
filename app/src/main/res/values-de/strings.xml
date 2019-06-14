@@ -27,4 +27,11 @@
     <string name="remove_seen">Gesehene Filmen entfernen</string>
     <string name="remove_to_see">Aus der Filmeliste herausnehmen</string>
     <string name="search_hint">Ein Film suchen…</string>
+    <string name="comment_explanation">\?</string>
+    <string name="comment_author">Ihr Name</string>
+    <string name="comment_text">Ihre Bemerkung</string>
+    <string name="comment_send">Senden</string>
+    <string name="comment_sent">\?</string>
+    <string name="error_author">\?</string>
+    <string name="error_text">\?</string>
 </resources>

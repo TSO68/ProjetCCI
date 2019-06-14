@@ -16,7 +16,7 @@
     <string name="menu_to_see">To see</string>
     <string name="menu_seen">Seen</string>
     <string name="menu_favorite">Favorites</string>
-    <string name="menu_share">Share</string>
+    <string name="menu_share">Give your opinion</string>
     <string name="menu_send">Send</string>
 
     <!-- content_main.xml -->
@@ -41,4 +41,14 @@
     <string name="button_seen">Seen</string>
     <string name="button_favorite">Favorite</string>
 
+    <!-- activity_comment.xml -->
+    <string name="comment_explanation">This space allows you to give your opinion on this application, your ideas for improvements, or anything that can help our team of elite developers</string>
+    <string name="comment_author">Your name</string>
+    <string name="comment_text">Your comment</string>
+    <string name="comment_send">Send</string>
+
+    <!-- CommentActivity -->
+    <string name="error_author">Please enter a name</string>
+    <string name="error_text">Please enter a comment</string>
+    <string name="comment_sent">Comment sent</string>
 </resources>
