@@ -27,11 +27,11 @@
     <string name="remove_seen">Gesehene Filmen entfernen</string>
     <string name="remove_to_see">Aus der Filmeliste herausnehmen</string>
     <string name="search_hint">Ein Film suchen…</string>
-    <string name="comment_explanation">\?</string>
     <string name="comment_author">Ihr Name</string>
     <string name="comment_text">Ihre Bemerkung</string>
     <string name="comment_send">Senden</string>
-    <string name="comment_sent">\?</string>
-    <string name="error_author">\?</string>
-    <string name="error_text">\?</string>
+    <string name="comment_sent">Bemerkung gesendet</string>
+    <string name="error_author">Bitte, einen Namen eingeben</string>
+    <string name="error_text">Bitte, eine Bemerkung eingeben</string>
+    <string name="comment_explanation">Dieser Bereich steht ihnen zu Verfügung, ihre Ansicht über die Applikation zu geben, um Ideen weiter zu entwickeln, und alles was den besten Entwicklerteam helfen kann</string>
 </resources>
