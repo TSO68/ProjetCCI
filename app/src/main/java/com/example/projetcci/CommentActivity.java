@@ -36,7 +36,7 @@ public class CommentActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(getString(R.string.menu_share));
+        actionBar.setTitle(getString(R.string.menu_opinion));
 
         editAuthor = (EditText) findViewById(R.id.editAuthor);
         editText = (EditText) findViewById(R.id.editText);

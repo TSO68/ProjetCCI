@@ -16,7 +16,7 @@
     <string name="menu_to_see">To see</string>
     <string name="menu_seen">Seen</string>
     <string name="menu_favorite">Favorites</string>
-    <string name="menu_share">Give your opinion</string>
+    <string name="menu_opinion">Give your opinion</string>
     <string name="menu_send">Send</string>
 
     <!-- content_main.xml -->
