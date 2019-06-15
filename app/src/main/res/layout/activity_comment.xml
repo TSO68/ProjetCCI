@@ -9,8 +9,7 @@
         android:id="@+id/explanation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:layout_marginBottom="10dip"
+        android:layout_margin="10dip"
         android:text="@string/comment_explanation"
         android:textSize="18sp"
         android:justificationMode="inter_word"
@@ -21,16 +20,15 @@
         android:id="@+id/firstDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
         android:background="?android:attr/listDivider" />
 
     <EditText
         android:id="@+id/editAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:layout_marginBottom="10dip"
+        android:layout_margin="10dip"
         android:inputType="textPersonName"
         android:hint="@string/comment_author" />
 
@@ -38,8 +36,10 @@
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:layout_marginBottom="10dip"
+        android:layout_marginTop="20dip"
+        android:layout_marginBottom="20dip"
+        android:layout_marginStart="10dip"
+        android:layout_marginEnd="10dip"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:hint="@string/comment_text" />
@@ -49,6 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
+        android:layout_marginStart="5dip"
+        android:layout_marginEnd="5dip"
         android:text="@string/comment_send" />
 
 </LinearLayout>
