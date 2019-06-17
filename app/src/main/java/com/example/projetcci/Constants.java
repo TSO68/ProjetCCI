@@ -11,5 +11,5 @@ public final class Constants {
     public static final String API_KEY = "d8cff699df1fc04a54ef922fa6ea35bc";
 
     //Custom API
-    public static final String CUSTOM_BASE_URL = "http://projetcci.tk/api/v1/Api.php?apicall=createcomment";
+    public static final String CUSTOM_BASE_URL = "https://projetcci.tk/api/v1/Api.php?apicall=createcomment";
 }

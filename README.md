@@ -21,7 +21,7 @@
 
 ### Perso
 * [ProjetCCI-API](https://github.com/TSO68/ProjetCCI-API)
-* [projetcci.tk](http://projetcci.tk/)
+* [projetcci.tk](https://projetcci.tk/)
 
 ## Librairies & Outils
 * [OkHttp](https://square.github.io/okhttp/)
