@@ -96,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         //Check the email content and pattern
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editNewEmail.setError("Please enter a valid email address");
+            editNewEmail.setError(getString(R.string.check_email));
             valid = false;
         } else {
             editNewEmail.setError(null);
@@ -104,7 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         //Check the password content and length
         if (password.isEmpty() || password.length() < 4) {
-            editNewPassword.setError("Password need more than 4 characters");
+            editNewPassword.setError(getString(R.string.check_password));
             valid = false;
         } else {
             editNewPassword.setError(null);
@@ -112,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         //Check the confirmed password content, length and matching with password
         if (confirmPassword.isEmpty() || confirmPassword.length() < 4 || !(confirmPassword.equals(password))) {
-            editConfirmPassword.setError("Password does not match");
+            editConfirmPassword.setError(getString(R.string.check_confirmed_password));
             valid = false;
         } else {
             editConfirmPassword.setError(null);
@@ -135,7 +135,7 @@ public class SignUpActivity extends AppCompatActivity {
         //Charging indicator while the account creation
         final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
+        progressDialog.setMessage(getString(R.string.creating_account));
         progressDialog.show();
 
         String email = editNewEmail.getText().toString();
@@ -147,11 +147,11 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(SignUpActivity.this,"Sign up successful",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.sign_up_successful), Toast.LENGTH_LONG).show();
                     startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(SignUpActivity.this,"Sign up failed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.sign_up_failed), Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                 }
             }
@@ -162,7 +162,7 @@ public class SignUpActivity extends AppCompatActivity {
      * Shows a Toast message if email, password and confirmed password didn't respect norms
      */
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), getString(R.string.sign_up_failed), Toast.LENGTH_LONG).show();
     }
 
     /**

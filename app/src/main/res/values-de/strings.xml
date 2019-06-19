@@ -45,4 +45,13 @@
     <string name="sign_up_to_projetcci">\?</string>
     <string name="your_email">\?</string>
     <string name="your_password">\?</string>
+    <string name="authenticating">\?</string>
+    <string name="check_email">\?</string>
+    <string name="check_password">\?</string>
+    <string name="log_in_failed">\?</string>
+    <string name="log_in_successful">\?</string>
+    <string name="check_confirmed_password">\?</string>
+    <string name="creating_account">\?</string>
+    <string name="sign_up_failed">\?</string>
+    <string name="sign_up_successful">\?</string>
 </resources>

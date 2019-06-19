@@ -57,12 +57,24 @@
     <!-- activity_login.xml -->
     <!-- activity_signup.xml -->
     <string name="log_in_to_projetcci">Log in to ProjetCCI</string>
-    <string name="your_email">Your Email</string>
-    <string name="your_password">Your Password</string>
+    <string name="your_email">Your email</string>
+    <string name="your_password">Your password</string>
     <string name="log_in">Log in</string>
     <string name="no_account_yet_create_one">No account yet ? Create one</string>
     <string name="sign_up_to_projetcci">Sign up to ProjetCCI</string>
-    <string name="confirm_your_password">Confirm Your Password</string>
+    <string name="confirm_your_password">Confirm your password</string>
     <string name="sign_up">Sign up</string>
     <string name="already_a_member_login">Already a member ? Log in</string>
+
+    <!-- LoginActivity -->
+    <!-- SignUpActivity -->
+    <string name="check_email">Please enter a valid email address</string>
+    <string name="check_password">Password needs more than 4 characters</string>
+    <string name="authenticating">Authenticating...</string>
+    <string name="log_in_successful">Log in successful</string>
+    <string name="log_in_failed">Log in failed</string>
+    <string name="check_confirmed_password">Password does not match</string>
+    <string name="creating_account">Creating account...</string>
+    <string name="sign_up_successful">Sign up successful</string>
+    <string name="sign_up_failed">Sign up failed</string>
 </resources>

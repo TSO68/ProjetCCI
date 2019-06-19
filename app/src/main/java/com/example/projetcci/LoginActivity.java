@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Check the email content and pattern
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editEmail.setError("Please enter a valid email address");
+            editEmail.setError(getString(R.string.check_email));
             valid = false;
         } else {
             editEmail.setError(null);
@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Check the password content and length
         if (password.isEmpty() || password.length() < 4) {
-            editPassword.setError("Password needs more than 4 characters");
+            editPassword.setError(getString(R.string.check_password));
             valid = false;
         } else {
             editEmail.setError(null);
@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
         //Charging indicator while authenticating
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage(getString(R.string.authenticating));
         progressDialog.show();
 
         final String email = editEmail.getText().toString();
@@ -133,12 +133,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this,"Log in successful",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.log_in_successful), Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(LoginActivity.this,"Log in failed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.log_in_failed), Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                 }
             }
@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
      * Shows a Toast message if email and password didn't respect norms
      */
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Log in failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), getString(R.string.log_in_failed), Toast.LENGTH_LONG).show();
         btnLogin.setEnabled(true);
     }
 
