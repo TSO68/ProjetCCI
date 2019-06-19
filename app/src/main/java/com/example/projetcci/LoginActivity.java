@@ -18,6 +18,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Log in to the app
+ */
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -30,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
+    /**
+     * If the user is logged, it will redirect on MainActivity
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -54,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        //Log in
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //Open SignUpActivity
         linkSignup.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
@@ -73,12 +80,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Check if email and password respect norms
+     * @return valid true or false
+     */
     public boolean validate() {
         boolean valid = true;
 
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
 
+        //Check the email content and pattern
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editEmail.setError("Please enter a valid email address");
             valid = false;
@@ -86,8 +98,9 @@ public class LoginActivity extends AppCompatActivity {
             editEmail.setError(null);
         }
 
+        //Check the password content and length
         if (password.isEmpty() || password.length() < 4) {
-            editPassword.setError("Password need more than 4 characters");
+            editPassword.setError("Password needs more than 4 characters");
             valid = false;
         } else {
             editEmail.setError(null);
@@ -95,13 +108,18 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
+    /**
+     * Connect to the app via FireBase
+     */
     public void log_in() {
 
+        //Check the validation of the login form
         if (!validate()) {
             onLoginFailed();
             return;
         }
 
+        //Charging indicator while authenticating
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
@@ -110,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
         final String email = editEmail.getText().toString();
         final String password = editPassword.getText().toString();
 
+        //Firebase authenticating with email and password
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -126,11 +145,20 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Shows a Toast message if email and password didn't respect norms
+     */
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Log in failed", Toast.LENGTH_LONG).show();
         btnLogin.setEnabled(true);
     }
 
+    /**
+     * By default, the Activity finishs and user is logged automatically
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
@@ -140,6 +168,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Prevent user to go back on MainActivity when he signs out
+     */
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

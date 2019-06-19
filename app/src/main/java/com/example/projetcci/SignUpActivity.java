@@ -19,6 +19,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Signing up to the app
+ */
 public class SignUpActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -28,8 +31,11 @@ public class SignUpActivity extends AppCompatActivity {
     Button btnSignup;
     TextView linkLogin;
 
-    private static final String TAG = "SignupActivity";
+    private static final String TAG = "SignUpActivity";
 
+    /**
+     * If the user is logged, it will redirect on MainActivity
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -58,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        //Sign up
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        //Open LoginActivity
         linkLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +83,10 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Check if email and passwords respect norms
+     * @return valid true or false
+     */
     public boolean validate() {
         boolean valid = true;
 
@@ -82,6 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password = editNewPassword.getText().toString();
         String confirmPassword = editConfirmPassword.getText().toString();
 
+        //Check the email content and pattern
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editNewEmail.setError("Please enter a valid email address");
             valid = false;
@@ -89,6 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
             editNewEmail.setError(null);
         }
 
+        //Check the password content and length
         if (password.isEmpty() || password.length() < 4) {
             editNewPassword.setError("Password need more than 4 characters");
             valid = false;
@@ -96,6 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
             editNewPassword.setError(null);
         }
 
+        //Check the confirmed password content, length and matching with password
         if (confirmPassword.isEmpty() || confirmPassword.length() < 4 || !(confirmPassword.equals(password))) {
             editConfirmPassword.setError("Password does not match");
             valid = false;
@@ -106,14 +121,18 @@ public class SignUpActivity extends AppCompatActivity {
         return valid;
     }
 
+    /**
+     * Sign up to the app via Firebase
+     */
     public void sign_up() {
-        Log.d(TAG, "Signup");
 
+        //Check the validation of the signup form
         if (!validate()) {
             onSignupFailed();
             return;
         }
 
+        //Charging indicator while the account creation
         final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
@@ -123,6 +142,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password = editNewPassword.getText().toString();
         String confirmPassword = editConfirmPassword.getText().toString();
 
+        ////Firebase account creating with email and password
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -138,10 +158,16 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Shows a Toast message if email, password and confirmed password didn't respect norms
+     */
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Sends user on LoginActivity
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -149,6 +175,9 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Back to LoginActivity
+     */
     @Override
     public boolean onSupportNavigateUp(){
         Intent intent = new Intent(this, LoginActivity.class);
