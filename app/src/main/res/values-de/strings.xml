@@ -34,4 +34,15 @@
     <string name="error_author">Bitte, einen Namen eingeben</string>
     <string name="error_text">Bitte, eine Bemerkung eingeben</string>
     <string name="comment_explanation">Dieser Bereich steht ihnen zu Verfügung, ihre Ansicht über die Applikation zu geben, um Ideen weiter zu entwickeln, und alles was den besten Entwicklerteam helfen kann</string>
+    <string name="communicate">\?</string>
+    <string name="log_out">\?</string>
+    <string name="already_a_member_login">\?</string>
+    <string name="log_in">\?</string>
+    <string name="log_in_to_projetcci">\?</string>
+    <string name="no_account_yet_create_one">\?</string>
+    <string name="confirm_your_password">\?</string>
+    <string name="sign_up">\?</string>
+    <string name="sign_up_to_projetcci">\?</string>
+    <string name="your_email">\?</string>
+    <string name="your_password">\?</string>
 </resources>

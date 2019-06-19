@@ -16,8 +16,10 @@
     <string name="menu_to_see">To see</string>
     <string name="menu_seen">Seen</string>
     <string name="menu_favorite">Favorites</string>
+    <string name="communicate">Communicate</string>
     <string name="menu_opinion">Give your opinion</string>
     <string name="menu_send">Send</string>
+    <string name="log_out">Log out</string>
 
     <!-- content_main.xml -->
     <string name="search_hint">Search a movie…</string>
@@ -51,4 +53,16 @@
     <string name="error_author">Please enter a name</string>
     <string name="error_text">Please enter a comment</string>
     <string name="comment_sent">Comment sent</string>
+
+    <!-- activity_login.xml -->
+    <!-- activity_signup.xml -->
+    <string name="log_in_to_projetcci">Log in to ProjetCCI</string>
+    <string name="your_email">Your Email</string>
+    <string name="your_password">Your Password</string>
+    <string name="log_in">Log in</string>
+    <string name="no_account_yet_create_one">No account yet ? Create one</string>
+    <string name="sign_up_to_projetcci">Sign up to ProjetCCI</string>
+    <string name="confirm_your_password">Confirm Your Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_a_member_login">Already a member ? Log in</string>
 </resources>
