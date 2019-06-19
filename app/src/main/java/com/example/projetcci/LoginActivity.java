@@ -20,15 +20,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
-    private static final int REQUEST_SIGNUP = 0;
-
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
-    EditText emailEditText, passwordEditText;
-    Button loginButton;
-    TextView link;
+    EditText editEmail, editPassword;
+    Button btnLogin;
+    TextView linkSignup;
+
+    private static final String TAG = "LoginActivity";
+    private static final int REQUEST_SIGNUP = 0;
 
     @Override
     protected void onStart() {
@@ -47,72 +47,94 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        emailEditText = findViewById(R.id.input_email);
-        passwordEditText = findViewById(R.id.input_password);
-        loginButton = findViewById(R.id.btn_login);
-        link = findViewById(R.id.link_signup);
+        editEmail = (EditText) findViewById(R.id.editEmail);
+        editPassword = (EditText)findViewById(R.id.editPassword);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        linkSignup = (TextView) findViewById(R.id.linkSignup);
 
         mAuth = FirebaseAuth.getInstance();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                log_in();
             }
         });
 
-        link.setOnClickListener(new View.OnClickListener() {
+        linkSignup.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // Start the Signup activity
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
                 finish();
 
             }
         });
-
-
-
     }
 
-    public void login() {
+    public boolean validate() {
+        boolean valid = true;
+
+        String email = editEmail.getText().toString();
+        String password = editPassword.getText().toString();
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editEmail.setError("Please enter a valid email address");
+            valid = false;
+        } else {
+            editEmail.setError(null);
+        }
+
+        if (password.isEmpty() || password.length() < 4) {
+            editPassword.setError("Password need more than 4 characters");
+            valid = false;
+        } else {
+            editEmail.setError(null);
+        }
+        return valid;
+    }
+
+    public void log_in() {
 
         if (!validate()) {
             onLoginFailed();
             return;
         }
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme);
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        final String email = emailEditText.getText().toString();
-        final String password = passwordEditText.getText().toString();
+        final String email = editEmail.getText().toString();
+        final String password = editPassword.getText().toString();
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
                 if (task.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this,"Log in successful",Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
-                }else {
-                    Toast.makeText(LoginActivity.this,"Login Failed!!!",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(LoginActivity.this,"Log in failed",Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                 }
             }
         });
     }
 
+    public void onLoginFailed() {
+        Toast.makeText(getBaseContext(), "Log in failed", Toast.LENGTH_LONG).show();
+        btnLogin.setEnabled(true);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-                // By default we just finish the Activity and log them in automatically
                 this.finish();
             }
         }
@@ -120,40 +142,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Disable going back to the MainActivity
         moveTaskToBack(true);
     }
-
-    public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
-        loginButton.setEnabled(true);
-
-    }
-
-    //for checking the if used enterd the information or not if not it won't allow the user to the login
-    public boolean validate() {
-        boolean valid = true;
-
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("enter a valid email address");
-            valid = false;
-        } else {
-            emailEditText.setError(null);
-        }
-
-        if (password.isEmpty() || password.length() < 4) {
-            passwordEditText.setError("more 4 characters");
-            valid = false;
-        } else {
-            passwordEditText.setError(null);
-        }
-        return valid;
-    }
-
-
-
 }

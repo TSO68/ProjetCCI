@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,8 @@ import java.util.List;
  */
 public class SeenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    FirebaseUser currentUser;
 
     private RecyclerView moviesView;
     private MoviesAdapter adapter;
@@ -143,6 +148,13 @@ public class SeenActivity extends AppCompatActivity
             getApplicationContext().startActivity(intent);
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_disconnect) {
+            FirebaseAuth.getInstance().signOut();
+
+            if ( currentUser == null) {
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                getApplicationContext().startActivity(intent);
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

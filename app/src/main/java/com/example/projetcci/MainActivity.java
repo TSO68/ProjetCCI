@@ -21,6 +21,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +45,8 @@ import static com.example.projetcci.Constants.API_KEY;
  */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    FirebaseUser currentUser;
 
     private RecyclerView moviesView;
     private MoviesAdapter adapter;
@@ -360,6 +365,13 @@ public class MainActivity extends AppCompatActivity
             getApplicationContext().startActivity(intent);
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_disconnect) {
+            FirebaseAuth.getInstance().signOut();
+
+            if ( currentUser == null) {
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                getApplicationContext().startActivity(intent);
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

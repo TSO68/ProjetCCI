@@ -3,6 +3,7 @@ package com.example.projetcci;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,14 +21,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private static final String TAG = "SignupActivity";
-
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
-    EditText emailEditText, passwordEditText, repasswordEditText;
-    Button signupButton;
-    TextView link;
+    EditText editNewEmail, editNewPassword, editReEnterPassword;
+    Button btnSignup;
+    TextView linkLogin;
+
+    private static final String TAG = "SignupActivity";
 
     @Override
     protected void onStart() {
@@ -46,25 +47,27 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        emailEditText = findViewById(R.id.input_new_email);
-        passwordEditText = findViewById(R.id.input_new_password);
-        repasswordEditText = findViewById(R.id.input_reEnterPassword);
-        signupButton = findViewById(R.id.btn_signup);
-        link = findViewById(R.id.link_login);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        editNewEmail = (EditText) findViewById(R.id.editNewEmail);
+        editNewPassword = findViewById(R.id.editNewPassword);
+        editReEnterPassword = findViewById(R.id.editReEnterPassword);
+        btnSignup = findViewById(R.id.btnSignup);
+        linkLogin = findViewById(R.id.linkLogin);
 
         mAuth = FirebaseAuth.getInstance();
 
-        signupButton.setOnClickListener(new View.OnClickListener() {
+        btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signup();
+                sign_up();
             }
         });
 
-        link.setOnClickListener(new View.OnClickListener() {
+        linkLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -72,7 +75,38 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void signup() {
+    public boolean validate() {
+        boolean valid = true;
+
+        String email = editNewEmail.getText().toString();
+        String password = editNewPassword.getText().toString();
+        String reEnterPassword = editReEnterPassword.getText().toString();
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editNewEmail.setError("Please enter a valid email address");
+            valid = false;
+        } else {
+            editNewEmail.setError(null);
+        }
+
+        if (password.isEmpty() || password.length() < 4) {
+            editNewPassword.setError("Password need more than 4 characters");
+            valid = false;
+        } else {
+            editNewPassword.setError(null);
+        }
+
+        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || !(reEnterPassword.equals(password))) {
+            editReEnterPassword.setError("Password does not match");
+            valid = false;
+        } else {
+            editReEnterPassword.setError(null);
+        }
+
+        return valid;
+    }
+
+    public void sign_up() {
         Log.d(TAG, "Signup");
 
         if (!validate()) {
@@ -80,68 +114,45 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        // _signupButton.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this,
-                R.style.AppTheme);
+        final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String reEnterPassword = repasswordEditText.getText().toString();
+        String email = editNewEmail.getText().toString();
+        String password = editNewPassword.getText().toString();
+        String reEnterPassword = editReEnterPassword.getText().toString();
 
-        //for creating the account
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
                 if(task.isSuccessful()){
+                    Toast.makeText(SignUpActivity.this,"Sign up successful",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                     finish();
-
                 } else {
-                    Toast.makeText(SignUpActivity.this,"SignUp Failed!!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this,"Sign up failed",Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                 }
             }
         });
-
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
     }
 
-    public boolean validate() {
-        boolean valid = true;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String reEnterPassword = repasswordEditText.getText().toString();
-
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("enter a valid email address");
-            valid = false;
-        } else {
-            emailEditText.setError(null);
-        }
-
-        if (password.isEmpty() || password.length() < 4) {
-            passwordEditText.setError("more than 4 characters");
-            valid = false;
-        } else {
-            passwordEditText.setError(null);
-        }
-
-        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || !(reEnterPassword.equals(password))) {
-            repasswordEditText.setError("Password Do not match");
-            valid = false;
-        } else {
-            repasswordEditText.setError(null);
-        }
-
-        return valid;
+    @Override
+    public boolean onSupportNavigateUp(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        return true;
     }
 }
