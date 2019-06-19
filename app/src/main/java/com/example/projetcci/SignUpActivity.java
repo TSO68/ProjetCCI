@@ -24,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
-    EditText editNewEmail, editNewPassword, editReEnterPassword;
+    EditText editNewEmail, editNewPassword, editConfirmPassword;
     Button btnSignup;
     TextView linkLogin;
 
@@ -51,10 +51,10 @@ public class SignUpActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         editNewEmail = (EditText) findViewById(R.id.editNewEmail);
-        editNewPassword = findViewById(R.id.editNewPassword);
-        editReEnterPassword = findViewById(R.id.editReEnterPassword);
-        btnSignup = findViewById(R.id.btnSignup);
-        linkLogin = findViewById(R.id.linkLogin);
+        editNewPassword = (EditText) findViewById(R.id.editNewPassword);
+        editConfirmPassword = (EditText) findViewById(R.id.editConfirmPassword);
+        btnSignup = (Button) findViewById(R.id.btnSignup);
+        linkLogin = (TextView) findViewById(R.id.linkLogin);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -80,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         String email = editNewEmail.getText().toString();
         String password = editNewPassword.getText().toString();
-        String reEnterPassword = editReEnterPassword.getText().toString();
+        String confirmPassword = editConfirmPassword.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editNewEmail.setError("Please enter a valid email address");
@@ -96,11 +96,11 @@ public class SignUpActivity extends AppCompatActivity {
             editNewPassword.setError(null);
         }
 
-        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || !(reEnterPassword.equals(password))) {
-            editReEnterPassword.setError("Password does not match");
+        if (confirmPassword.isEmpty() || confirmPassword.length() < 4 || !(confirmPassword.equals(password))) {
+            editConfirmPassword.setError("Password does not match");
             valid = false;
         } else {
-            editReEnterPassword.setError(null);
+            editConfirmPassword.setError(null);
         }
 
         return valid;
@@ -121,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         String email = editNewEmail.getText().toString();
         String password = editNewPassword.getText().toString();
-        String reEnterPassword = editReEnterPassword.getText().toString();
+        String confirmPassword = editConfirmPassword.getText().toString();
 
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
