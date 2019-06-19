@@ -34,6 +34,8 @@ public class FavoritesActivity extends AppCompatActivity
 
     private List<Movie> moviesList;
 
+    private static final String TAG = "FavoritesActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

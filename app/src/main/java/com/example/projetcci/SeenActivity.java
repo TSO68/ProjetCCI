@@ -34,6 +34,8 @@ public class SeenActivity extends AppCompatActivity
 
     private List<Movie> moviesList;
 
+    private static final String TAG = "SeenActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

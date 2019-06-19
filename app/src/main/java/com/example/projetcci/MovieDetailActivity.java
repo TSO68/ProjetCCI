@@ -47,7 +47,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private Button tosee, seen, favorite;
     private Drawable playlist_add, playlist_add_check, done, close, star, star_border;
 
-    private static final String TAG = "MovieDetails";
+    private static final String TAG = "MovieDetailActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
