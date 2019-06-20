@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +26,15 @@ import java.util.List;
 public class FavoritesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    FirebaseUser currentUser;
+
     private RecyclerView moviesView;
     private MoviesAdapter adapter;
     private GridLayoutManager gridLayoutManager;
 
     private List<Movie> moviesList;
+
+    private static final String TAG = "FavoritesActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +150,13 @@ public class FavoritesActivity extends AppCompatActivity
             getApplicationContext().startActivity(intent);
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_disconnect) {
+            FirebaseAuth.getInstance().signOut();
+
+            if ( currentUser == null) {
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                getApplicationContext().startActivity(intent);
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -150,4 +164,3 @@ public class FavoritesActivity extends AppCompatActivity
         return true;
     }
 }
-

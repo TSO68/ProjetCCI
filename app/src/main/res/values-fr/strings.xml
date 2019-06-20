@@ -34,4 +34,24 @@
     <string name="comment_sent">Commentaire envoyé</string>
     <string name="error_author">Veuillez saisir un nom</string>
     <string name="error_text">Veuillez saisir un commentaire</string>
+    <string name="communicate">Communiquer</string>
+    <string name="log_out">Se déconnecter</string>
+    <string name="already_a_member_login">Déjà membre ? Se connecter</string>
+    <string name="log_in">Se connecter</string>
+    <string name="log_in_to_projetcci">Se connecter à ProjetCCI</string>
+    <string name="no_account_yet_create_one">Pas encore de compte ? S\'inscrire</string>
+    <string name="confirm_your_password">Confirmer le mot de passe</string>
+    <string name="sign_up">S\'inscrire</string>
+    <string name="sign_up_to_projetcci">S\'inscrire à ProjetCCI</string>
+    <string name="your_email">Votre email</string>
+    <string name="your_password">Votre mot de passe</string>
+    <string name="authenticating">Connexion...</string>
+    <string name="check_email">Veuillez entrer un email valide</string>
+    <string name="check_password">Mot de passe nécessite plus de 4 caractères</string>
+    <string name="log_in_failed">Echec de connexion</string>
+    <string name="log_in_successful">Connexion réussie</string>
+    <string name="check_confirmed_password">Les mots de passe ne correspondent pas.</string>
+    <string name="creating_account">Création du compte...</string>
+    <string name="sign_up_failed">Inscription échouée</string>
+    <string name="sign_up_successful">Inscription réussie</string>
 </resources>

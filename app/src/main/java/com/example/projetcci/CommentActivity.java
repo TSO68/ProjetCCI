@@ -28,6 +28,7 @@ public class CommentActivity extends AppCompatActivity {
     Button btnSend;
 
     private static final int CODE_POST_REQUEST = 1025;
+    private static final String TAG = "CommentActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
