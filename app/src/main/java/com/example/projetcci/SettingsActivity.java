@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.projetcci.fragments.SettingsFragment;
 
+/**
+ * Settings activity
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     private static final String TAG = "SettingsActivity";
@@ -23,6 +26,9 @@ public class SettingsActivity extends AppCompatActivity {
         actionBar.setTitle(getString(R.string.menu_settings));
     }
 
+    /**
+     * Back to previous activity
+     */
     @Override
     public boolean onSupportNavigateUp(){
         finish();

@@ -7,6 +7,9 @@ import android.preference.PreferenceFragment;
 import com.example.projetcci.MovieManager;
 import com.example.projetcci.R;
 
+/**
+ * Included in SettingsActivity
+ */
 public class SettingsFragment extends PreferenceFragment {
 
     @Override
@@ -18,6 +21,7 @@ public class SettingsFragment extends PreferenceFragment {
         final MovieManager m = new MovieManager(getActivity());
         m.open();
 
+        //Clear local database
         Preference clearDB = findPreference("key_clear_database");
         clearDB.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference pref) {
