@@ -47,7 +47,7 @@
     <string name="your_password">Votre mot de passe</string>
     <string name="authenticating">Connexion...</string>
     <string name="check_email">Veuillez entrer un email valide</string>
-    <string name="check_password">Mot de passe nécessite plus de 4 caractères</string>
+    <string name="check_password">Le mot de passe doit comporter plus de 4 caractères</string>
     <string name="log_in_failed">Echec de connexion</string>
     <string name="log_in_successful">Connexion réussie</string>
     <string name="check_confirmed_password">Les mots de passe ne correspondent pas.</string>
