@@ -3,7 +3,6 @@
 ## TODO
 * Gestion des citations et des remarques
 * Gestion du microphone (enregistrement avis)
-* Gestion de l'authentification
 * Envoi de notifications
 
 ### Non prioritaire
@@ -12,6 +11,7 @@
 * Améliorer la gestion de la base de données locale (id local, note perso, etc...)
 * Améliorer le design de la page détail
 * Améliorer le design de la page "Comments"
+* Améliorer le design des pages "Login" et "Signup"
 * Améliorer le design général
 
 ## API
@@ -27,3 +27,4 @@
 * [OkHttp](https://square.github.io/okhttp/)
 * [Glide](https://bumptech.github.io/glide/)
 * [SQLite](https://www.sqlite.org/index.html)
+* [Firebase](https://firebase.google.com/)
