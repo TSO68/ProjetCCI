@@ -148,8 +148,9 @@ public class FavoritesActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             intent = new Intent(this, CommentActivity.class);
             this.startActivity(intent);
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_settings) {
+            intent = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent);
         } else if (id == R.id.nav_disconnect) {
             FirebaseAuth.getInstance().signOut();
 

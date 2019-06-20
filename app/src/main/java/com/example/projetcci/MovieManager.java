@@ -62,6 +62,11 @@ public class MovieManager {
         db.close();
     }
 
+    //Clear all rows in movies table
+    public void clear() {
+        db.delete(TABLE_NAME, "1", null);
+    }
+
     /**
      * Create a movie in DB
      * @param movie object

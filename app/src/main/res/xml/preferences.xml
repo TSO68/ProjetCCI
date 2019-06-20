@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="key_clear_database"
+        android:title="@string/clear_database"
+        android:summary="@string/clear_local" />
+
+    <PreferenceCategory android:title="@string/about">
+
+        <Preference
+            android:title="@string/source_code">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_url" />
+        </Preference>
+
+        <Preference
+            android:title="@string/tmdb"
+            android:summary="@string/tmdb_usage" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

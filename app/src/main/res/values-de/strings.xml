@@ -12,7 +12,6 @@
     <string name="menu_favorite">Favorites</string>
     <string name="menu_search">Suchen</string>
     <string name="menu_seen">Gesehen</string>
-    <string name="menu_send">Senden</string>
     <string name="menu_opinion">Ihre Meinung geben</string>
     <string name="menu_to_see">Zu gesehen</string>
     <string name="movie_image_description">Bild des Filmes</string>
@@ -54,4 +53,12 @@
     <string name="creating_account">\?</string>
     <string name="sign_up_failed">\?</string>
     <string name="sign_up_successful">\?</string>
+    <string name="about">\?</string>
+    <string name="clear_database">\?</string>
+    <string name="clear_local">\?</string>
+    <string name="github_url">https://github.com/TSO68/ProjetCCI</string>
+    <string name="menu_settings">\?</string>
+    <string name="source_code">\?</string>
+    <string name="tmdb">TMDB</string>
+    <string name="tmdb_usage">\?</string>
 </resources>

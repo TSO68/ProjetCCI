@@ -12,7 +12,6 @@
     <string name="menu_favorite">Favoris</string>
     <string name="menu_search">Rechercher</string>
     <string name="menu_seen">Vus</string>
-    <string name="menu_send">Envoyer</string>
     <string name="menu_opinion">Donner votre avis</string>
     <string name="menu_to_see">À voir</string>
     <string name="movie_image_description">Image du film</string>
@@ -54,4 +53,12 @@
     <string name="creating_account">Création du compte...</string>
     <string name="sign_up_failed">Inscription échouée</string>
     <string name="sign_up_successful">Inscription réussie</string>
+    <string name="about">À propos</string>
+    <string name="clear_database">Vider la base de données</string>
+    <string name="clear_local">Vider votre base de données locale</string>
+    <string name="github_url">https://github.com/TSO68/ProjetCCI</string>
+    <string name="menu_settings">Paramètres</string>
+    <string name="source_code">Code source</string>
+    <string name="tmdb">TMDB</string>
+    <string name="tmdb_usage">Cette application utilise l\'API TMDB</string>
 </resources>
