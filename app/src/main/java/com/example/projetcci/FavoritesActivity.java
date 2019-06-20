@@ -134,28 +134,28 @@ public class FavoritesActivity extends AppCompatActivity
         Intent intent;
 
         if (id == R.id.nav_search) {
-            intent = new Intent(getApplicationContext(), MainActivity.class);
-            getApplicationContext().startActivity(intent);
+            intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
         } else if (id == R.id.nav_to_see) {
-            intent = new Intent(getApplicationContext(), ToSeeActivity.class);
-            getApplicationContext().startActivity(intent);
+            intent = new Intent(this, ToSeeActivity.class);
+            this.startActivity(intent);
         } else if (id == R.id.nav_seen) {
-            intent = new Intent(getApplicationContext(), SeenActivity.class);
-            getApplicationContext().startActivity(intent);
+            intent = new Intent(this, SeenActivity.class);
+            this.startActivity(intent);
         } else if (id == R.id.nav_favorite) {
-            intent = new Intent(getApplicationContext(), FavoritesActivity.class);
-            getApplicationContext().startActivity(intent);
+            intent = new Intent(this, FavoritesActivity.class);
+            this.startActivity(intent);
         } else if (id == R.id.nav_share) {
-            intent = new Intent(getApplicationContext(), CommentActivity.class);
-            getApplicationContext().startActivity(intent);
+            intent = new Intent(this, CommentActivity.class);
+            this.startActivity(intent);
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.nav_disconnect) {
             FirebaseAuth.getInstance().signOut();
 
             if ( currentUser == null) {
-                intent = new Intent(getApplicationContext(), LoginActivity.class);
-                getApplicationContext().startActivity(intent);
+                intent = new Intent(this, LoginActivity.class);
+                this.startActivity(intent);
             }
         }
 
