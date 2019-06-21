@@ -86,4 +86,11 @@
     <string name="github_url">https://github.com/TSO68/ProjetCCI</string>
     <string name="tmdb">TMDB</string>
     <string name="tmdb_usage">This app uses TMDB API</string>
+
+    <!-- SettingsFragment -->
+    <string name="clear_ask">Do you really want to clear your local database ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="db_cleared">Local database cleared</string>
+
 </resources>

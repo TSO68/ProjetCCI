@@ -61,4 +61,8 @@
     <string name="source_code">\?</string>
     <string name="tmdb">TMDB</string>
     <string name="tmdb_usage">\?</string>
+    <string name="clear_ask">\?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="db_cleared">\?</string>
 </resources>

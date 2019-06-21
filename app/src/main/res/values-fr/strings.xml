@@ -61,4 +61,8 @@
     <string name="source_code">Code source</string>
     <string name="tmdb">TMDB</string>
     <string name="tmdb_usage">Cette application utilise l\'API TMDB</string>
+    <string name="clear_ask">Voulez-vous vraiment vider votre base de données locale ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="db_cleared">Base de données locale vidée</string>
 </resources>
