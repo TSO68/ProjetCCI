@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +29,7 @@ public class ToSeeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseUser currentUser;
+    TextView userEmail;
 
     private RecyclerView moviesView;
     private MoviesAdapter adapter;
@@ -52,6 +55,16 @@ public class ToSeeActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        userEmail = (TextView) headerView.findViewById(R.id.txtUserEmail);
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            String currentUserEmail = currentUser.getEmail();
+            userEmail.setText(currentUserEmail);
+        }
 
         moviesView = (RecyclerView) findViewById(R.id.my_movies_list);
         moviesList = new ArrayList<>();

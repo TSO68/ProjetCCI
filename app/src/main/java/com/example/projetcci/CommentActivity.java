@@ -10,7 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +30,8 @@ public class CommentActivity extends AppCompatActivity {
 
     EditText editAuthor, editText;
     Button btnSend;
+
+    FirebaseUser currentUser;
 
     private static final int CODE_POST_REQUEST = 1025;
     private static final String TAG = "CommentActivity";
@@ -43,6 +49,13 @@ public class CommentActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
 
         btnSend = (Button) findViewById(R.id.btnSend);
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            String currentUserEmail = currentUser.getEmail();
+            editAuthor.setText(currentUserEmail);
+        }
 
         //Send the comment
         btnSend.setOnClickListener(new View.OnClickListener() {
