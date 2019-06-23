@@ -2,12 +2,12 @@
 
 ## TODO
 * Gestion des citations et des remarques
+* Gestion des statistiques utilisateurs
 * Gestion du microphone (enregistrement avis)
 * Envoi de notifications
 
 ### Non prioritaire
 * Récupérer plus d'informations sur la page de détails
-* Récupérer les genres pour les films de la BDD locale
 * Améliorer la gestion de la base de données locale (id local, note perso, etc...)
 * Améliorer le design de la page détail
 * Améliorer le design de la page "Comments"
