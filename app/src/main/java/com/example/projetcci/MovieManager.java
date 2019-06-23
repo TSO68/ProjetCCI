@@ -5,10 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-
 /**
- * Manage local database
+ * Manage movie table in the local database
  */
 public class MovieManager {
 
@@ -21,12 +19,12 @@ public class MovieManager {
     public static final String KEY_MY_RATING = "my_rating";
     public static final String KEY_TMDB_RATING = "tmdb_rating";
     public static final String KEY_RELEASE_DATE = "release_date";
-    //public static final String KEY_GENRES = "genres";
+    public static final String KEY_GENRES = "genres";
     public static final String KEY_TOSEE = "tosee";
     public static final String KEY_SEEN = "seen";
     public static final String KEY_FAVORITE = "favorite";
 
-    //Create the table movies in the DB
+    //Create the movies table in the DB
     public static final String CREATE_MOVIE_TABLE = "CREATE TABLE "+TABLE_NAME+
             " (" +
             " "+KEY_ID_MOVIE+" INTEGER primary key," +
@@ -37,6 +35,7 @@ public class MovieManager {
             " "+KEY_MY_RATING+" REAL," +
             " "+KEY_TMDB_RATING+" REAL," +
             " "+KEY_RELEASE_DATE+" TEXT," +
+            " "+KEY_GENRES+" TEXT," +
             " "+KEY_TOSEE+" INTEGER,"+
             " "+KEY_SEEN+" INTEGER,"+
             " "+KEY_FAVORITE+" INTEGER"+
@@ -82,13 +81,7 @@ public class MovieManager {
         values.put(KEY_MY_RATING, movie.getMyRating());
         values.put(KEY_TMDB_RATING, movie.getTMDBRating());
         values.put(KEY_RELEASE_DATE, movie.getReleaseDate());
-
-        /*ArrayList<String> genres = new ArrayList<String>();
-
-        for (int i = 0; i < genres.size(); i++) {
-            values.put(KEY_GENRES, genres.get(i));
-        }*/
-
+        values.put(KEY_GENRES, movie.getGenres());
         values.put(KEY_TOSEE, movie.getToSee());
         values.put(KEY_SEEN, movie.getSeen());
         values.put(KEY_FAVORITE, movie.getFavorite());
@@ -110,13 +103,7 @@ public class MovieManager {
         values.put(KEY_MY_RATING, movie.getMyRating());
         values.put(KEY_TMDB_RATING, movie.getTMDBRating());
         values.put(KEY_RELEASE_DATE, movie.getReleaseDate());
-
-        /*ArrayList<String> genres = new ArrayList<String>();
-
-        for (int i = 0; i < genres.size(); i++) {
-            values.put(KEY_GENRES, genres.get(i));
-        }*/
-
+        values.put(KEY_GENRES, movie.getGenres());
         values.put(KEY_TOSEE, movie.getToSee());
         values.put(KEY_SEEN, movie.getSeen());
         values.put(KEY_FAVORITE, movie.getFavorite());
@@ -141,13 +128,12 @@ public class MovieManager {
     /**
      * Get movie informations from DB
      * @param id of the movie
+     * @return Movie object
      */
     public Movie getMovie(int id) {
 
-        ArrayList<String> genres = new ArrayList<String>();
-
         Movie a = new Movie(0,"","","","",0,0,
-                "", genres, 0, 0 ,0);
+                "", "", 0, 0 ,0);
 
         Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME +" WHERE "+KEY_ID_MOVIE + "="+id, null);
         if (c.moveToFirst()) {
@@ -159,15 +145,7 @@ public class MovieManager {
             a.setMyRating(c.getInt(c.getColumnIndex(KEY_MY_RATING)));
             a.setTMDBRating(c.getDouble(c.getColumnIndex(KEY_TMDB_RATING)));
             a.setReleaseDate(c.getString(c.getColumnIndex(KEY_RELEASE_DATE)));
-
-            /*ArrayList<String> genresList = new ArrayList<String>();
-
-            c.moveToFirst();
-            while(!c.isAfterLast()) {
-                genresList.add(c.getString(c.getColumnIndex(KEY_GENRES)));
-                c.moveToNext();
-            }*/
-
+            a.setGenres(c.getString(c.getColumnIndex(KEY_GENRES)));
             a.setToSee(c.getInt(c.getColumnIndex(KEY_TOSEE)));
             a.setSeen(c.getInt(c.getColumnIndex(KEY_SEEN)));
             a.setFavorite(c.getInt(c.getColumnIndex(KEY_FAVORITE)));
@@ -181,12 +159,10 @@ public class MovieManager {
      * Check if movie exists in DB
      * @param id of the movie
      */
-    public Boolean CheckMovie(int id) {
-
-        ArrayList<String> genres = new ArrayList<String>();
+    public Boolean checkMovie(int id) {
 
         Movie a = new Movie(0,"","","","",0,0,
-                "", genres, 0, 0 ,0);
+                "", "", 0, 0 ,0);
 
         Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE " + KEY_ID_MOVIE + "=" +id, null);
 

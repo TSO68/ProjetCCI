@@ -74,8 +74,6 @@ public class FavoritesActivity extends AppCompatActivity
         adapter = new MoviesAdapter(this, moviesList);
         moviesView.setAdapter(adapter);
 
-        ArrayList<String> genresList = new ArrayList<String>();
-
         //Open the DB and retrieve informations of favorite movies
         final MovieManager m = new MovieManager(this);
         m.open();
@@ -91,7 +89,7 @@ public class FavoritesActivity extends AppCompatActivity
                         c.getInt(c.getColumnIndex(MovieManager.KEY_MY_RATING)),
                         c.getDouble(c.getColumnIndex(MovieManager.KEY_TMDB_RATING)),
                         c.getString(c.getColumnIndex(MovieManager.KEY_RELEASE_DATE)),
-                        genresList,
+                        c.getString(c.getColumnIndex(MovieManager.KEY_GENRES)),
                         c.getInt(c.getColumnIndex(MovieManager.KEY_TOSEE)),
                         c.getInt(c.getColumnIndex(MovieManager.KEY_SEEN)),
                         c.getInt(c.getColumnIndex(MovieManager.KEY_FAVORITE)));

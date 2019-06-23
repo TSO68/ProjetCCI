@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
 import okhttp3.OkHttpClient;
@@ -37,7 +38,7 @@ import static com.example.projetcci.Constants.BASE_URL;
 import static com.example.projetcci.Constants.IMAGE_BASE_URL;
 
 /**
- * Display detaillled informations of each movie
+ * Display detailled informations of each movie
  */
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -71,8 +72,16 @@ public class MovieDetailActivity extends AppCompatActivity {
         star_border = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_border);
 
         //Open DB
+        final GenreManager g = new GenreManager(this);
+        g.open();
+
+        //Open DB
         final MovieManager m = new MovieManager(this);
         m.open();
+
+        //Open DB
+        final MovieGenresManager mg = new MovieGenresManager(this);
+        mg.open();
 
         //Get values from the concerned list activity (Main, ToSee, etc...)
         final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
@@ -146,7 +155,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         //Check if movie exists and DB, add it if not
         //Set icons of each button
-        if(m.CheckMovie(details.getId())){
+        if(m.checkMovie(details.getId())){
             Movie movie = m.getMovie(details.getId());
             details.setToSee(movie.getToSee());
             details.setSeen(movie.getSeen());
@@ -199,10 +208,26 @@ public class MovieDetailActivity extends AppCompatActivity {
             float f = (float) d;
             rating.setRating(f/2);
 
+            //Get the string of all genres and convert it in array of every genre splitted by a comma
+            String genresString = details.getGenres();
+            ArrayList<String> genresArray = new ArrayList<String>(Arrays.asList(genresString.split(",")));
+
             String genreStr = "";
-            for (String str : details.getGenres()) {
-                str = getGenreName(str);
-                genreStr += str + ", ";
+            for (String str : genresArray) {
+
+                //Convert every genre in an int
+                int genreId = Integer.parseInt(str);
+                //Add it to the relationnal table
+                mg.createMovieGenre(genreId, details.getId());
+
+                //TODO : Think if it's not better to get directly the name from DB
+                //Get informations of each genre with his id
+                Genre aGenre = g.getGenre(genreId);
+
+                //Get the genre name
+                String genreName = aGenre.getName();
+
+                genreStr += genreName + ", ";
             }
             genreStr = genreStr.length() > 0 ? genreStr.substring(0,genreStr.length() - 2) : genreStr;
             genresList.setText(genreStr);
@@ -238,79 +263,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         }else{
             return date;
         }
-    }
-
-    /**
-     * Get the genre name of each id
-     * @param genreId from API
-     * @return genre name
-     */
-    private String getGenreName(@NonNull String genreId) {
-        String genreName;
-
-        switch(genreId)
-        {
-            case "28":
-                genreName = "Action";
-                break;
-            case "12":
-                genreName = "Adventure";
-                break;
-            case "16":
-                genreName = "Animation";
-                break;
-            case "35":
-                genreName = "Comedy";
-                break;
-            case "80":
-                genreName = "Crime";
-                break;
-            case "99":
-                genreName = "Documentary";
-                break;
-            case "18":
-                genreName = "Drama";
-                break;
-            case "10751":
-                genreName = "Family";
-                break;
-            case "14":
-                genreName = "Fantasy";
-                break;
-            case "36":
-                genreName = "History";
-                break;
-            case "27":
-                genreName = "Horror";
-                break;
-            case "10402":
-                genreName = "Music";
-                break;
-            case "9648":
-                genreName = "Mystery";
-                break;
-            case "10749":
-                genreName = "Romance";
-                break;
-            case "878":
-                genreName = "Science Fiction";
-                break;
-            case "10770":
-                genreName = "TV Movie";
-                break;
-            case "53":
-                genreName = "Thriller";
-                break;
-            case "10752":
-                genreName = "War";
-                break;
-            case "37":
-                genreName = "Western";
-                break;
-            default:
-                genreName = "Movie";
-        }
-        return genreName;
     }
 
     /**

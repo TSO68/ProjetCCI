@@ -24,7 +24,9 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL(GenreManager.CREATE_GENRE_TABLE);
         sqLiteDatabase.execSQL(MovieManager.CREATE_MOVIE_TABLE);
+        sqLiteDatabase.execSQL(MovieGenresManager.CREATE_MOVIE_GENRES_TABLE);
     }
 
     @Override

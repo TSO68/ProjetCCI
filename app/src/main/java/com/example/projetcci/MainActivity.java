@@ -90,6 +90,15 @@ public class MainActivity extends AppCompatActivity
             userEmail.setText(currentUserEmail);
         }
 
+        //Open DB
+        final GenreManager g = new GenreManager(this);
+        g.open();
+
+        //Check if genres already exists in local database, if not, add it
+        if (!g.checkGenres()) {
+            new loadGenres().execute();
+        }
+
         moviesView = (RecyclerView) findViewById(R.id.movies_list);
         moviesList = new ArrayList<>();
         load_movies(currentPage);
@@ -207,11 +216,13 @@ public class MainActivity extends AppCompatActivity
                             genre.add(genresIds.getString(j));
                         }
 
+                        String genreString = TextUtils.join(",", genre);
+
                         //Get datas of each movies
                         Movie data = new Movie(object.getInt("id"), object.getString("title"),
                                 object.getString("overview"), object.getString("poster_path"),
                                 object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
-                                object.getString("release_date"), genre, 0,0,0);
+                                object.getString("release_date"), genreString, 0,0,0);
                         //Replace overview if empty
                         if (TextUtils.isEmpty(data.getOverview())) {
                             data.setOverview(getString(R.string.no_description));
@@ -279,11 +290,13 @@ public class MainActivity extends AppCompatActivity
                                 genre.add(genresIds.getString(j));
                             }
 
+                            String genreString = TextUtils.join(",", genre);
+
                             //Get datas of each movies
                             Movie data = new Movie(object.getInt("id"), object.getString("title"),
                                     object.getString("overview"), object.getString("poster_path"),
                                     object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
-                                    object.getString("release_date"), genre, 0,0,0);
+                                    object.getString("release_date"), genreString, 0,0,0);
                             //Replace overview if empty
                             if (TextUtils.isEmpty(data.getOverview())) {
                                 data.setOverview(getString(R.string.no_description));
@@ -317,6 +330,50 @@ public class MainActivity extends AppCompatActivity
             }
         };
         task.execute(search);
+    }
+
+    /**
+     * Get genres list from TMDB API
+     */
+    private class loadGenres extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            GenreManager g = new GenreManager(getApplicationContext());
+            g.open();
+
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "/genre/movie/list?api_key=" + API_KEY + "&language=" + getLocale())
+                    .build();
+
+            try {
+                //Get JSON with results from request
+                Response response = client.newCall(request).execute();
+                JSONObject root = new JSONObject(response.body().string());
+                JSONArray array = root.getJSONArray("genres");
+
+                for (int i = 0; i < array.length(); i++) {
+
+                    JSONObject object = array.getJSONObject(i);
+
+                    Genre data = new Genre(object.getInt("id"), object.getString("name"));
+
+                    g.createGenre(data);
+                }
+
+                return null;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            } catch (JSONException e) {
+                System.out.println("End of content");
+                return null;
+            }
+        }
     }
 
     //When back button is pressed

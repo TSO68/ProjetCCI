@@ -1,7 +1,6 @@
 package com.example.projetcci;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Class with informations needed from each movie
@@ -16,13 +15,13 @@ public class Movie implements Serializable {
     private int myRating;
     private double TMDBRating;
     private String releaseDate;
-    private ArrayList<String> genres;
+    private String genres;
     private int toSee;
     private int seen;
     private int favorite;
 
     public Movie(int id, String title, String overview, String posterPath, String backdropPath, 
-                 int myRating, double TMDBRating, String releaseDate, ArrayList<String> genres,
+                 int myRating, double TMDBRating, String releaseDate, String genres,
                  int toSee, int seen, int favorite) {
         this.id = id;
         this.title = title;
@@ -102,11 +101,11 @@ public class Movie implements Serializable {
         this.releaseDate = releaseDate;
     }
 
-    public ArrayList<String> getGenres() {
+    public String getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<String> genres) {
+    public void setGenres(String genres) {
         this.genres = genres;
     }
 
