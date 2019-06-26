@@ -44,7 +44,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private ImageView backdrop_image, poster;
     private TextView title, overview, releaseDate, runtime, genresList, castList;
-    private RatingBar rating;
+    private RatingBar tmdbRating, myRating;
     private Button tosee, seen, favorite;
     private Drawable playlist_add, playlist_add_check, done, close, star, star_border;
 
@@ -96,10 +96,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         title = findViewById(R.id.movie_title);
         releaseDate = findViewById(R.id.movie_release_date);
         runtime = findViewById(R.id.movie_runtime);
-        rating = (RatingBar) findViewById(R.id.movie_rating_bar);
+        tmdbRating = (RatingBar) findViewById(R.id.movie_tmdb_rating_bar);
         overview = findViewById(R.id.movie_overview);
         genresList = findViewById(R.id.movie_genres);
         castList = findViewById(R.id.movie_cast);
+        myRating = (RatingBar) findViewById(R.id.movie_my_rating_bar);
 
         //Set the movie as to see and update DB
         tosee.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +154,16 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
 
+        //Set user's rating and update the DB
+        myRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                double myRat = myRating.getRating();
+                details.setMyRating(myRat);
+                //Toast.makeText(getApplicationContext(),"You gave " + myRat + " to " + details.getTitle(), Toast.LENGTH_SHORT).show();
+                m.updateMovie(details);
+            }
+        });
+
         //Check if movie exists and DB, add it if not
         //Set icons of each button
         if(m.checkMovie(details.getId())){
@@ -160,6 +171,12 @@ public class MovieDetailActivity extends AppCompatActivity {
             details.setToSee(movie.getToSee());
             details.setSeen(movie.getSeen());
             details.setFavorite(movie.getFavorite());
+
+            //Set user's rating bar value
+            Movie myMovie = m.getMyRatingById(details.getId());
+            double myD = myMovie.getMyRating();
+            float myF = (float) myD;
+            myRating.setRating(myF);
 
             if (movie.getToSee() == 1){
                 tosee.setCompoundDrawablesWithIntrinsicBounds(null, playlist_add_check,null,null);
@@ -206,7 +223,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             overview.setText(details.getOverview());
             double d = details.getTMDBRating();
             float f = (float) d;
-            rating.setRating(f/2);
+            tmdbRating.setRating(f/2);
 
             //Get the string of all genres and convert it in array of every genre splitted by a comma
             String genresString = details.getGenres();
@@ -218,7 +235,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 //Convert every genre in an int
                 int genreId = Integer.parseInt(str);
                 //Add it to the relationnal table
-                mg.createMovieGenre(genreId, details.getId());
+                //mg.createMovieGenre(genreId, details.getId());
 
                 //TODO : Think if it's not better to get directly the name from DB
                 //Get informations of each genre with his id

@@ -88,7 +88,7 @@ public class ToSeeActivity extends AppCompatActivity
                         c.getString(c.getColumnIndex(MovieManager.KEY_OVERVIEW)),
                         c.getString(c.getColumnIndex(MovieManager.KEY_POSTER_PATH)),
                         c.getString(c.getColumnIndex(MovieManager.KEY_BACKDROP_PATH)),
-                        c.getInt(c.getColumnIndex(MovieManager.KEY_MY_RATING)),
+                        c.getDouble(c.getColumnIndex(MovieManager.KEY_MY_RATING)),
                         c.getDouble(c.getColumnIndex(MovieManager.KEY_TMDB_RATING)),
                         c.getString(c.getColumnIndex(MovieManager.KEY_RELEASE_DATE)),
                         c.getString(c.getColumnIndex(MovieManager.KEY_GENRES)),

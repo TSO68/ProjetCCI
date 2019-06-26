@@ -142,7 +142,7 @@ public class MovieManager {
             a.setOverview(c.getString(c.getColumnIndex(KEY_OVERVIEW)));
             a.setPosterPath(c.getString(c.getColumnIndex(KEY_POSTER_PATH)));
             a.setBackdropPath(c.getString(c.getColumnIndex(KEY_BACKDROP_PATH)));
-            a.setMyRating(c.getInt(c.getColumnIndex(KEY_MY_RATING)));
+            a.setMyRating(c.getDouble(c.getColumnIndex(KEY_MY_RATING)));
             a.setTMDBRating(c.getDouble(c.getColumnIndex(KEY_TMDB_RATING)));
             a.setReleaseDate(c.getString(c.getColumnIndex(KEY_RELEASE_DATE)));
             a.setGenres(c.getString(c.getColumnIndex(KEY_GENRES)));
@@ -161,9 +161,6 @@ public class MovieManager {
      */
     public Boolean checkMovie(int id) {
 
-        Movie a = new Movie(0,"","","","",0,0,
-                "", "", 0, 0 ,0);
-
         Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE " + KEY_ID_MOVIE + "=" +id, null);
 
         if (c.moveToFirst()) {
@@ -171,7 +168,6 @@ public class MovieManager {
         }else{
             return false;
         }
-
     }
 
     /**
@@ -200,5 +196,25 @@ public class MovieManager {
      */
     public Cursor getMovies() {
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+    }
+
+    /**
+     * Get user's rating of a movie
+     * @param id of the movie
+     * @return user's rating
+     */
+    public Movie getMyRatingById(int id) {
+
+        Movie a = new Movie(0,"","","","",0,0,
+                "", "", 0, 0 ,0);
+
+        Cursor c = db.rawQuery("SELECT " + KEY_MY_RATING + " FROM " + TABLE_NAME + " WHERE " + KEY_ID_MOVIE + "=" +id, null);
+
+        if (c.moveToFirst()) {
+            a.setMyRating(c.getDouble(c.getColumnIndex(KEY_MY_RATING)));
+            c.close();
+        }
+
+        return a;
     }
 }

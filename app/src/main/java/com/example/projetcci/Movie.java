@@ -12,7 +12,7 @@ public class Movie implements Serializable {
     private String overview;
     private String posterPath;
     private String backdropPath;
-    private int myRating;
+    private double myRating;
     private double TMDBRating;
     private String releaseDate;
     private String genres;
@@ -21,7 +21,7 @@ public class Movie implements Serializable {
     private int favorite;
 
     public Movie(int id, String title, String overview, String posterPath, String backdropPath, 
-                 int myRating, double TMDBRating, String releaseDate, String genres,
+                 double myRating, double TMDBRating, String releaseDate, String genres,
                  int toSee, int seen, int favorite) {
         this.id = id;
         this.title = title;
@@ -77,11 +77,11 @@ public class Movie implements Serializable {
         this.backdropPath = backdropPath;
     }
 
-    public int getMyRating() {
+    public double getMyRating() {
         return myRating;
     }
 
-    public void setMyRating(int myRating) {
+    public void setMyRating(double myRating) {
         this.myRating = myRating;
     }
 
