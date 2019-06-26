@@ -84,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Check if email and passwords respect norms
+     * Check if email and passwords respect format
      * @return valid true or false
      */
     public boolean validate() {
@@ -159,7 +159,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Shows a Toast message if email, password and confirmed password didn't respect norms
+     * Shows a Toast message if email, password and confirmed password didn't respect format
      */
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), getString(R.string.sign_up_failed), Toast.LENGTH_LONG).show();

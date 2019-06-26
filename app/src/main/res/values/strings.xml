@@ -70,11 +70,11 @@
     <!-- SignUpActivity -->
     <string name="check_email">Please enter a valid email address</string>
     <string name="check_password">Password needs more than 4 characters</string>
-    <string name="authenticating">Authenticating...</string>
+    <string name="authenticating">Authenticating…</string>
     <string name="log_in_successful">Log in successful</string>
     <string name="log_in_failed">Log in failed</string>
     <string name="check_confirmed_password">Password does not match</string>
-    <string name="creating_account">Creating account...</string>
+    <string name="creating_account">Creating account…</string>
     <string name="sign_up_successful">Sign up successful</string>
     <string name="sign_up_failed">Sign up failed</string>
 
@@ -92,5 +92,14 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="db_cleared">Local database cleared</string>
+
+    <!-- activity_reset_password.xml -->
+    <string name="reset_title">I forgot my password and want to reset it</string>
+    <string name="reset_password">Reset my password</string>
+
+    <!-- ResetPasswordActivity -->
+    <string name="email_sending">Email is sending…</string>
+    <string name="email_sent">Email sent to</string>
+    <string name="password_reset_failed">Password reset failed</string>
 
 </resources>

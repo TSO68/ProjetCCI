@@ -65,4 +65,9 @@
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="db_cleared">\?</string>
+    <string name="email_sending">\?</string>
+    <string name="email_sent">\?</string>
+    <string name="password_reset_failed">\?</string>
+    <string name="reset_password">\?</string>
+    <string name="reset_title">\?</string>
 </resources>

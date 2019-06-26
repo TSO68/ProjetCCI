@@ -50,7 +50,7 @@
     <string name="log_in_failed">Echec de connexion</string>
     <string name="log_in_successful">Connexion réussie</string>
     <string name="check_confirmed_password">Les mots de passe ne correspondent pas.</string>
-    <string name="creating_account">Création du compte...</string>
+    <string name="creating_account">Création du compte…</string>
     <string name="sign_up_failed">Inscription échouée</string>
     <string name="sign_up_successful">Inscription réussie</string>
     <string name="about">À propos</string>
@@ -65,4 +65,9 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="db_cleared">Base de données locale vidée</string>
+    <string name="email_sending">Envoi de l\'email en cours…</string>
+    <string name="email_sent">Email envoyé à</string>
+    <string name="password_reset_failed">Echec de la réinitialisation du mot de passe</string>
+    <string name="reset_password">Réinitialiser mon mot de passe</string>
+    <string name="reset_title">J\'ai oublié mon mot de passe et je veux le réinitialiser</string>
 </resources>

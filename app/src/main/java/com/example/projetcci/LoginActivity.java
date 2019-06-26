@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText editEmail, editPassword;
     Button btnLogin;
-    TextView linkSignup;
+    TextView linkSignup, linkReset;
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         editPassword = (EditText)findViewById(R.id.editPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         linkSignup = (TextView) findViewById(R.id.linkSignup);
+        linkReset = (TextView) findViewById(R.id.linkReset);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -72,16 +73,26 @@ public class LoginActivity extends AppCompatActivity {
         linkSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
                 finish();
 
             }
         });
+
+        //Open SignUpActivity
+        linkReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     /**
-     * Check if email and password respect norms
+     * Check if email and password respect format
      * @return valid true or false
      */
     public boolean validate() {
@@ -146,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Shows a Toast message if email and password didn't respect norms
+     * Shows a Toast message if email and password didn't respect format
      */
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), getString(R.string.log_in_failed), Toast.LENGTH_LONG).show();
