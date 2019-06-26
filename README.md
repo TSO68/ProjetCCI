@@ -8,7 +8,6 @@
 
 ### Non prioritaire
 * Récupérer plus d'informations sur la page de détails
-* Améliorer la gestion de la base de données locale (id local, note perso, etc...)
 * Améliorer le design de la page détail
 * Améliorer le design de la page "Comments"
 * Améliorer le design des pages "Login" et "Signup"
