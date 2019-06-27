@@ -33,21 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    /**
-     * If the user is logged, it will redirect on MainActivity
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (currentUser != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +74,21 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    /**
+     * If the user is logged, it will redirect on MainActivity
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
     /**

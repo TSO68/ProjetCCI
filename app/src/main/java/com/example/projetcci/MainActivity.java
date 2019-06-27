@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity
 
     private int currentPage = 1;
     private boolean movieSearch = false;
+    private boolean isAuthListenerSet = false;
 
     private static final String TAG = "MainActivity";
 
@@ -169,6 +171,18 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    /**
+     * Add the FirebaseAuth.AuthStateListener mAuthListener when activity is started
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!isAuthListenerSet) {
+            FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
+            isAuthListenerSet = true;
+        }
     }
 
     /**
@@ -437,17 +451,40 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             intent = new Intent(this, SettingsActivity.class);
             this.startActivity(intent);
-        } else if (id == R.id.nav_disconnect) {
+        } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
-
-            if ( currentUser == null) {
-                intent = new Intent(this, LoginActivity.class);
-                this.startActivity(intent);
-            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * Listener which checks if user is still logged or not
+     */
+    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user == null) {
+                Toast.makeText(MainActivity.this, "Vous vous êtes déconnecté", Toast.LENGTH_SHORT).show();
+                Intent intent;
+                intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        }
+    };
+
+    /**
+     * Remove the FirebaseAuth.AuthStateListener mAuthListener when activity is stopped
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
+            isAuthListenerSet = false;
+        }
     }
 }
