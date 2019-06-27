@@ -195,7 +195,7 @@ public class FavoritesActivity extends AppCompatActivity
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user == null) {
-                Toast.makeText(FavoritesActivity.this, "Vous vous êtes déconnecté", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FavoritesActivity.this, getString(R.string.log_out_successful), Toast.LENGTH_SHORT).show();
                 Intent intent;
                 intent = new Intent(FavoritesActivity.this, LoginActivity.class);
                 startActivity(intent);

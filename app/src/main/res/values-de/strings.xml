@@ -70,4 +70,5 @@
     <string name="password_reset_failed">\?</string>
     <string name="reset_password">\?</string>
     <string name="reset_title">\?</string>
+    <string name="log_out_successful">\?</string>
 </resources>

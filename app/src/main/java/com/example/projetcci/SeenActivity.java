@@ -197,7 +197,7 @@ public class SeenActivity extends AppCompatActivity
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user == null) {
-                Toast.makeText(SeenActivity.this, "Vous vous êtes déconnecté", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeenActivity.this, getString(R.string.log_out_successful), Toast.LENGTH_SHORT).show();
                 Intent intent;
                 intent = new Intent(SeenActivity.this, LoginActivity.class);
                 startActivity(intent);
