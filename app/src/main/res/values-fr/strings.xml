@@ -71,4 +71,12 @@
     <string name="reset_password">Réinitialiser mon mot de passe</string>
     <string name="reset_title">J\'ai oublié mon mot de passe et je veux le réinitialiser</string>
     <string name="log_out_successful">Déconnexion réussie</string>
+    <string name="average_rating">Note moyenne</string>
+    <string name="favorite_genre">Genre favori</string>
+    <string name="nb_movies_favorites">Nombre de films favoris</string>
+    <string name="nb_movies_seen">Nombre de films vus</string>
+    <string name="nb_movies_to_see">Nombre de films à voir</string>
+    <string name="total_viewing">Durée de visionnage totale</string>
+    <string name="menu_statistics">Statistiques</string>
+    <string name="no_genre">Aucun genre n\'est disponible</string>
 </resources>

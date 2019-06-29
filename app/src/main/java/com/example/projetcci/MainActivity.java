@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity
                         Movie data = new Movie(object.getInt("id"), object.getString("title"),
                                 object.getString("overview"), object.getString("poster_path"),
                                 object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
-                                object.getString("release_date"), genreString, 0,0,0);
+                                object.getString("release_date"), genreString,0,0,0,0);
                         //Replace overview if empty
                         if (TextUtils.isEmpty(data.getOverview())) {
                             data.setOverview(getString(R.string.no_description));
@@ -310,7 +310,7 @@ public class MainActivity extends AppCompatActivity
                             Movie data = new Movie(object.getInt("id"), object.getString("title"),
                                     object.getString("overview"), object.getString("poster_path"),
                                     object.getString("backdrop_path"), 0, object.getDouble("vote_average"),
-                                    object.getString("release_date"), genreString, 0,0,0);
+                                    object.getString("release_date"), genreString,0,0,0,0);
                             //Replace overview if empty
                             if (TextUtils.isEmpty(data.getOverview())) {
                                 data.setOverview(getString(R.string.no_description));
@@ -444,6 +444,9 @@ public class MainActivity extends AppCompatActivity
             this.startActivity(intent);
         } else if (id == R.id.nav_favorite) {
             intent = new Intent(this, FavoritesActivity.class);
+            this.startActivity(intent);
+        } else if (id == R.id.nav_statistics) {
+            intent = new Intent(this, StatisticsActivity.class);
             this.startActivity(intent);
         } else if (id == R.id.nav_share) {
             intent = new Intent(this, CommentActivity.class);

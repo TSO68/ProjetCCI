@@ -61,6 +61,25 @@ public class MovieGenresManager {
         return db.insert(TABLE_NAME,null,values);
     }
 
+    /**
+     * Check if couple with id of the genre and id of the movie already exists in DB
+     * @param idGenre id of the genre
+     * @param idMovie id of the movie
+     * @return a boolean
+     */
+    public Boolean checkMovieGenres(int idGenre, int idMovie) {
+
+        Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE " + KEY_ID_GENRE
+                + "=" + idGenre + " AND " + KEY_ID_MOVIE + "=" + idMovie, null);
+
+        if (c.moveToFirst()) {
+            c.close();
+            return true;
+        }else{
+            c.close();
+            return false;
+        }
+    }
 
     //TODO : Correct this request and test it if necessary
     /**
@@ -88,5 +107,31 @@ public class MovieGenresManager {
         c.close();
 
         return name;
+    }
+
+    /*
+    Statistics part
+     */
+
+    /**
+     * Get the most watched genre from the user
+     * @return id of the genre
+     */
+    public int getFavoriteGenre() {
+
+        //TODO : Upgrade the request to get only seen movies
+        Cursor c = db.rawQuery("SELECT " +  KEY_ID_GENRE + ", COUNT(*) AS count FROM " + TABLE_NAME
+                + " GROUP BY " + KEY_ID_GENRE + " ORDER BY count DESC LIMIT 1", null);
+
+        int genre = 0;
+        if (c != null) {
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+                genre = c.getInt(0);
+            }
+            c.close();
+        }
+
+        return genre;
     }
 }

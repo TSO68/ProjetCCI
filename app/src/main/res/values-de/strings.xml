@@ -71,4 +71,12 @@
     <string name="reset_password">\?</string>
     <string name="reset_title">\?</string>
     <string name="log_out_successful">\?</string>
+    <string name="average_rating">\?</string>
+    <string name="favorite_genre">\?</string>
+    <string name="nb_movies_favorites">\?</string>
+    <string name="nb_movies_seen">\?</string>
+    <string name="nb_movies_to_see">\?</string>
+    <string name="total_viewing">\?</string>
+    <string name="menu_statistics">Statistiken</string>
+    <string name="no_genre">\?</string>
 </resources>

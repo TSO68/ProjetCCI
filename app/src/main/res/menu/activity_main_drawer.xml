@@ -20,6 +20,10 @@
             android:id="@+id/nav_favorite"
             android:icon="@drawable/ic_star"
             android:title="@string/menu_favorite" />
+        <item
+            android:id="@+id/nav_statistics"
+            android:icon="@drawable/ic_show_chart"
+            android:title="@string/menu_statistics" />
     </group>
 
     <item android:title="@string/communicate">

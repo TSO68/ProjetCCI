@@ -20,6 +20,7 @@ public class MovieManager {
     public static final String KEY_TMDB_RATING = "tmdb_rating";
     public static final String KEY_RELEASE_DATE = "release_date";
     public static final String KEY_GENRES = "genres";
+    public static final String KEY_RUNTIME = "runtime";
     public static final String KEY_TOSEE = "tosee";
     public static final String KEY_SEEN = "seen";
     public static final String KEY_FAVORITE = "favorite";
@@ -36,6 +37,7 @@ public class MovieManager {
             " "+KEY_TMDB_RATING+" REAL," +
             " "+KEY_RELEASE_DATE+" TEXT," +
             " "+KEY_GENRES+" TEXT," +
+            " "+KEY_RUNTIME+" INTEGER,"+
             " "+KEY_TOSEE+" INTEGER,"+
             " "+KEY_SEEN+" INTEGER,"+
             " "+KEY_FAVORITE+" INTEGER"+
@@ -82,6 +84,7 @@ public class MovieManager {
         values.put(KEY_TMDB_RATING, movie.getTMDBRating());
         values.put(KEY_RELEASE_DATE, movie.getReleaseDate());
         values.put(KEY_GENRES, movie.getGenres());
+        values.put(KEY_RUNTIME, movie.getRuntime());
         values.put(KEY_TOSEE, movie.getToSee());
         values.put(KEY_SEEN, movie.getSeen());
         values.put(KEY_FAVORITE, movie.getFavorite());
@@ -114,6 +117,21 @@ public class MovieManager {
     }
 
     /**
+     * Update the runtime of a movie
+     * @param runtime of the movie
+     * @param id of the movie
+     */
+    public int updateRuntime(int runtime, int id) {
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_RUNTIME, runtime);
+        String where = KEY_ID_MOVIE + " = ?";
+        String[] whereArgs = {id+""};
+
+        return db.update(TABLE_NAME, values, where, whereArgs);
+    }
+
+    /**
      * Delete a movie in DB
      * @param movie object
      */
@@ -133,7 +151,7 @@ public class MovieManager {
     public Movie getMovie(int id) {
 
         Movie a = new Movie(0,"","","","",0,0,
-                "", "", 0, 0 ,0);
+                "", "", 0,0, 0 ,0);
 
         Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME +" WHERE "+KEY_ID_MOVIE + "="+id, null);
         if (c.moveToFirst()) {
@@ -146,6 +164,7 @@ public class MovieManager {
             a.setTMDBRating(c.getDouble(c.getColumnIndex(KEY_TMDB_RATING)));
             a.setReleaseDate(c.getString(c.getColumnIndex(KEY_RELEASE_DATE)));
             a.setGenres(c.getString(c.getColumnIndex(KEY_GENRES)));
+            a.setRuntime(c.getInt(c.getColumnIndex(KEY_RUNTIME)));
             a.setToSee(c.getInt(c.getColumnIndex(KEY_TOSEE)));
             a.setSeen(c.getInt(c.getColumnIndex(KEY_SEEN)));
             a.setFavorite(c.getInt(c.getColumnIndex(KEY_FAVORITE)));
@@ -206,7 +225,7 @@ public class MovieManager {
     public Movie getMyRatingById(int id) {
 
         Movie a = new Movie(0,"","","","",0,0,
-                "", "", 0, 0 ,0);
+                "", "", 0,0, 0 ,0);
 
         Cursor c = db.rawQuery("SELECT " + KEY_MY_RATING + " FROM " + TABLE_NAME + " WHERE " + KEY_ID_MOVIE + "=" +id, null);
 
@@ -216,5 +235,109 @@ public class MovieManager {
         }
 
         return a;
+    }
+
+    /*
+    Statistics part
+     */
+
+    /**
+     * Get the number of movies to see
+     * @return the number of movies
+     */
+    public int getCountToSeeMovies() {
+
+        Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + KEY_TOSEE + "=1", null);
+
+        int count = 0;
+        if (c != null) {
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+                count = c.getInt(0);
+            }
+            c.close();
+        }
+
+        return count;
+    }
+
+    /**
+     * Get the number of movies seen
+     * @return the number of movies
+     */
+    public int getCountSeenMovies() {
+
+        Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + KEY_SEEN + "=1", null);
+
+        int count = 0;
+        if (c != null) {
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+                count = c.getInt(0);
+            }
+            c.close();
+        }
+
+        return count;
+    }
+
+    /**
+     * Get the number of favorite movies
+     * @return the number of movies
+     */
+    public int getCountFavoritesMovies() {
+
+        Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + KEY_FAVORITE + "=1", null);
+
+        int count = 0;
+        if (c != null) {
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+                count = c.getInt(0);
+            }
+            c.close();
+        }
+
+        return count;
+    }
+
+    /**
+     * Get the sum of runtime of each movies seen by the user
+     * @return the total of viewing time
+     */
+    public int getTotalViewing() {
+
+        Cursor c = db.rawQuery("SELECT SUM("+ KEY_RUNTIME +") FROM " + TABLE_NAME + " WHERE " + KEY_SEEN + "=1", null);
+
+        int sum = 0;
+        if (c != null) {
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+                sum = c.getInt(0);
+            }
+            c.close();
+        }
+
+        return sum;
+    }
+
+    /**
+     * Get the average rating of the user
+     * @return the average rating
+     */
+    public double getAverageRating() {
+
+        Cursor c = db.rawQuery("SELECT AVG("+ KEY_MY_RATING +") FROM " + TABLE_NAME + " WHERE " + KEY_MY_RATING + "!=0", null);
+
+        double average = 0;
+        if (c != null) {
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+                average = c.getDouble(0);
+            }
+            c.close();
+        }
+
+        return average;
     }
 }

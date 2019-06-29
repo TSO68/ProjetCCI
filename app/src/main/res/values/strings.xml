@@ -17,6 +17,7 @@
     <string name="menu_to_see">To see</string>
     <string name="menu_seen">Seen</string>
     <string name="menu_favorite">Favorites</string>
+    <string name="menu_statistics">Statistics</string>
     <string name="communicate">Communicate</string>
     <string name="menu_opinion">Give your opinion</string>
     <string name="menu_settings">Settings</string>
@@ -39,6 +40,7 @@
     <string name="add_favorite">Added in Favorites list</string>
     <string name="remove_favorite">Remove from Favorites list</string>
     <string name="cast">Cast</string>
+    <string name="no_genre">No genre available</string>
     <string name="no_cast">No cast informations available</string>
     <string name="button_to_see">To see</string>
     <string name="button_seen">Seen</string>
@@ -103,4 +105,11 @@
     <string name="email_sent">Email sent to</string>
     <string name="password_reset_failed">Password reset failed</string>
 
+    <!-- activity_statistics -->
+    <string name="nb_movies_seen">Number of movies seen</string>
+    <string name="nb_movies_to_see">Number of movies to see</string>
+    <string name="nb_movies_favorites">Number of favorites movies</string>
+    <string name="total_viewing">Total viewing time</string>
+    <string name="average_rating">Average rating</string>
+    <string name="favorite_genre">Favorite genre</string>
 </resources>

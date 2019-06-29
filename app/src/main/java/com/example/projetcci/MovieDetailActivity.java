@@ -231,18 +231,31 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             String genreStr = "";
             for (String str : genresArray) {
+                int genreId = 0;
+                String genreName = "";
 
-                //Convert every genre in an int
-                int genreId = Integer.parseInt(str);
-                //Add it to the relationnal table
-                //mg.createMovieGenre(genreId, details.getId());
+                //Needed if movie has no genre recorded by TMDB
+                if (!str.equals("")) {
+                    //Convert every genre in an int
+                    genreId = Integer.parseInt(str);
+                    //Add it to the relationnal table if it doesn't exist yet
+                    if (!mg.checkMovieGenres(genreId, details.getId())) {
+                        mg.createMovieGenre(genreId, details.getId());
+                    }
+                }
 
-                //TODO : Think if it's not better to get directly the name from DB
-                //Get informations of each genre with his id
-                Genre aGenre = g.getGenre(genreId);
+                //Needed if movie has no genre recorded by TMDB
+                if (genreId != 0) {
+                    //TODO : Think if it's not better to get directly the name from DB
+                    //Get informations of each genre with his id
+                    Genre aGenre = g.getGenre(genreId);
 
-                //Get the genre name
-                String genreName = aGenre.getName();
+                    //Get the genre name
+                    genreName = aGenre.getName();
+                } else {
+                    genreName = getResources().getString(R.string.no_genre);
+                }
+
 
                 genreStr += genreName + ", ";
             }
@@ -328,6 +341,15 @@ public class MovieDetailActivity extends AppCompatActivity {
                 time = 0;
             }
             runtime.setText(time + " min");
+
+            //Open DB
+            final MovieManager m = new MovieManager(MovieDetailActivity.this);
+            m.open();
+
+            //Update movie's row with its runtime
+            final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
+            m.updateRuntime(time, details.getId());
+
         }
     }
 

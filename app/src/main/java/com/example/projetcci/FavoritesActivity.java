@@ -94,6 +94,7 @@ public class FavoritesActivity extends AppCompatActivity
                         c.getDouble(c.getColumnIndex(MovieManager.KEY_TMDB_RATING)),
                         c.getString(c.getColumnIndex(MovieManager.KEY_RELEASE_DATE)),
                         c.getString(c.getColumnIndex(MovieManager.KEY_GENRES)),
+                        c.getInt(c.getColumnIndex(MovieManager.KEY_RUNTIME)),
                         c.getInt(c.getColumnIndex(MovieManager.KEY_TOSEE)),
                         c.getInt(c.getColumnIndex(MovieManager.KEY_SEEN)),
                         c.getInt(c.getColumnIndex(MovieManager.KEY_FAVORITE)));
@@ -171,6 +172,9 @@ public class FavoritesActivity extends AppCompatActivity
             this.startActivity(intent);
         } else if (id == R.id.nav_favorite) {
             intent = new Intent(this, FavoritesActivity.class);
+            this.startActivity(intent);
+        } else if (id == R.id.nav_statistics) {
+            intent = new Intent(this, StatisticsActivity.class);
             this.startActivity(intent);
         } else if (id == R.id.nav_share) {
             intent = new Intent(this, CommentActivity.class);

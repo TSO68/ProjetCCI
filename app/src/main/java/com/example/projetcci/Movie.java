@@ -16,13 +16,14 @@ public class Movie implements Serializable {
     private double TMDBRating;
     private String releaseDate;
     private String genres;
+    private int runtime;
     private int toSee;
     private int seen;
     private int favorite;
 
     public Movie(int id, String title, String overview, String posterPath, String backdropPath, 
                  double myRating, double TMDBRating, String releaseDate, String genres,
-                 int toSee, int seen, int favorite) {
+                 int runtime, int toSee, int seen, int favorite) {
         this.id = id;
         this.title = title;
         this.overview = overview;
@@ -32,6 +33,7 @@ public class Movie implements Serializable {
         this.TMDBRating = TMDBRating;
         this.releaseDate = releaseDate;
         this.genres = genres;
+        this.runtime = runtime;
         this.toSee = toSee;
         this.seen = seen;
         this.favorite = favorite;
@@ -107,6 +109,14 @@ public class Movie implements Serializable {
 
     public void setGenres(String genres) {
         this.genres = genres;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
     }
 
     public int getToSee() {
