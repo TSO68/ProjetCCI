@@ -2,7 +2,6 @@
 
 ## TODO
 * Gestion des citations et des remarques
-* Gestion des statistiques utilisateurs
 * Gestion du microphone (enregistrement avis)
 * Envoi de notifications
 
