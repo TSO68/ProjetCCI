@@ -44,7 +44,7 @@
     <string name="sign_up_to_projetcci">S\'inscrire à ProjetCCI</string>
     <string name="your_email">Votre email</string>
     <string name="your_password">Votre mot de passe</string>
-    <string name="authenticating">Connexion...</string>
+    <string name="authenticating">Connexion…</string>
     <string name="check_email">Veuillez entrer un email valide</string>
     <string name="check_password">Le mot de passe doit comporter plus de 4 caractères</string>
     <string name="log_in_failed">Echec de connexion</string>
@@ -79,4 +79,5 @@
     <string name="total_viewing">Durée de visionnage totale</string>
     <string name="menu_statistics">Statistiques</string>
     <string name="no_genre">Aucun genre n\'est disponible</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
 </resources>
