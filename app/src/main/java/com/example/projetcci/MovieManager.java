@@ -183,8 +183,10 @@ public class MovieManager {
         Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE " + KEY_ID_MOVIE + "=" +id, null);
 
         if (c.moveToFirst()) {
+            c.close();
             return true;
-        }else{
+        } else {
+            c.close();
             return false;
         }
     }

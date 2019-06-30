@@ -97,8 +97,10 @@ public class GenreManager {
         Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME, null);
 
         if (c.moveToFirst()) {
+            c.close();
             return true;
-        }else{
+        } else {
+            c.close();
             return false;
         }
     }
