@@ -1,8 +1,13 @@
 package com.example.projetcci;
 
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +39,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static android.Manifest.permission.RECORD_AUDIO;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.example.projetcci.Constants.API_KEY;
 import static com.example.projetcci.Constants.BASE_URL;
 import static com.example.projetcci.Constants.IMAGE_BASE_URL;
@@ -45,8 +53,13 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ImageView backdrop_image, poster;
     private TextView title, overview, releaseDate, runtime, genresList, castList;
     private RatingBar tmdbRating, myRating;
-    private Button tosee, seen, favorite;
+    private Button tosee, seen, favorite, record, stopRecord, play, stopPlay;
     private Drawable playlist_add, playlist_add_check, done, close, star, star_border;
+
+    String AudioSavePathInDevice = null;
+    MediaRecorder mediaRecorder;
+    MediaPlayer mediaPlayer;
+    public static final int RequestPermissionCode = 1;
 
     private static final String TAG = "MovieDetailActivity";
 
@@ -59,6 +72,18 @@ public class MovieDetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        backdrop_image = findViewById(R.id.movie_backdrop_image);
+        poster = findViewById(R.id.movie_poster);
+        title = findViewById(R.id.movie_title);
+        releaseDate = findViewById(R.id.movie_release_date);
+        runtime = findViewById(R.id.movie_runtime);
+        tmdbRating = (RatingBar) findViewById(R.id.movie_tmdb_rating_bar);
+        overview = findViewById(R.id.movie_overview);
+        genresList = findViewById(R.id.movie_genres);
+        castList = findViewById(R.id.movie_cast);
+        myRating = (RatingBar) findViewById(R.id.movie_my_rating_bar);
+
+        //Buttons for DB
         tosee = findViewById(R.id.button_to_see);
         seen = findViewById(R.id.button_seen);
         favorite = findViewById(R.id.button_favorite);
@@ -70,6 +95,12 @@ public class MovieDetailActivity extends AppCompatActivity {
         close = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_close);
         star = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star);
         star_border = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_border);
+
+        //Buttons for audio recording & playing
+        record = findViewById(R.id.button_record);
+        stopRecord = findViewById(R.id.button_stop_record);
+        play = findViewById(R.id.button_play);
+        stopPlay = findViewById(R.id.button_stop_play);
 
         //Open DB
         final GenreManager g = new GenreManager(this);
@@ -90,17 +121,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         new loadCast().execute();
 
         actionBar.setTitle(details.getTitle());
-
-        backdrop_image = findViewById(R.id.movie_backdrop_image);
-        poster = findViewById(R.id.movie_poster);
-        title = findViewById(R.id.movie_title);
-        releaseDate = findViewById(R.id.movie_release_date);
-        runtime = findViewById(R.id.movie_runtime);
-        tmdbRating = (RatingBar) findViewById(R.id.movie_tmdb_rating_bar);
-        overview = findViewById(R.id.movie_overview);
-        genresList = findViewById(R.id.movie_genres);
-        castList = findViewById(R.id.movie_cast);
-        myRating = (RatingBar) findViewById(R.id.movie_my_rating_bar);
 
         //Set the movie as to see and update DB
         tosee.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +179,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 double myRat = myRating.getRating();
                 details.setMyRating(myRat);
-                //Toast.makeText(getApplicationContext(),"You gave " + myRat + " to " + details.getTitle(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"You gave " + myRat + " to " + details.getTitle(),
+                // Toast.LENGTH_SHORT).show();
                 m.updateMovie(details);
             }
         });
@@ -262,6 +283,146 @@ public class MovieDetailActivity extends AppCompatActivity {
             genreStr = genreStr.length() > 0 ? genreStr.substring(0,genreStr.length() - 2) : genreStr;
             genresList.setText(genreStr);
         }
+
+        //Record the audio file
+        record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkPermission()) {
+
+                    //Create root directory for the app, if it doesn't exist yet
+                    String rootApp = "/ProjetCCI";
+                    File dirApp = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), rootApp);
+                    if (!dirApp.exists())
+                    {
+                        dirApp.mkdir();
+                    }
+
+                    //Create the root for the movie with its Id, if it doesn't exist yet
+                    String movieFolder = File.separator + details.getId();
+                    File dirMovie = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                            + rootApp, movieFolder);
+                    if (!dirMovie.exists())
+                    {
+                        dirMovie.mkdir();
+                    }
+
+                    //Set the audio path
+                    AudioSavePathInDevice = dirMovie + "/" + "myopinion.3gp";
+
+                    MediaRecorderReady();
+
+                    try {
+                        mediaRecorder.prepare();
+                        mediaRecorder.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    record.setEnabled(false);
+                    stopRecord.setEnabled(true);
+
+                    Toast.makeText(MovieDetailActivity.this, getString(R.string.start_recording),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    requestPermission();
+                }
+
+            }
+        });
+
+        //Stop the recording of the audio file
+        stopRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediaRecorder.stop();
+                mediaRecorder.reset();
+                mediaRecorder.release();
+
+                stopRecord.setEnabled(false);
+                play.setEnabled(true);
+                record.setEnabled(true);
+                stopPlay.setEnabled(false);
+
+                Toast.makeText(MovieDetailActivity.this, getString(R.string.complete_recording),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //Play the audio file corresponding to the movie
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) throws IllegalArgumentException,
+                    SecurityException, IllegalStateException {
+                stopRecord.setEnabled(false);
+                record.setEnabled(false);
+                stopPlay.setEnabled(true);
+
+                mediaPlayer = new MediaPlayer();
+
+                try {
+                    //Get root and movie directories, and file path
+                    String rootApp = "/ProjetCCI";
+                    String movieFolder = File.separator + details.getId();
+                    File dirMovie = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                            + rootApp, movieFolder);
+                    String audioFile = dirMovie + File.separator + "myopinion.3gp";
+
+                    mediaPlayer.setDataSource(audioFile);
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                mediaPlayer.start();
+                Toast.makeText(MovieDetailActivity.this, getString(R.string.play_recording),
+                        Toast.LENGTH_LONG).show();
+
+                //Listen if file is ending, stop playing at the end
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        stopRecord.setEnabled(false);
+                        record.setEnabled(true);
+                        stopPlay.setEnabled(false);
+                        play.setEnabled(true);
+
+                        Toast.makeText(MovieDetailActivity.this, getString(R.string.file_end),
+                                Toast.LENGTH_LONG).show();
+
+                        if (mediaPlayer != null){
+                            mediaPlayer.stop();
+                            mediaPlayer.reset();
+                            mediaPlayer.release();
+                            MediaRecorderReady();
+                        }
+                    }
+                });
+            }
+        });
+
+        //Stop playing the audio file
+        stopPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopRecord.setEnabled(false);
+                record.setEnabled(true);
+                stopPlay.setEnabled(false);
+                play.setEnabled(true);
+
+                Toast.makeText(MovieDetailActivity.this, getString(R.string.play_stopped),
+                        Toast.LENGTH_LONG).show();
+
+                if (mediaPlayer != null){
+                    mediaPlayer.stop();
+                    mediaPlayer.reset();
+                    mediaPlayer.release();
+                    MediaRecorderReady();
+                }
+            }
+        });
     }
 
     /**
@@ -422,6 +583,67 @@ public class MovieDetailActivity extends AppCompatActivity {
                 castList.setText(castStr);
             }
         }
+    }
+
+    /**
+     * Set informations about the audio file : source, format, encoding
+     */
+    public void MediaRecorderReady(){
+        mediaRecorder = new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+        mediaRecorder.setOutputFile(AudioSavePathInDevice);
+    }
+
+    /**
+     * Request permissions for the audio file recording
+     */
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(MovieDetailActivity.this, new
+                String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);
+    }
+
+    /**
+     * Request permissions to the user
+     * @param requestCode 1
+     * @param permissions WRITE_EXTERNAL_STORAGE, RECORD_AUDIO
+     * @param grantResults true or false
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case RequestPermissionCode:
+                if (grantResults.length> 0) {
+                    boolean StoragePermission = grantResults[0] ==
+                            PackageManager.PERMISSION_GRANTED;
+                    boolean RecordPermission = grantResults[1] ==
+                            PackageManager.PERMISSION_GRANTED;
+
+                    if (StoragePermission && RecordPermission) {
+                        Toast.makeText(MovieDetailActivity.this, getString(R.string.permissions_granted),
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(MovieDetailActivity.this,getString(R.string.permissions_denied),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+        }
+    }
+
+    /**
+     * Check if permissions are granted or not
+     * @return true or false
+     */
+    public boolean checkPermission() {
+        int write_external = ContextCompat.checkSelfPermission(getApplicationContext(),
+                WRITE_EXTERNAL_STORAGE);
+        int record_audio = ContextCompat.checkSelfPermission(getApplicationContext(),
+                RECORD_AUDIO);
+        return write_external == PackageManager.PERMISSION_GRANTED &&
+                record_audio == PackageManager.PERMISSION_GRANTED;
     }
 
     /**

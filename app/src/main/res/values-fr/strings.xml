@@ -80,4 +80,15 @@
     <string name="menu_statistics">Statistiques</string>
     <string name="no_genre">Aucun genre n\'est disponible</string>
     <string name="forgot_password">Mot de passe oublié ?</string>
+    <string name="complete_recording">Enregistrement terminé</string>
+    <string name="permissions_denied">Permissions refusées</string>
+    <string name="permissions_granted">Permissions accordées</string>
+    <string name="play_recording">Lecture de l\'enregistrement</string>
+    <string name="start_recording">Début de l\'enregistrement</string>
+    <string name="file_end">Fin du fichier</string>
+    <string name="stop_playing">Arrêt lecture</string>
+    <string name="play_stopped">Lecture stoppée</string>
+    <string name="play">Lecture</string>
+    <string name="record">Enreg.</string>
+    <string name="stop_record">Arrêt enreg.</string>
 </resources>

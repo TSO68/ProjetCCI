@@ -32,7 +32,7 @@
     <!-- MainActivity -->
     <string name="no_description">No description available</string>
 
-    <!-- MovieDetailActivity -->
+    <!-- activity_movie_detail, MovieDetailActivity -->
     <string name="add_to_see">Added in To See list</string>
     <string name="remove_to_see">Removed from To See list</string>
     <string name="add_seen">Added in Seen list</string>
@@ -45,6 +45,21 @@
     <string name="button_to_see">To see</string>
     <string name="button_seen">Seen</string>
     <string name="button_favorite">Favorite</string>
+    <string name="record">Record</string>
+    <string name="stop_record">Stop record</string>
+    <string name="play">Play</string>
+    <string name="stop_playing">Stop playing</string>
+    <string name="button_record" translatable="false">Record</string>
+    <string name="button_stop_record" translatable="false">Stop recording</string>
+    <string name="button_play" translatable="false">Play</string>
+    <string name="button_stop_play" translatable="false">Stop playing</string>
+    <string name="start_recording">Recording started</string>
+    <string name="complete_recording">Recording Completed</string>
+    <string name="play_recording">Recording Playing</string>
+    <string name="file_end">End of file</string>
+    <string name="play_stopped">Playing stopped</string>
+    <string name="permissions_granted">Permissions Granted</string>
+    <string name="permissions_denied">Permissions Denied</string>
 
     <!-- activity_comment.xml -->
     <string name="comment_explanation">This space allows you to give your opinion on this application, your ideas for improvements, or anything that can help our team of elite developers</string>

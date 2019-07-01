@@ -80,4 +80,15 @@
     <string name="confirm_your_password">Ihr Passwort wiederholen</string>
     <string name="log_in">Anmelden</string>
     <string name="reset_title">Ich habe mein Passwort vergessen und ich möchte ihn zurücksetzen</string>
+    <string name="complete_recording">\?</string>
+    <string name="permissions_denied">\?</string>
+    <string name="permissions_granted">\?</string>
+    <string name="play_recording">\?</string>
+    <string name="start_recording">\?</string>
+    <string name="file_end">\?</string>
+    <string name="stop_playing">\?</string>
+    <string name="play_stopped">\?</string>
+    <string name="play">\?</string>
+    <string name="record">\?</string>
+    <string name="stop_record">\?</string>
 </resources>

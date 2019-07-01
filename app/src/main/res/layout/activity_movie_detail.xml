@@ -153,7 +153,7 @@
                 android:layout_margin="16dp" />
 
             <LinearLayout
-                android:id="@+id/buttons_layout"
+                android:id="@+id/db_buttons_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/movie_cast"
@@ -191,12 +191,65 @@
                 android:id="@+id/movie_my_rating_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/buttons_layout"
+                android:layout_below="@id/db_buttons_layout"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:numStars="5"
                 android:stepSize="0.5" />
+
+            <LinearLayout
+                android:id="@+id/record_buttons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/movie_my_rating_bar"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_record"
+                    android:text="@string/record"
+                    android:singleLine="true" />
+
+                <Button
+                    android:id="@+id/button_stop_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_stop"
+                    android:text="@string/stop_record"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/play_buttons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/record_buttons_layout"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_play"
+                    android:text="@string/play"
+                    android:singleLine="true" />
+
+                <Button
+                    android:id="@+id/button_stop_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_stop"
+                    android:text="@string/stop_playing"
+                    android:singleLine="true" />
+
+            </LinearLayout>
 
         </RelativeLayout>
     </ScrollView>
