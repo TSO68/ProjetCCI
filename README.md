@@ -2,8 +2,8 @@
 
 ## TODO
 * Gestion des citations et des remarques
-* Gestion du microphone (enregistrement avis)
 * Envoi de notifications
+* Création SplashScreen et page de présentation
 
 ### Non prioritaire
 * Récupérer plus d'informations sur la page de détails
