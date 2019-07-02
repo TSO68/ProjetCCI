@@ -1,9 +1,19 @@
 # Projet d'application Android / CCI
 
-## TODO
-* Gestion des citations et des remarques
-* Envoi de notifications
-* Création SplashScreen et page de présentation
+## Roadmap
+* [ ] Envoi de notifications
+* [ ] Gestion des citations et des remarques
+* [ ] Création d'une page de présentation de l'application
+* [x] Création d'un splash screen
+* [x] Gestion du microphone (enregistrement avis)
+* [x] Gestion des statistiques de l'utilisateur
+* [x] Gestion de l'authentification
+* [x] Envoi de commentaires au développeur via l'API perso
+* [x] Connexion avec l'API perso
+* [x] Gestion de la base de données locale SQLite avec statuts du visionnage, note perso à améliorer + affichage des pages concernées
+* [x] Afficher la page des détails de chaque film
+* [x] Recherche de films
+* [x] Récupérer une liste de films à découvrir
 
 ### Non prioritaire
 * Récupérer plus d'informations sur la page de détails
