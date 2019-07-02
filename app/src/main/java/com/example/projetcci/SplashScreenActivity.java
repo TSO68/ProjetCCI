@@ -25,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         mUser= FirebaseAuth.getInstance().getCurrentUser();
 
-        /**
+        /*
          * Sets the time that the screen does appear before sending user
          * on MainActivity if he's connected
          * on LoginActivity if he's not connected
