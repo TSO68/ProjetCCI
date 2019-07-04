@@ -3,7 +3,7 @@
 ## Roadmap
 * [ ] Envoi de notifications
 * [ ] Gestion des citations et des remarques
-* [ ] Création d'une page de présentation de l'application
+* [x] Création d'une page de présentation de l'application
 * [x] Création d'un splash screen
 * [x] Gestion du microphone (enregistrement avis)
 * [x] Gestion des statistiques de l'utilisateur
@@ -21,6 +21,7 @@
 * Améliorer le design de la page "Comments"
 * Améliorer le design des pages "Login" et "Signup"
 * Améliorer le design général
+* Améliorer la page de présentation
 
 ## API
 ### TMDB
