@@ -2,7 +2,7 @@
 
 ## Roadmap
 * [ ] Envoi de notifications
-* [ ] Gestion des citations et des remarques
+* [x] Gestion des citations
 * [x] Création d'une page de présentation de l'application
 * [x] Création d'un splash screen
 * [x] Gestion du microphone (enregistrement avis)
