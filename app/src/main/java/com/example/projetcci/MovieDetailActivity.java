@@ -106,6 +106,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         play = findViewById(R.id.button_play);
         stopPlay = findViewById(R.id.button_stop_play);
 
+        //Disable buttons when Activity is launched
+        stopRecord.setEnabled(false);
+        stopPlay.setEnabled(false);
+
         //Open DB
         final GenreManager g = new GenreManager(this);
         g.open();
@@ -340,7 +344,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                     stopRecord.setEnabled(true);
 
                     Toast.makeText(MovieDetailActivity.this, getString(R.string.start_recording),
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     requestPermission();
                 }
@@ -356,13 +360,13 @@ public class MovieDetailActivity extends AppCompatActivity {
                 mediaRecorder.reset();
                 mediaRecorder.release();
 
+                record.setEnabled(true);
                 stopRecord.setEnabled(false);
                 play.setEnabled(true);
-                record.setEnabled(true);
                 stopPlay.setEnabled(false);
 
                 Toast.makeText(MovieDetailActivity.this, getString(R.string.complete_recording),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -371,8 +375,9 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) throws IllegalArgumentException,
                     SecurityException, IllegalStateException {
-                stopRecord.setEnabled(false);
                 record.setEnabled(false);
+                stopRecord.setEnabled(false);
+                play.setEnabled(false);
                 stopPlay.setEnabled(true);
 
                 mediaPlayer = new MediaPlayer();
@@ -393,19 +398,19 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                 mediaPlayer.start();
                 Toast.makeText(MovieDetailActivity.this, getString(R.string.play_recording),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
 
                 //Listen if file is ending, stop playing at the end
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
-                        stopRecord.setEnabled(false);
                         record.setEnabled(true);
-                        stopPlay.setEnabled(false);
+                        stopRecord.setEnabled(false);
                         play.setEnabled(true);
+                        stopPlay.setEnabled(false);
 
                         Toast.makeText(MovieDetailActivity.this, getString(R.string.file_end),
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
 
                         if (mediaPlayer != null){
                             mediaPlayer.stop();
@@ -422,13 +427,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         stopPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopRecord.setEnabled(false);
                 record.setEnabled(true);
-                stopPlay.setEnabled(false);
+                stopRecord.setEnabled(false);
                 play.setEnabled(true);
+                stopPlay.setEnabled(false);
 
                 Toast.makeText(MovieDetailActivity.this, getString(R.string.play_stopped),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
 
                 if (mediaPlayer != null){
                     mediaPlayer.stop();
