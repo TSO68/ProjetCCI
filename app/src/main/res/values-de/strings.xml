@@ -91,4 +91,11 @@
     <string name="play">\?</string>
     <string name="record">\?</string>
     <string name="stop_record">\?</string>
+    <string name="add_quote">\?</string>
+    <string name="character">\?</string>
+    <string name="quote">\?</string>
+    <string name="quote_added">\?</string>
+    <string name="see_quotes">\?</string>
+    <string name="set_character">\?</string>
+    <string name="set_quote">\?</string>
 </resources>

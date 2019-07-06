@@ -41,6 +41,7 @@
     <string name="remove_favorite">Remove from Favorites list</string>
     <string name="cast">Cast</string>
     <string name="no_genre">No genre available</string>
+    <string name="see_quotes">See quotes</string>
     <string name="no_cast">No cast informations available</string>
     <string name="button_to_see">To see</string>
     <string name="button_seen">Seen</string>
@@ -128,4 +129,14 @@
     <string name="total_viewing">Total viewing time</string>
     <string name="average_rating">Average rating</string>
     <string name="favorite_genre">Favorite genre</string>
+
+    <!-- activity_qyotes -->
+    <string name="character">Character</string>
+    <string name="quote">Quote</string>
+    <string name="add_quote">Add quote</string>
+
+    <!-- QuotesActivity -->
+    <string name="quote_added">Quote added</string>
+    <string name="set_character">Please set a character name</string>
+    <string name="set_quote">Please set a quote</string>
 </resources>

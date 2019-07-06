@@ -1,5 +1,6 @@
 package com.example.projetcci;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -53,7 +54,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ImageView backdrop_image, poster;
     private TextView title, overview, releaseDate, runtime, genresList, castList;
     private RatingBar tmdbRating, myRating;
-    private Button tosee, seen, favorite, record, stopRecord, play, stopPlay;
+    private Button quotes, tosee, seen, favorite, record, stopRecord, play, stopPlay;
     private Drawable playlist_add, playlist_add_check, done, close, star, star_border;
 
     String AudioSavePathInDevice = null;
@@ -82,6 +83,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         genresList = findViewById(R.id.movie_genres);
         castList = findViewById(R.id.movie_cast);
         myRating = (RatingBar) findViewById(R.id.movie_my_rating_bar);
+
+        //Button to QuotesActivity
+        quotes = findViewById(R.id.button_quotes);
 
         //Buttons for DB
         tosee = findViewById(R.id.button_to_see);
@@ -121,6 +125,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         new loadCast().execute();
 
         actionBar.setTitle(details.getTitle());
+
+        //Send the user to QuotesActivity with id and title of the movie as Extras
+        quotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MovieDetailActivity.this, QuotesActivity.class);
+                intent.putExtra("ID_MOVIE", details.getId());
+                intent.putExtra("TITLE_MOVIE", details.getTitle());
+                startActivity(intent);
+            }
+        });
 
         //Set the movie as to see and update DB
         tosee.setOnClickListener(new View.OnClickListener() {

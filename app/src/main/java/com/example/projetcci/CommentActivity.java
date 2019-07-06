@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import static com.example.projetcci.Constants.CUSTOM_BASE_URL;
+import static com.example.projetcci.Constants.CREATE_COMMENT_BASE_URL;
 
 /**
  * Send comments on remote database
@@ -89,7 +89,7 @@ public class CommentActivity extends AppCompatActivity {
         params.put("author", author);
         params.put("text", text);
 
-        PerformNetworkRequest request = new PerformNetworkRequest(CUSTOM_BASE_URL, params, CODE_POST_REQUEST);
+        PerformNetworkRequest request = new PerformNetworkRequest(CREATE_COMMENT_BASE_URL, params, CODE_POST_REQUEST);
         request.execute();
     }
 
@@ -117,7 +117,7 @@ public class CommentActivity extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             RequestHandler requestHandler = new RequestHandler();
 
-            //Controls if the request match the code
+            //Call the POST request
             if (requestCode == CODE_POST_REQUEST) {
                 return requestHandler.sendPostRequest(url, params);
             }

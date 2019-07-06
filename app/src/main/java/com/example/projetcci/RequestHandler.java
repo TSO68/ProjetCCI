@@ -20,7 +20,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class RequestHandler {
 
     /**
-     * Method to send httpPostRequest
+     * Method that send the POST request
      * @param requestURL URL of the script to which the request will be sent
      * @param postDataParams HashMap with name value pairs containing the data to be send with the request
      * @return
@@ -72,6 +72,27 @@ public class RequestHandler {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Method that send the GET request
+     * @param requestURL URL of the script to which the request will be sent
+     * @return
+     */
+    public String sendGetRequest(String requestURL) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            URL url = new URL(requestURL);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+            String s;
+            while ((s = bufferedReader.readLine()) != null) {
+                sb.append(s + "\n");
+            }
+        } catch (Exception e) {
         }
         return sb.toString();
     }
