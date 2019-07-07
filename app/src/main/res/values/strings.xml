@@ -59,8 +59,8 @@
     <string name="play_recording">Recording Playing</string>
     <string name="file_end">End of file</string>
     <string name="play_stopped">Playing stopped</string>
-    <string name="permissions_granted">Permissions Granted</string>
-    <string name="permissions_denied">Permissions Denied</string>
+    <string name="permissions_granted">Permissions granted</string>
+    <string name="permissions_denied">Permissions denied</string>
 
     <!-- activity_comment.xml -->
     <string name="comment_explanation">This space allows you to give your opinion on this application, your ideas for improvements, or anything that can help our team of elite developers</string>
@@ -133,7 +133,7 @@
     <!-- activity_qyotes -->
     <string name="character">Character</string>
     <string name="quote">Quote</string>
-    <string name="add_quote">Add quote</string>
+    <string name="add_quote">Add a quote</string>
 
     <!-- QuotesActivity -->
     <string name="quote_added">Quote added</string>
