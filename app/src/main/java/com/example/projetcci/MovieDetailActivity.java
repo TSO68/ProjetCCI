@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +58,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     private RatingBar tmdbRating, myRating;
     private Button quotes, tosee, seen, favorite, record, stopRecord, play, stopPlay;
     private Drawable playlist_add, playlist_add_check, done, close, star, star_border;
+
+    FirebaseUser currentUser;
 
     String AudioSavePathInDevice = null;
     MediaRecorder mediaRecorder;
@@ -109,6 +113,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         //Disable buttons when Activity is launched
         stopRecord.setEnabled(false);
         stopPlay.setEnabled(false);
+
+        //Get user's email for audio folders
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        final String user = currentUser.getEmail();
 
         //Open DB
         final GenreManager g = new GenreManager(this);
@@ -310,17 +318,26 @@ public class MovieDetailActivity extends AppCompatActivity {
                 if (checkPermission()) {
 
                     //Create root directory for the app, if it doesn't exist yet
-                    String rootApp = "/ProjetCCI";
-                    File dirApp = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), rootApp);
+                    String rootFolder = File.separator + "ProjetCCI";
+                    File dirApp = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), rootFolder);
                     if (!dirApp.exists())
                     {
                         dirApp.mkdir();
                     }
 
+                    //Create each user directory inside app directory, if it doesn't exist yet
+                    String userFolder = File.separator + user;
+                    File dirUser = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                            + rootFolder, userFolder);
+                    if (!dirUser.exists())
+                    {
+                        dirUser.mkdir();
+                    }
+
                     //Create the root for the movie with its Id, if it doesn't exist yet
                     String movieFolder = File.separator + details.getId();
                     File dirMovie = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                            + rootApp, movieFolder);
+                            + rootFolder + userFolder, movieFolder);
                     if (!dirMovie.exists())
                     {
                         dirMovie.mkdir();
@@ -383,11 +400,12 @@ public class MovieDetailActivity extends AppCompatActivity {
                 mediaPlayer = new MediaPlayer();
 
                 try {
-                    //Get root and movie directories, and file path
-                    String rootApp = "/ProjetCCI";
+                    //Get root, user and movie directories, and file path
+                    String rootFolder = File.separator + "ProjetCCI";
+                    String userFolder = File.separator + user;
                     String movieFolder = File.separator + details.getId();
                     File dirMovie = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                            + rootApp, movieFolder);
+                            + rootFolder + userFolder, movieFolder);
                     String audioFile = dirMovie + File.separator + "myopinion.3gp";
 
                     mediaPlayer.setDataSource(audioFile);
