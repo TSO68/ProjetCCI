@@ -78,7 +78,7 @@
     <string name="clear_database">Datenbank entleeren</string>
     <string name="confirm_your_password">Ihr Passwort wiederholen</string>
     <string name="log_in">Anmelden</string>
-    <string name="reset_title">Ich habe mein Passwort vergessen und ich möchte ihn zurücksetzen</string>
+    <string name="reset_title">Ich habe mein Passwort vergessen und ich möchte es zurücksetzen</string>
     <string name="complete_recording">Abgeschlossene Aufnahme</string>
     <string name="permissions_denied">Berechtigungen verweigert</string>
     <string name="permissions_granted">Berechtigungen erteilt</string>

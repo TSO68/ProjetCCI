@@ -74,6 +74,7 @@ public class QuotesActivity extends AppCompatActivity {
                 //TODO : Upgrade the refreshing after user added the quote
                 Intent intent = new Intent(QuotesActivity.this, QuotesActivity.class);
                 intent.putExtra("ID_MOVIE", id);
+                intent.putExtra("TITLE_MOVIE", title);
                 startActivity(intent);
             }
         });

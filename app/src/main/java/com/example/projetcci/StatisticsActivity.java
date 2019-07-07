@@ -63,7 +63,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         //Get the total of viewing time
         int viewing = m.getTotalViewing();
-        totalViewing.setText(String.valueOf(viewing));
+        totalViewing.setText(viewing + " min");
 
         //Get id of favorite genre
         int favorite = mg.getFavoriteGenre();

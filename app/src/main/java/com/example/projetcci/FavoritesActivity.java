@@ -142,10 +142,12 @@ public class FavoritesActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Intent intent;
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            intent = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
