@@ -71,11 +71,8 @@ public class QuotesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 createQuote();
                 Toast.makeText(getApplicationContext(), getString(R.string.quote_added), Toast.LENGTH_SHORT).show();
-                //TODO : Upgrade the refreshing after user added the quote
-                Intent intent = new Intent(QuotesActivity.this, QuotesActivity.class);
-                intent.putExtra("ID_MOVIE", id);
-                intent.putExtra("TITLE_MOVIE", title);
-                startActivity(intent);
+                finish();
+                startActivity(getIntent());
             }
         });
 
