@@ -84,50 +84,32 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Check if email and passwords respect format
-     * @return valid true or false
-     */
-    public boolean validate() {
-        boolean valid = true;
-
-        String email = editNewEmail.getText().toString();
-        String password = editNewPassword.getText().toString();
-        String confirmPassword = editConfirmPassword.getText().toString();
-
-        //Check the email content and pattern
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editNewEmail.setError(getString(R.string.check_email));
-            valid = false;
-        } else {
-            editNewEmail.setError(null);
-        }
-
-        //Check the password content and length
-        if (password.isEmpty() || password.length() < 4) {
-            editNewPassword.setError(getString(R.string.check_password));
-            valid = false;
-        } else {
-            editNewPassword.setError(null);
-        }
-
-        //Check the confirmed password content, length and matching with password
-        if (confirmPassword.isEmpty() || confirmPassword.length() < 4 || !(confirmPassword.equals(password))) {
-            editConfirmPassword.setError(getString(R.string.check_confirmed_password));
-            valid = false;
-        } else {
-            editConfirmPassword.setError(null);
-        }
-
-        return valid;
-    }
-
-    /**
      * Sign up to the app via Firebase
      */
     public void sign_up() {
 
-        //Check the validation of the signup form
-        if (!validate()) {
+        final String email = editNewEmail.getText().toString();
+        final String password = editNewPassword.getText().toString();
+        final String confirmPassword = editConfirmPassword.getText().toString();
+
+        /*
+        Check if email, password and confirmed password are valid
+         */
+        if (!Validator.checkEmail(email) && !Validator.checkPassword(password)) {
+            editNewEmail.setError(getString(R.string.check_email));
+            editNewPassword.setError(getString(R.string.check_password));
+            onSignupFailed();
+            return;
+        } else if (!Validator.checkEmail(email)) {
+            editNewEmail.setError(getString(R.string.check_email));
+            onSignupFailed();
+            return;
+        } else if (!Validator.checkPassword(password)) {
+            editNewPassword.setError(getString(R.string.check_password));
+            onSignupFailed();
+            return;
+        } else if (!Validator.checkConfirmPassword(confirmPassword, password)) {
+            editConfirmPassword.setError(getString(R.string.check_confirmed_password));
             onSignupFailed();
             return;
         }
@@ -137,10 +119,6 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.creating_account));
         progressDialog.show();
-
-        String email = editNewEmail.getText().toString();
-        String password = editNewPassword.getText().toString();
-        String confirmPassword = editConfirmPassword.getText().toString();
 
         ////Firebase account creating with email and password
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

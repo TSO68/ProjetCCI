@@ -89,7 +89,7 @@
     <!-- LoginActivity -->
     <!-- SignUpActivity -->
     <string name="check_email">Please enter a valid email address</string>
-    <string name="check_password">Password needs more than 4 characters</string>
+    <string name="check_password">Password needs between 6 and 15 characters</string>
     <string name="authenticating">Authenticating…</string>
     <string name="log_in_successful">Log in successful</string>
     <string name="log_in_failed">Log in failed</string>
@@ -119,7 +119,7 @@
 
     <!-- ResetPasswordActivity -->
     <string name="email_sending">Email is sending…</string>
-    <string name="email_sent">Email sent to</string>
+    <string name="email_sent">"Email sent to "</string>
     <string name="password_reset_failed">Password reset failed</string>
 
     <!-- activity_statistics -->
