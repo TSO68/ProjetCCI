@@ -40,22 +40,12 @@ public class ValidatorUnitTest {
     }
 
     @Test
-    public void character_isCorrect() {
-        assertThat(Validator.checkCharacter("George Abitbol")).isTrue();
+    public void content_isCorrect() {
+        assertThat(Validator.checkContent("George Abitbol")).isTrue();
     }
 
     @Test
-    public void character_isFalse() {
-        assertThat(Validator.checkCharacter("")).isFalse();
-    }
-
-    @Test
-    public void quote_isCorrect() {
-        assertThat(Validator.checkQuote("Tu n'es vraiment pas très sympa !")).isTrue();
-    }
-
-    @Test
-    public void quote_isFalse() {
-        assertThat(Validator.checkQuote("")).isFalse();
+    public void content_isFalse() {
+        assertThat(Validator.checkContent("")).isFalse();
     }
 }

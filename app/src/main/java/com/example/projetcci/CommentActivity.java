@@ -74,15 +74,19 @@ public class CommentActivity extends AppCompatActivity {
         String author = editAuthor.getText().toString().trim();
         String text = editText.getText().toString().trim();
 
-        if (TextUtils.isEmpty(author)) {
-            editAuthor.setError(getString(R.string.error_author));
-            editAuthor.requestFocus();
+        /*
+        Check if author and text are valid
+         */
+        if (!Validator.checkContent(author) && !Validator.checkContent(text)) {
+            editAuthor.setError(getString(R.string.set_character));
+            editText.setError(getString(R.string.set_quote));
             return;
-        }
-
-        if (TextUtils.isEmpty(text)) {
-            editText.setError(getString(R.string.error_text));
-            editText.requestFocus();
+        } else if (!Validator.checkContent(author)) {
+            editAuthor.setError(getString(R.string.set_character));
+            return;
+        } else if (!Validator.checkContent(text)) {
+            editText.setError(getString(R.string.set_quote));
+            return;
         }
 
         HashMap<String, String> params = new HashMap<>();

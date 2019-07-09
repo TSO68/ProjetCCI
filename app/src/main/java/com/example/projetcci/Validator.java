@@ -58,15 +58,8 @@ public class Validator {
         return true;
     }
 
-    public static boolean checkCharacter(String character) {
-        if (character.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean checkQuote(String quote) {
-        if (quote.isEmpty()) {
+    public static boolean checkContent(String content) {
+        if (content.isEmpty()) {
             return false;
         }
         return true;
