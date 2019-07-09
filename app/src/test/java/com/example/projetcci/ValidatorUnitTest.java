@@ -2,7 +2,6 @@ package com.example.projetcci;
 
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.*;
 
 public class ValidatorUnitTest {
 
