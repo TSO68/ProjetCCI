@@ -78,14 +78,14 @@ public class CommentActivity extends AppCompatActivity {
         Check if author and text are valid
          */
         if (!Validator.checkContent(author) && !Validator.checkContent(text)) {
-            editAuthor.setError(getString(R.string.set_character));
-            editText.setError(getString(R.string.set_quote));
+            editAuthor.setError(getString(R.string.error_author));
+            editText.setError(getString(R.string.error_text));
             return;
         } else if (!Validator.checkContent(author)) {
-            editAuthor.setError(getString(R.string.set_character));
+            editAuthor.setError(getString(R.string.error_author));
             return;
         } else if (!Validator.checkContent(text)) {
-            editText.setError(getString(R.string.set_quote));
+            editText.setError(getString(R.string.error_text));
             return;
         }
 
