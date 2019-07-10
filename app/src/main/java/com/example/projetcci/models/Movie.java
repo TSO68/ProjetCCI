@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.models;
 
 import java.io.Serializable;
 

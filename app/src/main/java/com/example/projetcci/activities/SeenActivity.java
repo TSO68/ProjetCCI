@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,6 +18,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetcci.models.Movie;
+import com.example.projetcci.database.MovieManager;
+import com.example.projetcci.adapters.MoviesAdapter;
+import com.example.projetcci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -25,9 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Display the list of favorite movies
+ * Display the list of seen movies
  */
-public class FavoritesActivity extends AppCompatActivity
+public class SeenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseUser currentUser;
@@ -41,7 +45,7 @@ public class FavoritesActivity extends AppCompatActivity
 
     private boolean isAuthListenerSet = false;
 
-    private static final String TAG = "FavoritesActivity";
+    private static final String TAG = "SeenActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +82,12 @@ public class FavoritesActivity extends AppCompatActivity
         adapter = new MoviesAdapter(this, moviesList);
         moviesView.setAdapter(adapter);
 
-        //Open the DB and retrieve informations of favorite movies
+        ArrayList<String> genresList = new ArrayList<String>();
+
+        //Open the DB and retrieve informations of seen movies
         final MovieManager m = new MovieManager(this);
         m.open();
-        Cursor c = m.getMoviesFavorite();
+        Cursor c = m.getMoviesSeen();
         if (c.moveToFirst())
         {
             do {
@@ -201,9 +207,9 @@ public class FavoritesActivity extends AppCompatActivity
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user == null) {
-                Toast.makeText(FavoritesActivity.this, getString(R.string.log_out_successful), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeenActivity.this, getString(R.string.log_out_successful), Toast.LENGTH_SHORT).show();
                 Intent intent;
-                intent = new Intent(FavoritesActivity.this, LoginActivity.class);
+                intent = new Intent(SeenActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         }

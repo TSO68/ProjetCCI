@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.utils;
 
 /**
  * Constants for APIs

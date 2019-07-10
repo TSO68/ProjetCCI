@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,6 +24,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.projetcci.models.Genre;
+import com.example.projetcci.database.GenreManager;
+import com.example.projetcci.models.Movie;
+import com.example.projetcci.database.MovieGenresManager;
+import com.example.projetcci.database.MovieManager;
+import com.example.projetcci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -44,9 +49,10 @@ import okhttp3.Response;
 
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static com.example.projetcci.Constants.API_KEY;
-import static com.example.projetcci.Constants.BASE_URL;
-import static com.example.projetcci.Constants.IMAGE_BASE_URL;
+
+import static com.example.projetcci.utils.Constants.API_KEY;
+import static com.example.projetcci.utils.Constants.BASE_URL;
+import static com.example.projetcci.utils.Constants.IMAGE_BASE_URL;
 
 /**
  * Display detailled informations of each movie

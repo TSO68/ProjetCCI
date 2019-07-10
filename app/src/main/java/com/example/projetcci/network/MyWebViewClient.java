@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.network;
 
 import android.content.Intent;
 import android.net.Uri;

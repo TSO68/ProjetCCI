@@ -7,7 +7,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
-import com.example.projetcci.MovieManager;
+import com.example.projetcci.database.MovieManager;
 import com.example.projetcci.R;
 
 /**

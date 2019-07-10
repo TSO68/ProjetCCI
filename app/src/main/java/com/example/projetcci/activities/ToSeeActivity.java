@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,6 +18,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetcci.models.Movie;
+import com.example.projetcci.database.MovieManager;
+import com.example.projetcci.adapters.MoviesAdapter;
+import com.example.projetcci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

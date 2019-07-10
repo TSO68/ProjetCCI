@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.database;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+
+import com.example.projetcci.network.MyWebViewClient;
+import com.example.projetcci.R;
 
 /**
  * Welcoming activity that presents the application

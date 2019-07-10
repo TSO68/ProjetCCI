@@ -1,9 +1,10 @@
-package com.example.projetcci;
+package com.example.projetcci.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.projetcci.R;
 import com.example.projetcci.fragments.SettingsFragment;
 
 /**

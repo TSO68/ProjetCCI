@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.models;
 
 /**
  * Class with informations needed from each genre

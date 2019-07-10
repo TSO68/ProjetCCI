@@ -1,5 +1,7 @@
 package com.example.projetcci;
 
+import com.example.projetcci.utils.Validator;
+
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 

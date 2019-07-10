@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.network;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

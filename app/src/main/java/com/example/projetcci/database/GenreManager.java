@@ -1,9 +1,11 @@
-package com.example.projetcci;
+package com.example.projetcci.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.projetcci.models.Genre;
 
 /**
  * Manage genres table in the local database

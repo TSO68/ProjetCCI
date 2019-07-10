@@ -1,10 +1,15 @@
-package com.example.projetcci;
+package com.example.projetcci.activities;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
+
+import com.example.projetcci.models.Genre;
+import com.example.projetcci.database.GenreManager;
+import com.example.projetcci.database.MovieGenresManager;
+import com.example.projetcci.database.MovieManager;
+import com.example.projetcci.R;
 
 import java.text.DecimalFormat;
 

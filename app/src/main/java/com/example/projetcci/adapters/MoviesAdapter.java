@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,11 +11,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.projetcci.R;
+import com.example.projetcci.activities.MovieDetailActivity;
+import com.example.projetcci.models.Movie;
 
 import java.io.Serializable;
 import java.util.List;
 
-import static com.example.projetcci.Constants.IMAGE_BASE_URL;
+import static com.example.projetcci.utils.Constants.IMAGE_BASE_URL;
 
 /**
  * Adapter for list pages

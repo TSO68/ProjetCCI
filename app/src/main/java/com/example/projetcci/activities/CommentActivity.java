@@ -1,18 +1,17 @@
-package com.example.projetcci;
-
+package com.example.projetcci.activities;
 
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetcci.R;
+import com.example.projetcci.network.RequestHandler;
+import com.example.projetcci.utils.Validator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -21,7 +20,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import static com.example.projetcci.Constants.CREATE_COMMENT_BASE_URL;
+import static com.example.projetcci.utils.Constants.CREATE_COMMENT_BASE_URL;
 
 /**
  * Send comments on remote database

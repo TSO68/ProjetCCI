@@ -1,4 +1,4 @@
-package com.example.projetcci;
+package com.example.projetcci.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -24,13 +23,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetcci.models.Genre;
+import com.example.projetcci.database.GenreManager;
+import com.example.projetcci.models.Movie;
+import com.example.projetcci.adapters.MoviesAdapter;
+import com.example.projetcci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,8 +44,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.example.projetcci.Constants.BASE_URL;
-import static com.example.projetcci.Constants.API_KEY;
+import static com.example.projetcci.utils.Constants.BASE_URL;
+import static com.example.projetcci.utils.Constants.API_KEY;
 
 /**
  * Display the "discover" list from TMDB and search movies

@@ -1,12 +1,9 @@
-package com.example.projetcci;
+package com.example.projetcci.activities;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +15,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projetcci.models.Quote;
+import com.example.projetcci.R;
+import com.example.projetcci.network.RequestHandler;
+import com.example.projetcci.utils.Validator;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,8 +30,8 @@ import java.util.List;
 
 import static android.view.View.GONE;
 
-import static com.example.projetcci.Constants.CREATE_QUOTE_BASE_URL;
-import static com.example.projetcci.Constants.GET_QUOTES_BASE_URL;
+import static com.example.projetcci.utils.Constants.CREATE_QUOTE_BASE_URL;
+import static com.example.projetcci.utils.Constants.GET_QUOTES_BASE_URL;
 
 public class QuotesActivity extends AppCompatActivity {
 
