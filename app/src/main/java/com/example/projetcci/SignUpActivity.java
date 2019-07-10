@@ -99,18 +99,23 @@ public class SignUpActivity extends AppCompatActivity {
             editNewEmail.setError(getString(R.string.check_email));
             editNewPassword.setError(getString(R.string.check_password));
             onSignupFailed();
+            editNewEmail.requestFocus();
+            editNewPassword.requestFocus();
             return;
         } else if (!Validator.checkEmail(email)) {
             editNewEmail.setError(getString(R.string.check_email));
             onSignupFailed();
+            editNewEmail.requestFocus();
             return;
         } else if (!Validator.checkPassword(password)) {
             editNewPassword.setError(getString(R.string.check_password));
             onSignupFailed();
+            editNewPassword.requestFocus();
             return;
         } else if (!Validator.checkConfirmPassword(confirmPassword, password)) {
             editConfirmPassword.setError(getString(R.string.check_confirmed_password));
             onSignupFailed();
+            editConfirmPassword.requestFocus();
             return;
         }
 

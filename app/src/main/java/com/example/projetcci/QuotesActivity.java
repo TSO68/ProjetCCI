@@ -92,12 +92,16 @@ public class QuotesActivity extends AppCompatActivity {
         if (!Validator.checkContent(character) && !Validator.checkContent(quote)) {
             editCharacter.setError(getString(R.string.set_character));
             editQuote.setError(getString(R.string.set_quote));
+            editCharacter.requestFocus();
+            editQuote.requestFocus();
             return;
         } else if (!Validator.checkContent(character)) {
             editCharacter.setError(getString(R.string.set_character));
+            editCharacter.requestFocus();
             return;
         } else if (!Validator.checkContent(quote)) {
             editQuote.setError(getString(R.string.set_quote));
+            editQuote.requestFocus();
             return;
         }
 

@@ -80,12 +80,16 @@ public class CommentActivity extends AppCompatActivity {
         if (!Validator.checkContent(author) && !Validator.checkContent(text)) {
             editAuthor.setError(getString(R.string.error_author));
             editText.setError(getString(R.string.error_text));
+            editAuthor.requestFocus();
+            editText.requestFocus();
             return;
         } else if (!Validator.checkContent(author)) {
             editAuthor.setError(getString(R.string.error_author));
+            editAuthor.requestFocus();
             return;
         } else if (!Validator.checkContent(text)) {
             editText.setError(getString(R.string.error_text));
+            editText.requestFocus();
             return;
         }
 

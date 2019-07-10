@@ -106,14 +106,18 @@ public class LoginActivity extends AppCompatActivity {
             editEmail.setError(getString(R.string.check_email));
             editPassword.setError(getString(R.string.check_password));
             onLoginFailed();
+            editEmail.requestFocus();
+            editPassword.requestFocus();
             return;
         } else if (!Validator.checkEmail(email)) {
             editEmail.setError(getString(R.string.check_email));
             onLoginFailed();
+            editEmail.requestFocus();
             return;
         } else if (!Validator.checkPassword(password)) {
             editPassword.setError(getString(R.string.check_password));
             onLoginFailed();
+            editPassword.requestFocus();
             return;
         }
 

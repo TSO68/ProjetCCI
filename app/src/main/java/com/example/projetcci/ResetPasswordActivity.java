@@ -63,6 +63,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         if (!Validator.checkEmail(email)) {
             editEmailReset.setError(getString(R.string.check_email));
             onResetFailed();
+            editEmailReset.requestFocus();
             return;
         }
 
