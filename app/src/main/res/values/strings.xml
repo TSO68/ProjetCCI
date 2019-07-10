@@ -38,7 +38,7 @@
     <string name="add_seen">Added in Seen list</string>
     <string name="remove_seen">Removed from Seen list</string>
     <string name="add_favorite">Added in Favorites list</string>
-    <string name="remove_favorite">Remove from Favorites list</string>
+    <string name="remove_favorite">Removed from Favorites list</string>
     <string name="cast">Cast</string>
     <string name="no_genre">No genre available</string>
     <string name="see_quotes">See quotes</string>

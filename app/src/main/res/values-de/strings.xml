@@ -23,8 +23,8 @@
     <string name="no_cast">Keine Informationen zum Verteilungen verfügbar</string>
     <string name="no_description">Keine verfügbare Beschreibung</string>
     <string name="remove_favorite">Aus den Favoriten entfernt</string>
-    <string name="remove_seen">Gesehene Filmen entfernen</string>
-    <string name="remove_to_see">Aus der Filmeliste herausnehmen</string>
+    <string name="remove_seen">Gesehene Filme entfernt</string>
+    <string name="remove_to_see">Aus der Filmliste herausnimmt</string>
     <string name="search_hint">Ein Film suchen…</string>
     <string name="comment_author">Ihr Name</string>
     <string name="comment_text">Ihre Bemerkung</string>
@@ -47,7 +47,7 @@
     <string name="log_in_failed">Anmeldung fehlgeschlagen</string>
     <string name="log_in_successful">Erfolgreiche Anmeldung</string>
     <string name="check_confirmed_password">Die Passwörter stimmen nicht überein</string>
-    <string name="creating_account">Konto erstellen</string>
+    <string name="creating_account">Konto erstellen…</string>
     <string name="sign_up_failed">Registrierung fehlgeschlagen</string>
     <string name="sign_up_successful">Erfolgreiche Registrierung</string>
     <string name="clear_local">Ihre lokale Datenbank entleeren</string>
@@ -60,9 +60,9 @@
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="db_cleared">Datenbank entleert</string>
-    <string name="email_sending">Email wird gesendet</string>
+    <string name="email_sending">Email wird gesendet…</string>
     <string name="email_sent">"Email gesendet an "</string>
-    <string name="password_reset_failed">Fehler bei Zurücksetzen des Passworts</string>
+    <string name="password_reset_failed">Fehler bei Zurücksetzen des Passwort</string>
     <string name="reset_password">Mein Passwort zurücksetzen</string>
     <string name="log_out_successful">Erfolgreiche Abmeldung</string>
     <string name="average_rating">Durchschnittsnote</string>
@@ -97,5 +97,5 @@
     <string name="set_quote">Bitte geben Sie ein Zitat ein</string>
     <string name="add_quote">Ein Zitat hinzufügen</string>
     <string name="set_character">Bitte geben Sie den Namen einer Figur ein</string>
-    <string name="total_viewing">Gesamtzeits der Vorfürung</string>
+    <string name="total_viewing">Gesamtzeit der Vorfürung</string>
 </resources>
