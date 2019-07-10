@@ -70,9 +70,6 @@ public class QuotesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createQuote();
-                Toast.makeText(getApplicationContext(), getString(R.string.quote_added), Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(getIntent());
             }
         });
 
@@ -89,13 +86,20 @@ public class QuotesActivity extends AppCompatActivity {
         String character = editCharacter.getText().toString().trim();
         String quote = editQuote.getText().toString().trim();
 
-        if (TextUtils.isEmpty(character)) {
+        /*
+        Check if character and quote are valid
+         */
+        if (!Validator.checkContent(character) && !Validator.checkContent(quote)) {
+            editCharacter.setError(getString(R.string.set_character));
+            editQuote.setError(getString(R.string.set_quote));
+            editCharacter.requestFocus();
+            editQuote.requestFocus();
+            return;
+        } else if (!Validator.checkContent(character)) {
             editCharacter.setError(getString(R.string.set_character));
             editCharacter.requestFocus();
             return;
-        }
-
-        if (TextUtils.isEmpty(quote)) {
+        } else if (!Validator.checkContent(quote)) {
             editQuote.setError(getString(R.string.set_quote));
             editQuote.requestFocus();
             return;
@@ -108,6 +112,10 @@ public class QuotesActivity extends AppCompatActivity {
 
         PerformNetworkRequest request = new PerformNetworkRequest(CREATE_QUOTE_BASE_URL, params, CODE_POST_REQUEST);
         request.execute();
+
+        Toast.makeText(getApplicationContext(), getString(R.string.quote_added), Toast.LENGTH_SHORT).show();
+        finish();
+        startActivity(getIntent());
     }
 
     /**

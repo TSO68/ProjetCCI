@@ -61,7 +61,7 @@
     <string name="no">Nein</string>
     <string name="db_cleared">Datenbank entleert</string>
     <string name="email_sending">Email wird gesendet</string>
-    <string name="email_sent">Email gesendet an</string>
+    <string name="email_sent">"Email gesendet an "</string>
     <string name="password_reset_failed">Fehler bei Zurücksetzen des Passworts</string>
     <string name="reset_password">Mein Passwort zurücksetzen</string>
     <string name="log_out_successful">Erfolgreiche Abmeldung</string>
@@ -74,7 +74,7 @@
     <string name="no_genre">Es gibt kein Art von Film</string>
     <string name="forgot_password">Passwort vergessen ?</string>
     <string name="about">Über die App</string>
-    <string name="check_password">Das Passwort muss mindestens 6 Zeichen lang zein</string>
+    <string name="check_password">Das Passwort muss zwischen 6 und 15 Zeichen lang sein</string>
     <string name="clear_database">Datenbank entleeren</string>
     <string name="confirm_your_password">Ihr Passwort wiederholen</string>
     <string name="log_in">Anmelden</string>

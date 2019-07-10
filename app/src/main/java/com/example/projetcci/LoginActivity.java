@@ -92,41 +92,32 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Check if email and password respect format
-     * @return valid true or false
-     */
-    public boolean validate() {
-        boolean valid = true;
-
-        String email = editEmail.getText().toString();
-        String password = editPassword.getText().toString();
-
-        //Check the email content and pattern
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editEmail.setError(getString(R.string.check_email));
-            valid = false;
-        } else {
-            editEmail.setError(null);
-        }
-
-        //Check the password content and length
-        if (password.isEmpty() || password.length() < 4) {
-            editPassword.setError(getString(R.string.check_password));
-            valid = false;
-        } else {
-            editEmail.setError(null);
-        }
-        return valid;
-    }
-
-    /**
      * Connect to the app via FireBase
      */
     public void log_in() {
 
-        //Check the validation of the login form
-        if (!validate()) {
+        final String email = editEmail.getText().toString();
+        final String password = editPassword.getText().toString();
+
+        /*
+        Check if email and password are valid
+         */
+        if (!Validator.checkEmail(email) && !Validator.checkPassword(password)) {
+            editEmail.setError(getString(R.string.check_email));
+            editPassword.setError(getString(R.string.check_password));
             onLoginFailed();
+            editEmail.requestFocus();
+            editPassword.requestFocus();
+            return;
+        } else if (!Validator.checkEmail(email)) {
+            editEmail.setError(getString(R.string.check_email));
+            onLoginFailed();
+            editEmail.requestFocus();
+            return;
+        } else if (!Validator.checkPassword(password)) {
+            editPassword.setError(getString(R.string.check_password));
+            onLoginFailed();
+            editPassword.requestFocus();
             return;
         }
 
@@ -135,9 +126,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.authenticating));
         progressDialog.show();
-
-        final String email = editEmail.getText().toString();
-        final String password = editPassword.getText().toString();
 
         //Firebase authenticating with email and password
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

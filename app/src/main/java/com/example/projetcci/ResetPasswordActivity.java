@@ -51,30 +51,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     /**
-     * Check if email respect format
-     * @return valid true or false
+     * Trigger the email sended by Firebase that allows user to reset his password
      */
-    public boolean validate() {
-        boolean valid = true;
-
-        String email = editEmailReset.getText().toString();
-
-        //Check the email content and pattern
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editEmailReset.setError(getString(R.string.check_email));
-            valid = false;
-        } else {
-            editEmailReset.setError(null);
-        }
-
-        return valid;
-    }
-
     public void resetPassword() {
 
-        //Check the validation of the form
-        if (!validate()) {
+        final String email = editEmailReset.getText().toString();
+
+        /*
+        Check if email is valid
+         */
+        if (!Validator.checkEmail(email)) {
+            editEmailReset.setError(getString(R.string.check_email));
             onResetFailed();
+            editEmailReset.requestFocus();
             return;
         }
 
@@ -83,8 +72,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.email_sending));
         progressDialog.show();
-
-        final String email = editEmailReset.getText().toString();
 
         //Firebase send the email which allows to reset the password
         mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {

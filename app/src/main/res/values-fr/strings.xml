@@ -46,7 +46,7 @@
     <string name="your_password">Votre mot de passe</string>
     <string name="authenticating">Connexion…</string>
     <string name="check_email">Veuillez entrer un email valide</string>
-    <string name="check_password">Le mot de passe doit comporter plus de 4 caractères</string>
+    <string name="check_password">Le mot de passe doit comporter entre 6 et 15 caractères</string>
     <string name="log_in_failed">Echec de connexion</string>
     <string name="log_in_successful">Connexion réussie</string>
     <string name="check_confirmed_password">Les mots de passe ne correspondent pas.</string>
@@ -66,7 +66,7 @@
     <string name="no">Non</string>
     <string name="db_cleared">Base de données locale vidée</string>
     <string name="email_sending">Envoi de l\'email en cours…</string>
-    <string name="email_sent">Email envoyé à</string>
+    <string name="email_sent">"Email envoyé à "</string>
     <string name="password_reset_failed">Echec de la réinitialisation du mot de passe</string>
     <string name="reset_password">Réinitialiser mon mot de passe</string>
     <string name="reset_title">J\'ai oublié mon mot de passe et je veux le réinitialiser</string>
