@@ -47,7 +47,7 @@ public class MainActivityTest {
         TextView userEmail = headerView.findViewById(R.id.txtUserEmail);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUserEmail = "";
+        String currentUserEmail;
         if (currentUser != null) {
             currentUserEmail = currentUser.getEmail();
         } else {
