@@ -15,7 +15,8 @@
         android:gravity="center"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:text="@string/sign_up_to_projetcci" />
+        android:text="@string/sign_up_to_projetcci"
+        android:textColor="@color/white" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/newEmailLayout"
@@ -75,6 +76,7 @@
         android:layout_marginBottom="24dp"
         android:layout_marginStart="5dip"
         android:layout_marginEnd="5dip"
+        android:backgroundTint="@color/lightGray"
         android:text="@string/sign_up" />
 
     <TextView
@@ -84,6 +86,7 @@
         android:gravity="center"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:text="@string/already_a_member_login" />
+        android:text="@string/already_a_member_login"
+        android:textColor="@color/white" />
 
 </LinearLayout>

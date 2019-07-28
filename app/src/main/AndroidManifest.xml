@@ -31,7 +31,9 @@
         <activity android:name=".activities.StatisticsActivity" />
         <activity android:name=".activities.ResetPasswordActivity" />
         <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.LoginActivity" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.CommentActivity" />
         <activity
             android:name=".activities.FavoritesActivity"

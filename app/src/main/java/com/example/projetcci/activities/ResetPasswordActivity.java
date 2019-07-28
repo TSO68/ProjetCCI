@@ -69,7 +69,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         }
 
         //Charging indicator while sending the email
-        final ProgressDialog progressDialog = new ProgressDialog(ResetPasswordActivity.this);
+        final ProgressDialog progressDialog = new ProgressDialog(ResetPasswordActivity.this, R.style.AlertDialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.email_sending));
         progressDialog.show();

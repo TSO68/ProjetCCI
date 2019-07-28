@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //Charging indicator while authenticating
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.AlertDialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.authenticating));
         progressDialog.show();
