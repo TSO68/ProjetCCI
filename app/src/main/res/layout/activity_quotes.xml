@@ -39,6 +39,7 @@
             android:id="@+id/btnAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/lightGray"
             android:text="@string/add_quote" />
     </LinearLayout>
 
@@ -46,14 +47,18 @@
         android:id="@+id/listQuotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_add" />
+        android:layout_below="@id/layout_add"
+        android:listSelector="@android:color/transparent"
+        android:divider="@color/gray"
+        android:dividerHeight="0.3dip" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarQuotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:indeterminateDrawable="@drawable/progress" />
 
 </RelativeLayout>
