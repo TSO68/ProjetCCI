@@ -43,7 +43,7 @@
     </style>
 
     <style name="DrawerTitle">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/lightGray</item>
     </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">
