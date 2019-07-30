@@ -262,11 +262,11 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             Glide.with(this)
                     .load(IMAGE_BASE_URL + details.getBackdropPath())
-                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                    .apply(RequestOptions.placeholderOf(R.color.gray))
                     .into(backdrop_image);
             Glide.with(this)
                     .load(IMAGE_BASE_URL + details.getPosterPath())
-                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                    .apply(RequestOptions.placeholderOf(R.color.gray))
                     .into(poster);
             title.setText(details.getTitle());
 
