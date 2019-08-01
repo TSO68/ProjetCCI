@@ -1,7 +1,6 @@
 # Projet d'application Android / CCI
 
 ## Roadmap
-* [ ] Envoi de notifications
 * [x] Gestion des citations
 * [x] Création d'une page de présentation de l'application
 * [x] Création d'un splash screen
@@ -10,18 +9,17 @@
 * [x] Gestion de l'authentification
 * [x] Envoi de commentaires au développeur via l'API perso
 * [x] Connexion avec l'API perso
-* [x] Gestion de la base de données locale SQLite avec statuts du visionnage, note perso à améliorer + affichage des pages concernées
+* [x] Gestion de la base de données locale avec statuts du visionnage, note personnelle et affichage des pages concernées
 * [x] Afficher la page des détails de chaque film
 * [x] Recherche de films
 * [x] Récupérer une liste de films à découvrir
 
 ### Non prioritaire
-* Récupérer plus d'informations sur la page de détails
-* Améliorer le design de la page détail
-* Améliorer le design de la page "Comments"
 * Améliorer le design des pages "Login" et "Signup"
-* Améliorer le design général
 * Améliorer la page de présentation
+
+### Évolutions possibles
+* Prévoir le visionnage d'un film avec l'envoi de notifications pour rappel
 
 ## API
 ### TMDB
