@@ -26,7 +26,9 @@
             android:title="@string/menu_statistics" />
     </group>
 
-    <item android:title="@string/communicate">
+    <item
+        android:title="@string/communicate"
+        android:id="@+id/titleDrawer">
         <menu>
             <item
                 android:id="@+id/nav_share"

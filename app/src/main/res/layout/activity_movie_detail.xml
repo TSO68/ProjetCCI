@@ -39,7 +39,7 @@
                 android:id="@+id/movie_backdrop_image"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/darkGray"
                 android:contentDescription="@string/movie_image_description"
                 android:scaleType="centerCrop" />
 
@@ -76,27 +76,31 @@
                             android:id="@+id/movie_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/white"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/movie_genres"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightGray" />
 
                         <TextView
                             android:id="@+id/movie_release_date"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightGray" />
 
                         <TextView
                             android:id="@+id/movie_runtime"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightGray" />
 
                         <RatingBar
                             android:id="@+id/movie_tmdb_rating_bar"
+                            android:theme="@style/RatingBar"
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -110,6 +114,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
+                            android:backgroundTint="@color/lightGray"
                             android:text="@string/see_quotes"
                             android:singleLine="true" />
 
@@ -124,6 +129,7 @@
                 android:layout_below="@id/movieDetails"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:backgroundTint="@color/lighterGray"
                 android:background="?android:attr/listDivider" />
 
             <TextView
@@ -132,7 +138,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/firstDivider"
                 android:justificationMode="inter_word"
-                android:layout_margin="16dp" />
+                android:layout_margin="16dp"
+                android:textColor="@color/lightGray" />
 
             <TextView
                 android:id="@+id/cast_title"
@@ -142,15 +149,17 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/cast"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/lighterGray" />
 
             <View
                 android:id="@+id/secondDivider"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:layout_below="@id/cast_title"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:backgroundTint="@color/lighterGray"
                 android:background="?android:attr/listDivider" />
 
             <TextView
@@ -159,7 +168,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/secondDivider"
                 android:justificationMode="inter_word"
-                android:layout_margin="16dp" />
+                android:layout_margin="16dp"
+                android:textColor="@color/lightGray" />
 
             <LinearLayout
                 android:id="@+id/db_buttons_layout"
@@ -174,6 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/ic_playlist_add"
+                    android:backgroundTint="@color/lightGray"
                     android:text="@string/button_to_see"
                     android:singleLine="true" />
 
@@ -183,6 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/ic_done"
+                    android:backgroundTint="@color/lightGray"
                     android:text="@string/button_seen"
                     android:singleLine="true" />
 
@@ -192,12 +204,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/ic_star_border"
+                    android:backgroundTint="@color/lightGray"
                     android:text="@string/button_favorite"
                     android:singleLine="true" />
             </LinearLayout>
 
             <RatingBar
                 android:id="@+id/movie_my_rating_bar"
+                android:theme="@style/RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/db_buttons_layout"
@@ -220,6 +234,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/ic_record"
+                    android:backgroundTint="@color/lightGray"
                     android:text="@string/record"
                     android:singleLine="true" />
 
@@ -229,6 +244,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/ic_stop"
+                    android:backgroundTint="@color/lightGray"
                     android:text="@string/stop_record"
                     android:singleLine="true" />
             </LinearLayout>
@@ -246,6 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/ic_play"
+                    android:backgroundTint="@color/lightGray"
                     android:text="@string/play"
                     android:singleLine="true" />
 
@@ -255,6 +272,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/ic_stop"
+                    android:backgroundTint="@color/lightGray"
                     android:text="@string/stop_playing"
                     android:singleLine="true" />
 

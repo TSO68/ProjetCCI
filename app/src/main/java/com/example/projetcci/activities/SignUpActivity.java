@@ -121,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         //Charging indicator while the account creation
-        final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+        final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this, R.style.AlertDialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.creating_account));
         progressDialog.show();

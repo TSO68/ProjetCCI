@@ -31,7 +31,9 @@
         <activity android:name=".activities.StatisticsActivity" />
         <activity android:name=".activities.ResetPasswordActivity" />
         <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.LoginActivity" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.CommentActivity" />
         <activity
             android:name=".activities.FavoritesActivity"
@@ -43,7 +45,9 @@
             android:name=".activities.ToSeeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.MovieDetailActivity" />
-        <activity android:name=".activities.SettingsActivity" />
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:theme="@style/PreferenceScreen" />
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"

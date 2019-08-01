@@ -96,7 +96,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             title.setText(movie.getTitle());
             Glide.with(context)
                     .load(IMAGE_BASE_URL + movie.getPosterPath())
-                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                    .apply(RequestOptions.placeholderOf(R.color.gray))
                     .into(poster);
         }
     }

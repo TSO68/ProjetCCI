@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,6 +65,13 @@ public class SeenActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null); //Keep icons in white
+        //Set color of the drawer menu title
+        Menu menu = navigationView.getMenu();
+        MenuItem title = menu.findItem(R.id.titleDrawer);
+        SpannableString s = new SpannableString(title.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.DrawerTitle), 0, s.length(), 0);
+        title.setTitle(s);
 
         View headerView = navigationView.getHeaderView(0);
         userEmail = (TextView) headerView.findViewById(R.id.txtUserEmail);

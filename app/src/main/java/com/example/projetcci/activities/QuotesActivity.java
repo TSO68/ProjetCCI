@@ -62,7 +62,7 @@ public class QuotesActivity extends AppCompatActivity {
         editCharacter = (EditText) findViewById(R.id.editCharacter);
         editQuote = (EditText) findViewById(R.id.editQuote);
         addQuote = (Button) findViewById(R.id.btnAdd);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBarQuotes);
         listQuotes = (ListView) findViewById(R.id.listQuotes);
 
         quotesList = new ArrayList<>();

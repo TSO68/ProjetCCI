@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCC" >
+    android:background="@color/colorPrimary" >
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/nb_movies_seen"
-                android:textColor="#999"
+                android:textColor="@color/lightGray"
                 android:gravity="center"/>
 
             <TextView
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="35sp"
-                android:textColor="#333"
+                android:textColor="@color/white"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/nb_movies_to_see"
-                android:textColor="#999"
+                android:textColor="@color/lightGray"
                 android:gravity="center"/>
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="35sp"
-                android:textColor="#333"
+                android:textColor="@color/white"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/nb_movies_favorites"
-                android:textColor="#999"
+                android:textColor="@color/lightGray"
                 android:gravity="center"/>
 
             <TextView
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="35sp"
-                android:textColor="#333"
+                android:textColor="@color/white"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/total_viewing"
-                android:textColor="#999"
+                android:textColor="@color/lightGray"
                 android:gravity="center"/>
 
             <TextView
@@ -120,7 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="35sp"
-                android:textColor="#333"
+                android:textColor="@color/white"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/average_rating"
-                android:textColor="#999"
+                android:textColor="@color/lightGray"
                 android:gravity="center"/>
 
             <TextView
@@ -149,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="35sp"
-                android:textColor="#333"
+                android:textColor="@color/white"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/favorite_genre"
-                android:textColor="#999"
+                android:textColor="@color/lightGray"
                 android:gravity="center"/>
 
             <TextView
@@ -178,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="35sp"
-                android:textColor="#333"
+                android:textColor="@color/white"
                 android:gravity="center"/>
 
         </LinearLayout>
