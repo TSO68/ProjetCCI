@@ -14,10 +14,6 @@
 * [x] Recherche de films
 * [x] Récupérer une liste de films à découvrir
 
-### Non prioritaire
-* Améliorer le design des pages "Login" et "Signup"
-* Améliorer la page de présentation
-
 ### Évolutions possibles
 * Prévoir le visionnage d'un film avec l'envoi de notifications pour rappel
 
