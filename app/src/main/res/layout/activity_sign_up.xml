@@ -7,6 +7,15 @@
     android:orientation="vertical"
     android:focusableInTouchMode="true" >
 
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dip"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_app_icon"
+        android:contentDescription="@string/app_name" />
+
     <TextView
         android:id="@+id/titleSignUp"
         android:layout_width="fill_parent"
@@ -73,20 +82,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="7dp"
         android:layout_marginStart="5dip"
         android:layout_marginEnd="5dip"
         android:backgroundTint="@color/lightGray"
         android:text="@string/sign_up" />
 
-    <TextView
-        android:id="@+id/linkLogin"
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/btnToLogin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="@string/already_a_member_login"
-        android:textColor="@color/white" />
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="5dip"
+        android:layout_marginEnd="5dip"
+        android:backgroundTint="@color/lightGray"
+        android:text="@string/already_a_member_login" />
 
 </LinearLayout>

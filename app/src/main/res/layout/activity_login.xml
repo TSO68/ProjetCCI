@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
     android:orientation="vertical"
     android:focusableInTouchMode="true" >
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dip"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_app_icon"
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/titleLogin"
@@ -56,31 +64,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="7dp"
         android:layout_marginStart="5dip"
         android:layout_marginEnd="5dip"
         android:backgroundTint="@color/lightGray"
         android:text="@string/log_in" />
 
-    <TextView
-        android:id="@+id/linkSignup"
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/btnToSignup"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="@string/no_account_yet_create_one"
-        android:textColor="@color/white" />
+        android:layout_marginBottom="7dp"
+        android:layout_marginStart="5dip"
+        android:layout_marginEnd="5dip"
+        android:backgroundTint="@color/lightGray"
+        android:text="@string/no_account_yet_create_one" />
 
     <TextView
         android:id="@+id/linkReset"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:textSize="16sp"
         android:textStyle="bold"
         android:text="@string/forgot_password"
         android:textColor="@color/white" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
+        android:focusableInTouchMode="true" >
+
+        <Button
+            android:id="@+id/btnToDiscover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="5dip"
+            android:layout_marginEnd="5dip"
+            android:backgroundTint="@color/lightGray"
+            android:text="@string/discover_projetcci" />
+
+    </LinearLayout>
 </LinearLayout>

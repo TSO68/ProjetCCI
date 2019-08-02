@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projetcci.R;
@@ -29,8 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseUser currentUser;
 
     EditText editNewEmail, editNewPassword, editConfirmPassword;
-    Button btnSignup;
-    TextView linkLogin;
+    Button btnSignup, btnToLogin;
 
     private static final String TAG = "SignUpActivity";
 
@@ -46,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
         editNewPassword = (EditText) findViewById(R.id.editNewPassword);
         editConfirmPassword = (EditText) findViewById(R.id.editConfirmPassword);
         btnSignup = (Button) findViewById(R.id.btnSignup);
-        linkLogin = (TextView) findViewById(R.id.linkLogin);
+        btnToLogin = (Button) findViewById(R.id.btnToLogin);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -59,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         //Open LoginActivity
-        linkLogin.setOnClickListener(new View.OnClickListener() {
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

@@ -1,12 +1,12 @@
 package com.example.projetcci.activities;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Button;
 
 import com.example.projetcci.network.MyWebViewClient;
 import com.example.projetcci.R;
@@ -14,20 +14,19 @@ import com.example.projetcci.R;
 /**
  * Welcoming activity that presents the application
  */
-public class WelcomeActivity extends AppCompatActivity {
+public class DiscoverActivity extends AppCompatActivity {
 
     private WebView mWebView;
-
-    Button btnToLogin, btnToSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_discover);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         mWebView = (WebView) findViewById(R.id.webview_projetcci);
-        btnToLogin = (Button) findViewById(R.id.btnToLogin);
-        btnToSignup = (Button) findViewById(R.id.btnToSignup);
 
         //Configure the Webview
         WebSettings webSettings = mWebView.getSettings();
@@ -43,25 +42,27 @@ public class WelcomeActivity extends AppCompatActivity {
                 findViewById(R.id.webview_projetcci).setVisibility(View.VISIBLE);
             }
         });
+    }
 
-        //To LoginActivity
-        btnToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+    /**
+     * Sends user on LoginActivity
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
-        //To SignupActivity
-        btnToSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+    /**
+     * Back to LoginActivity
+     */
+    @Override
+    public boolean onSupportNavigateUp(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+        return true;
     }
 }

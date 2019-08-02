@@ -28,8 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseUser currentUser;
 
     EditText editEmail, editPassword;
-    Button btnLogin;
-    TextView linkSignup, linkReset;
+    Button btnLogin, btnToSignUp, btnToDiscover;
+    TextView linkReset;
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
@@ -42,8 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText)findViewById(R.id.editPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
-        linkSignup = (TextView) findViewById(R.id.linkSignup);
+        btnToSignUp = (Button) findViewById(R.id.btnToSignup);
         linkReset = (TextView) findViewById(R.id.linkReset);
+        btnToDiscover = (Button) findViewById(R.id.btnToDiscover);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -56,21 +57,30 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Open SignUpActivity
-        linkSignup.setOnClickListener(new View.OnClickListener() {
+        btnToSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
                 finish();
-
             }
         });
 
-        //Open SignUpActivity
+        //Open ResetPasswordActivity
         linkReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //Open DiscoverActivity
+        btnToDiscover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, DiscoverActivity.class);
                 startActivity(intent);
                 finish();
             }
