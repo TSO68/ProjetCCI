@@ -30,6 +30,7 @@ import com.example.projetcci.database.GenreManager;
 import com.example.projetcci.models.Movie;
 import com.example.projetcci.adapters.MoviesAdapter;
 import com.example.projetcci.R;
+import com.example.projetcci.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -198,18 +199,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Search the Locale of the device
-     * @return a string with language-country of the device
-     */
-    public String getLocale() {
-        String countryCode = Locale.getDefault().getCountry();
-        String languageCode = Locale.getDefault().getLanguage();
-        String localeCode = languageCode + "-" + countryCode;
-
-        return localeCode;
-    }
-
-    /**
      * Load movies from the "discover" list of TMDB API
      * @param id number of the page from the list
      */
@@ -222,7 +211,7 @@ public class MainActivity extends AppCompatActivity
                 OkHttpClient client = new OkHttpClient();
 
                 Request request = new Request.Builder()
-                        .url(BASE_URL + "/discover/movie?api_key=" + API_KEY + "&language=" + getLocale() + "&sort_by=popularity.desc&include_adult=false&include_video=false&page=" + integers[0])
+                        .url(BASE_URL + "/discover/movie?api_key=" + API_KEY + "&language=" + Utils.getLocale() + "&sort_by=popularity.desc&include_adult=false&include_video=false&page=" + integers[0])
                         .build();
                 try {
                     //Get JSON with results from request
@@ -293,7 +282,7 @@ public class MainActivity extends AppCompatActivity
             protected Void doInBackground(String... strings) {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url(BASE_URL + "/search/movie?api_key=" + API_KEY + "&language=" + getLocale() + "&query=" +strings[0])
+                        .url(BASE_URL + "/search/movie?api_key=" + API_KEY + "&language=" + Utils.getLocale() + "&query=" +strings[0])
                         .build();
                 try {
                     //Get JSON with results from request
@@ -372,7 +361,7 @@ public class MainActivity extends AppCompatActivity
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
-                    .url(BASE_URL + "/genre/movie/list?api_key=" + API_KEY + "&language=" + getLocale())
+                    .url(BASE_URL + "/genre/movie/list?api_key=" + API_KEY + "&language=" + Utils.getLocale())
                     .build();
 
             try {

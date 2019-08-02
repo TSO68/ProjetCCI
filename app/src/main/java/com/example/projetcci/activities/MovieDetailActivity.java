@@ -7,7 +7,6 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -30,6 +29,7 @@ import com.example.projetcci.models.Movie;
 import com.example.projetcci.database.MovieGenresManager;
 import com.example.projetcci.database.MovieManager;
 import com.example.projetcci.R;
+import com.example.projetcci.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -271,7 +271,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             title.setText(details.getTitle());
 
             //Correct date style
-            String correctDate = formatDate(details.getReleaseDate());
+            String correctDate = Utils.formatDate(details.getReleaseDate());
             releaseDate.setText(correctDate);
 
             overview.setText(details.getOverview());
@@ -470,37 +470,6 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     /**
-     * Search the Locale of the device
-     * @return a string with language-country of the device
-     */
-    public String getLocale() {
-        String countryCode = Locale.getDefault().getCountry();
-        String languageCode = Locale.getDefault().getLanguage();
-        String localeCode = languageCode + "-" + countryCode;
-
-        return localeCode;
-    }
-
-    /**
-     *
-     * @param date string of the date retrieved from API
-     * @return reformatted date if needed
-     */
-    public String formatDate(@NonNull String date) {
-        //Format date if Locale if the device isn't US based
-        if (!getLocale().equals("en-US")) {
-            String tempDate = date.replaceAll("-","");
-            String day = tempDate.substring(6, 8);
-            String month = tempDate.substring(4, 6);
-            String year = tempDate.substring(0, 4);
-            String newDate = day + "/" + month + "/" + year;
-            return newDate;
-        }else{
-            return date;
-        }
-    }
-
-    /**
      * Retrieve some additionnal details of each movie, that "discover" didn't display
      */
     private class loadDetails extends AsyncTask<Void,Void,Integer> {
@@ -514,7 +483,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
-                    .url(BASE_URL + "/movie/" + idMovie + "?api_key=" + API_KEY + "&language=" + getLocale())
+                    .url(BASE_URL + "/movie/" + idMovie + "?api_key=" + API_KEY + "&language=" + Utils.getLocale())
                     .build();
 
             try {

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Class that check different values typed by user
  */
-public class Validator {
+public final class Validator {
 
     private static final int MIN_LENGTH = 6;
     private static final int MAX_LENGTH = 15;
@@ -19,6 +19,10 @@ public class Validator {
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                     ")+"
     );
+
+    private Validator() {
+
+    }
 
     /**
      * Check if email pattern and if EditText is empty
