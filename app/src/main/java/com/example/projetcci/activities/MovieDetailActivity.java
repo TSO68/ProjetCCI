@@ -41,7 +41,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -59,18 +58,15 @@ import static com.example.projetcci.utils.Constants.IMAGE_BASE_URL;
  */
 public class MovieDetailActivity extends AppCompatActivity {
 
-    private ImageView backdrop_image, poster;
-    private TextView title, overview, releaseDate, runtime, genresList, castList;
-    private RatingBar tmdbRating, myRating;
-    private Button quotes, tosee, seen, favorite, record, stopRecord, play, stopPlay;
+    private TextView runtime, castList;
+    private RatingBar myRating;
+    private Button tosee, seen, favorite, record, stopRecord, play, stopPlay;
     private Drawable playlist_add, playlist_add_check, done, close, star, star_border;
 
-    FirebaseUser currentUser;
-
-    String AudioSavePathInDevice = null;
-    MediaRecorder mediaRecorder;
-    MediaPlayer mediaPlayer;
-    public static final int RequestPermissionCode = 1;
+    private String AudioSavePathInDevice = null;
+    private MediaRecorder mediaRecorder;
+    private MediaPlayer mediaPlayer;
+    private static final int RequestPermissionCode = 1;
 
     private static final String TAG = "MovieDetailActivity";
 
@@ -83,19 +79,19 @@ public class MovieDetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        backdrop_image = findViewById(R.id.movie_backdrop_image);
-        poster = findViewById(R.id.movie_poster);
-        title = findViewById(R.id.movie_title);
-        releaseDate = findViewById(R.id.movie_release_date);
+        ImageView backdrop_image = findViewById(R.id.movie_backdrop_image);
+        ImageView poster = findViewById(R.id.movie_poster);
+        TextView title = findViewById(R.id.movie_title);
+        TextView releaseDate = findViewById(R.id.movie_release_date);
         runtime = findViewById(R.id.movie_runtime);
-        tmdbRating = (RatingBar) findViewById(R.id.movie_tmdb_rating_bar);
-        overview = findViewById(R.id.movie_overview);
-        genresList = findViewById(R.id.movie_genres);
+        RatingBar tmdbRating = findViewById(R.id.movie_tmdb_rating_bar);
+        TextView overview = findViewById(R.id.movie_overview);
+        TextView genresList = findViewById(R.id.movie_genres);
         castList = findViewById(R.id.movie_cast);
-        myRating = (RatingBar) findViewById(R.id.movie_my_rating_bar);
+        myRating = findViewById(R.id.movie_my_rating_bar);
 
         //Button to QuotesActivity
-        quotes = findViewById(R.id.button_quotes);
+        Button quotes = findViewById(R.id.button_quotes);
 
         //Buttons for DB
         tosee = findViewById(R.id.button_to_see);
@@ -121,7 +117,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         stopPlay.setEnabled(false);
 
         //Get user's email for audio folders
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         final String user = currentUser.getEmail();
 
         //Open DB
@@ -281,9 +277,9 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             //Get the string of all genres and convert it in array of every genre splitted by a comma
             String genresString = details.getGenres();
-            ArrayList<String> genresArray = new ArrayList<String>(Arrays.asList(genresString.split(",")));
+            ArrayList<String> genresArray = new ArrayList<>(Arrays.asList(genresString.split(",")));
 
-            String genreStr = "";
+            StringBuilder genreStr = new StringBuilder();
             for (String str : genresArray) {
                 int genreId = 0;
                 String genreName = "";
@@ -311,10 +307,10 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
 
 
-                genreStr += genreName + ", ";
+                genreStr.append(genreName).append(", ");
             }
-            genreStr = genreStr.length() > 0 ? genreStr.substring(0,genreStr.length() - 2) : genreStr;
-            genresList.setText(genreStr);
+            genreStr = new StringBuilder(genreStr.length() > 0 ? genreStr.substring(0, genreStr.length() - 2) : genreStr.toString());
+            genresList.setText(genreStr.toString());
         }
 
         //Record the audio file
@@ -514,7 +510,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             if (String.valueOf(time).equals("null")){
                 time = 0;
             }
-            runtime.setText(time + " min");
+            runtime.setText(getString(R.string.time, time));
 
             //Open DB
             final MovieManager m = new MovieManager(MovieDetailActivity.this);
@@ -550,7 +546,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 JSONObject root = new JSONObject(response.body().string());
                 JSONArray array = root.getJSONArray("cast");
 
-                ArrayList<String> cast = new ArrayList<String>();
+                ArrayList<String> cast = new ArrayList<>();
 
                 for (int i = 0; i < 10; i++) {
 
@@ -582,18 +578,18 @@ public class MovieDetailActivity extends AppCompatActivity {
          */
         @Override
         protected void onPostExecute(ArrayList<String> cast) {
-            String castStr = "";
+            StringBuilder castStr = new StringBuilder();
 
             //Replace if cast is null in TMDB API
             if (cast == null) {
-                castStr = getResources().getString(R.string.no_cast);
-                castList.setText(castStr);
+                castStr = new StringBuilder(getResources().getString(R.string.no_cast));
+                castList.setText(castStr.toString());
             }else {
                 for (String str : cast) {
-                    castStr += str + ", ";
+                    castStr.append(str).append(", ");
                 }
-                castStr = castStr.length() > 0 ? castStr.substring(0,castStr.length() - 2) : castStr;
-                castList.setText(castStr);
+                castStr = new StringBuilder(castStr.length() > 0 ? castStr.substring(0, castStr.length() - 2) : castStr.toString());
+                castList.setText(castStr.toString());
             }
         }
     }
@@ -601,7 +597,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     /**
      * Set informations about the audio file : source, format, encoding
      */
-    public void MediaRecorderReady(){
+    private void MediaRecorderReady(){
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -625,24 +621,22 @@ public class MovieDetailActivity extends AppCompatActivity {
      */
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case RequestPermissionCode:
-                if (grantResults.length> 0) {
-                    boolean StoragePermission = grantResults[0] ==
-                            PackageManager.PERMISSION_GRANTED;
-                    boolean RecordPermission = grantResults[1] ==
-                            PackageManager.PERMISSION_GRANTED;
+                                           String[] permissions, int[] grantResults) {
+        if (requestCode == RequestPermissionCode) {
+            if (grantResults.length > 0) {
+                boolean StoragePermission = grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED;
+                boolean RecordPermission = grantResults[1] ==
+                        PackageManager.PERMISSION_GRANTED;
 
-                    if (StoragePermission && RecordPermission) {
-                        Toast.makeText(MovieDetailActivity.this, getString(R.string.permissions_granted),
-                                Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(MovieDetailActivity.this,getString(R.string.permissions_denied),
-                                Toast.LENGTH_LONG).show();
-                    }
+                if (StoragePermission && RecordPermission) {
+                    Toast.makeText(MovieDetailActivity.this, getString(R.string.permissions_granted),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MovieDetailActivity.this, getString(R.string.permissions_denied),
+                            Toast.LENGTH_LONG).show();
                 }
-                break;
+            }
         }
     }
 
@@ -650,7 +644,7 @@ public class MovieDetailActivity extends AppCompatActivity {
      * Check if permissions are granted or not
      * @return true or false
      */
-    public boolean checkPermission() {
+    private boolean checkPermission() {
         int write_external = ContextCompat.checkSelfPermission(getApplicationContext(),
                 WRITE_EXTERNAL_STORAGE);
         int record_audio = ContextCompat.checkSelfPermission(getApplicationContext(),

@@ -18,8 +18,6 @@ import java.text.DecimalFormat;
  */
 public class StatisticsActivity extends AppCompatActivity {
 
-    private TextView seenMovies, toSeeMovies, favoritesMovies, totalViewing, averageRating, favoriteGenre;
-
     private static final String TAG = "StatisticsActivity";
 
     @Override
@@ -31,12 +29,12 @@ public class StatisticsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getString(R.string.menu_statistics));
 
-        seenMovies = findViewById(R.id.nb_movies_seen);
-        toSeeMovies = findViewById(R.id.nb_movies_to_see);
-        favoritesMovies = findViewById(R.id.nb_movies_favorites);
-        totalViewing = findViewById(R.id.total_viewing);
-        averageRating = findViewById(R.id.average_rating);
-        favoriteGenre = findViewById(R.id.genre_favorite);
+        TextView seenMovies = findViewById(R.id.nb_movies_seen);
+        TextView toSeeMovies = findViewById(R.id.nb_movies_to_see);
+        TextView favoritesMovies = findViewById(R.id.nb_movies_favorites);
+        TextView totalViewing = findViewById(R.id.total_viewing);
+        TextView averageRating = findViewById(R.id.average_rating);
+        TextView favoriteGenre = findViewById(R.id.genre_favorite);
 
         //Open DB
         final GenreManager g = new GenreManager(this);
@@ -68,7 +66,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         //Get the total of viewing time
         int viewing = m.getTotalViewing();
-        totalViewing.setText(viewing + " min");
+        totalViewing.setText(getString(R.string.time, viewing));
 
         //Get id of favorite genre
         int favorite = mg.getFavoriteGenre();

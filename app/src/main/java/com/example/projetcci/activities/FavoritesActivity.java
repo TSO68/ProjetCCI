@@ -36,15 +36,6 @@ import java.util.List;
 public class FavoritesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseUser currentUser;
-    TextView userEmail;
-
-    private RecyclerView moviesView;
-    private MoviesAdapter adapter;
-    private GridLayoutManager gridLayoutManager;
-
-    private List<Movie> moviesList;
-
     private boolean isAuthListenerSet = false;
 
     private static final String TAG = "FavoritesActivity";
@@ -52,7 +43,7 @@ public class FavoritesActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_to_see);
+        setContentView(R.layout.activity_favorites);
 
         Toolbar toolbar = findViewById(R.id.toolbar_my_movies);
         setSupportActionBar(toolbar);
@@ -74,21 +65,21 @@ public class FavoritesActivity extends AppCompatActivity
         title.setTitle(s);
 
         View headerView = navigationView.getHeaderView(0);
-        userEmail = (TextView) headerView.findViewById(R.id.txtUserEmail);
+        TextView userEmail = headerView.findViewById(R.id.txtUserEmail);
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
             String currentUserEmail = currentUser.getEmail();
             userEmail.setText(currentUserEmail);
         }
 
-        moviesView = (RecyclerView) findViewById(R.id.my_movies_list);
-        moviesList = new ArrayList<>();
+        RecyclerView moviesView = findViewById(R.id.my_movies_list);
+        List<Movie> moviesList = new ArrayList<>();
 
-        gridLayoutManager = new GridLayoutManager(this,2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
         moviesView.setLayoutManager(gridLayoutManager);
-        adapter = new MoviesAdapter(this, moviesList);
+        MoviesAdapter adapter = new MoviesAdapter(this, moviesList);
         moviesView.setAdapter(adapter);
 
         //Open the DB and retrieve informations of favorite movies
@@ -157,7 +148,6 @@ public class FavoritesActivity extends AppCompatActivity
         int id = item.getItemId();
         Intent intent;
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             intent = new Intent(this, SettingsActivity.class);
             this.startActivity(intent);
@@ -169,7 +159,6 @@ public class FavoritesActivity extends AppCompatActivity
     /**
      * Open the drawer menu and send the user on the desired activity
      */
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -209,7 +198,7 @@ public class FavoritesActivity extends AppCompatActivity
     /**
      * Listener which checks if user is still logged or not
      */
-    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+    private final FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser user = firebaseAuth.getCurrentUser();

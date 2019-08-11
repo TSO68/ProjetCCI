@@ -24,12 +24,10 @@ import com.google.firebase.auth.FirebaseUser;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
-    FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
 
-    EditText editEmail, editPassword;
-    Button btnLogin, btnToSignUp, btnToDiscover;
-    TextView linkReset;
+    private EditText editEmail, editPassword;
+    private Button btnLogin;
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
@@ -39,12 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editEmail = (EditText) findViewById(R.id.editEmail);
-        editPassword = (EditText)findViewById(R.id.editPassword);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnToSignUp = (Button) findViewById(R.id.btnToSignup);
-        linkReset = (TextView) findViewById(R.id.linkReset);
-        btnToDiscover = (Button) findViewById(R.id.btnToDiscover);
+        editEmail = findViewById(R.id.editEmail);
+        editPassword = findViewById(R.id.editPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        Button btnToSignUp = findViewById(R.id.btnToSignup);
+        TextView linkReset = findViewById(R.id.linkReset);
+        Button btnToDiscover = findViewById(R.id.btnToDiscover);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -94,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -105,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Connect to the app via FireBase
      */
-    public void log_in() {
+    private void log_in() {
 
         final String email = editEmail.getText().toString();
         final String password = editPassword.getText().toString();
@@ -158,16 +156,16 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Shows a Toast message if email and password didn't respect format
      */
-    public void onLoginFailed() {
+    private void onLoginFailed() {
         Toast.makeText(getBaseContext(), getString(R.string.log_in_failed), Toast.LENGTH_LONG).show();
         btnLogin.setEnabled(true);
     }
 
     /**
      * By default, the Activity finishs and user is logged automatically
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode code of the request
+     * @param resultCode code of the result
+     * @param data intent
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

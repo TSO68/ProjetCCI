@@ -1,5 +1,7 @@
 package com.example.projetcci.network;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -9,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +26,7 @@ public class RequestHandler {
      * Method that send the POST request
      * @param requestURL URL of the script to which the request will be sent
      * @param postDataParams HashMap with name value pairs containing the data to be send with the request
-     * @return
+     * @return the URL string
      */
     public String sendPostRequest(String requestURL,
                                   HashMap<String, String> postDataParams) {
@@ -51,7 +54,7 @@ public class RequestHandler {
             //Writing parameters to the request
             //We are using a method getPostDataString which is defined below
             BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
+                    new OutputStreamWriter(os, StandardCharsets.UTF_8));
             writer.write(getPostDataString(postDataParams));
 
             writer.flush();
@@ -79,7 +82,7 @@ public class RequestHandler {
     /**
      * Method that send the GET request
      * @param requestURL URL of the script to which the request will be sent
-     * @return
+     * @return the URL string
      */
     public String sendGetRequest(String requestURL) {
         StringBuilder sb = new StringBuilder();
@@ -93,6 +96,7 @@ public class RequestHandler {
                 sb.append(s + "\n");
             }
         } catch (Exception e) {
+            Log.e("error", e.toString());
         }
         return sb.toString();
     }
@@ -101,7 +105,7 @@ public class RequestHandler {
      * Get the data string for the POST request
      * @param params Hashmap with the data for the request
      * @return the result of the POST request
-     * @throws UnsupportedEncodingException
+     * @throws UnsupportedEncodingException UnsupportedEncodingException
      */
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();

@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
 public class MainActivityTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
+    public final ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void checkIfHeaderViewIsPresent() {

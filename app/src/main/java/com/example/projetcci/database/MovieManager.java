@@ -44,7 +44,7 @@ public class MovieManager {
             " "+KEY_SEEN+" INTEGER,"+
             " "+KEY_FAVORITE+" INTEGER"+
             ");";
-    private MyDatabase myDataBaseSQLite;
+    private final MyDatabase myDataBaseSQLite;
     private SQLiteDatabase db;
 
     //Get the DB instance
@@ -74,7 +74,7 @@ public class MovieManager {
      * Create a movie in DB
      * @param movie object
      */
-    public long createMovie(Movie movie) {
+    public void createMovie(Movie movie) {
 
         ContentValues values = new ContentValues();
         values.put(KEY_ID_MOVIE, movie.getId());
@@ -91,14 +91,14 @@ public class MovieManager {
         values.put(KEY_SEEN, movie.getSeen());
         values.put(KEY_FAVORITE, movie.getFavorite());
 
-        return db.insert(TABLE_NAME,null,values);
+        db.insert(TABLE_NAME, null, values);
     }
 
     /**
      * Update a movie in DB
      * @param movie object
      */
-    public int updateMovie(Movie movie) {
+    public void updateMovie(Movie movie) {
 
         ContentValues values = new ContentValues();
         values.put(KEY_TITLE, movie.getTitle());
@@ -115,7 +115,7 @@ public class MovieManager {
         String where = KEY_ID_MOVIE + " = ?";
         String[] whereArgs = {movie.getId()+""};
 
-        return db.update(TABLE_NAME, values, where, whereArgs);
+        db.update(TABLE_NAME, values, where, whereArgs);
     }
 
     /**
@@ -123,14 +123,14 @@ public class MovieManager {
      * @param runtime of the movie
      * @param id of the movie
      */
-    public int updateRuntime(int runtime, int id) {
+    public void updateRuntime(int runtime, int id) {
 
         ContentValues values = new ContentValues();
         values.put(KEY_RUNTIME, runtime);
         String where = KEY_ID_MOVIE + " = ?";
         String[] whereArgs = {id+""};
 
-        return db.update(TABLE_NAME, values, where, whereArgs);
+        db.update(TABLE_NAME, values, where, whereArgs);
     }
 
     /**

@@ -13,8 +13,8 @@ import com.example.projetcci.models.Genre;
 public class GenreManager {
 
     private static final String TABLE_NAME = "genres";
-    public static final String KEY_ID_GENRE = "id_genre";
-    public static final String KEY_NAME = "name";
+    private static final String KEY_ID_GENRE = "id_genre";
+    private static final String KEY_NAME = "name";
 
     //Create the genres table in the DB
     public static final String CREATE_GENRE_TABLE = "CREATE TABLE "+TABLE_NAME+
@@ -22,7 +22,7 @@ public class GenreManager {
             " "+KEY_ID_GENRE+" INTEGER primary key," +
             " "+KEY_NAME+" TEXT" +
             ");";
-    private MyDatabase myDataBaseSQLite;
+    private final MyDatabase myDataBaseSQLite;
     private SQLiteDatabase db;
 
     //Get the DB instance
@@ -51,15 +51,14 @@ public class GenreManager {
     /**
      * Create a genre in the DB
      * @param genre object
-     * @return
      */
-    public long createGenre(Genre genre) {
+    public void createGenre(Genre genre) {
 
         ContentValues values = new ContentValues();
         values.put(KEY_ID_GENRE, genre.getId());
         values.put(KEY_NAME, genre.getName());
 
-        return db.insert(TABLE_NAME,null,values);
+        db.insert(TABLE_NAME, null, values);
     }
 
     /**
@@ -84,7 +83,7 @@ public class GenreManager {
 
     /**
      * Get all genres from DB
-     * @return
+     * @return list of genres
      */
     public Cursor getGenres() {
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
@@ -92,7 +91,7 @@ public class GenreManager {
 
     /**
      * Check if genres list exists in DB
-     * @return
+     * @return boolean
      */
     public Boolean checkGenres() {
 

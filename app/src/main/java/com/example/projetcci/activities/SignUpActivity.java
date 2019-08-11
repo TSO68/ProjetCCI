@@ -24,11 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
  */
 public class SignUpActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
-    FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
 
-    EditText editNewEmail, editNewPassword, editConfirmPassword;
-    Button btnSignup, btnToLogin;
+    private EditText editNewEmail, editNewPassword, editConfirmPassword;
 
     private static final String TAG = "SignUpActivity";
 
@@ -40,11 +38,11 @@ public class SignUpActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        editNewEmail = (EditText) findViewById(R.id.editNewEmail);
-        editNewPassword = (EditText) findViewById(R.id.editNewPassword);
-        editConfirmPassword = (EditText) findViewById(R.id.editConfirmPassword);
-        btnSignup = (Button) findViewById(R.id.btnSignup);
-        btnToLogin = (Button) findViewById(R.id.btnToLogin);
+        editNewEmail = findViewById(R.id.editNewEmail);
+        editNewPassword = findViewById(R.id.editNewPassword);
+        editConfirmPassword = findViewById(R.id.editConfirmPassword);
+        Button btnSignup = findViewById(R.id.btnSignup);
+        Button btnToLogin = findViewById(R.id.btnToLogin);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -74,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
@@ -85,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * Sign up to the app via Firebase
      */
-    public void sign_up() {
+    private void sign_up() {
 
         final String email = editNewEmail.getText().toString();
         final String password = editNewPassword.getText().toString();
@@ -143,7 +141,7 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * Shows a Toast message if email, password and confirmed password didn't respect format
      */
-    public void onSignupFailed() {
+    private void onSignupFailed() {
         Toast.makeText(getBaseContext(), getString(R.string.sign_up_failed), Toast.LENGTH_LONG).show();
     }
 

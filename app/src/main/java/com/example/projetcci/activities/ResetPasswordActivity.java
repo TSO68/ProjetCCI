@@ -22,10 +22,10 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class ResetPasswordActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
-    EditText editEmailReset;
-    Button btnReset;
+    private EditText editEmailReset;
+    private Button btnReset;
 
     private static final String TAG = "ResetActivity";
 
@@ -37,8 +37,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        editEmailReset = (EditText) findViewById(R.id.editEmailReset);
-        btnReset = (Button) findViewById(R.id.btnReset);
+        editEmailReset = findViewById(R.id.editEmailReset);
+        btnReset = findViewById(R.id.btnReset);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -54,7 +54,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     /**
      * Trigger the email sended by Firebase that allows user to reset his password
      */
-    public void resetPassword() {
+    private void resetPassword() {
 
         final String email = editEmailReset.getText().toString();
 
@@ -94,7 +94,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     /**
      * Shows a Toast message if email didn't respect format
      */
-    public void onResetFailed() {
+    private void onResetFailed() {
         Toast.makeText(getBaseContext(), getString(R.string.password_reset_failed), Toast.LENGTH_LONG).show();
         btnReset.setEnabled(true);
     }

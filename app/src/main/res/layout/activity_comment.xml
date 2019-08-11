@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -33,7 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dip"
         android:inputType="textPersonName"
-        android:hint="@string/comment_author" />
+        android:hint="@string/comment_author"
+        android:importantForAutofill="no"
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/editText"
@@ -45,7 +48,9 @@
         android:layout_marginEnd="10dip"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:hint="@string/comment_text" />
+        android:hint="@string/comment_text"
+        android:importantForAutofill="no"
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/btnSend"

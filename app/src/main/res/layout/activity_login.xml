@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -38,7 +39,9 @@
             android:layout_margin="10dip"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:hint="@string/your_email" />
+            android:hint="@string/your_email"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -55,7 +58,9 @@
             android:layout_margin="10dip"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:hint="@string/your_password" />
+            android:hint="@string/your_password"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
 
     </android.support.design.widget.TextInputLayout>
 

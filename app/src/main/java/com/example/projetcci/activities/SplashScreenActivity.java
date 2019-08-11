@@ -14,10 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
  */
 public class SplashScreenActivity extends AppCompatActivity {
 
-    //Timer = 3 sec
-    private static int SPLASH_TIMEOUT = 3000;
-
-    FirebaseUser mUser;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +22,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         mUser= FirebaseAuth.getInstance().getCurrentUser();
+
+        //Timer = 3 sec
+        final int SPLASH_TIMEOUT = 3000;
 
         /*
          * Sets the time that the screen does appear before sending user

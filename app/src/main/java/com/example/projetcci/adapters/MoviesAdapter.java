@@ -25,8 +25,8 @@ import static com.example.projetcci.utils.Constants.IMAGE_BASE_URL;
  */
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
-    private Context context;
-    private List<Movie> movies;
+    private final Context context;
+    private final List<Movie> movies;
 
     /**
      * Set up the adapter with the necessary configuration
@@ -67,10 +67,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
      * The view of every item that is displayed in the grid/list.
      */
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        ImageView poster;
+        final TextView title;
+        final ImageView poster;
 
-        public MovieViewHolder(View itemView) {
+        MovieViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.item_movie_title);
             title.setSelected(true);
@@ -81,7 +81,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                 public void onClick(View view) {
                     Intent intent;
                     intent = new Intent(context , MovieDetailActivity.class);
-                    intent.putExtra("MOVIE_DETAILS", (Serializable) movies.get(getAdapterPosition()));
+                    intent.putExtra("MOVIE_DETAILS", movies.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });
@@ -92,7 +92,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
          * Fill views with the needed data
          * @param movie object
          */
-        public void bind(Movie movie) {
+        void bind(Movie movie) {
             title.setText(movie.getTitle());
             Glide.with(context)
                     .load(IMAGE_BASE_URL + movie.getPosterPath())

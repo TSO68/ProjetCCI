@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 public class LoginActivityTest {
 
     @Rule
-    public ActivityTestRule<LoginActivity> rule = new ActivityTestRule<>(LoginActivity.class);
+    public final ActivityTestRule<LoginActivity> rule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
     public void checkIfTextViewIsPresent() {

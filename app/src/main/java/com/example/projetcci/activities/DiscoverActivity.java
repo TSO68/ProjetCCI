@@ -16,8 +16,6 @@ import com.example.projetcci.R;
  */
 public class DiscoverActivity extends AppCompatActivity {
 
-    private WebView mWebView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +24,7 @@ public class DiscoverActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        mWebView = (WebView) findViewById(R.id.webview_projetcci);
+        WebView mWebView = findViewById(R.id.webview_projetcci);
 
         //Configure the Webview
         WebSettings webSettings = mWebView.getSettings();

@@ -38,12 +38,11 @@ public class QuotesActivity extends AppCompatActivity {
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
 
-    EditText editCharacter, editQuote;
-    Button addQuote;
-    ProgressBar progressBar;
-    ListView listQuotes;
+    private EditText editCharacter, editQuote;
+    private ProgressBar progressBar;
+    private ListView listQuotes;
 
-    List<Quote> quotesList;
+    private List<Quote> quotesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +53,15 @@ public class QuotesActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Get id and title of concerned movie from MovieDetailActivity
-        final int id = getIntent().getExtras().getInt("ID_MOVIE");
         final String title = getIntent().getExtras().getString("TITLE_MOVIE");
 
         actionBar.setTitle(title);
 
-        editCharacter = (EditText) findViewById(R.id.editCharacter);
-        editQuote = (EditText) findViewById(R.id.editQuote);
-        addQuote = (Button) findViewById(R.id.btnAdd);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarQuotes);
-        listQuotes = (ListView) findViewById(R.id.listQuotes);
+        editCharacter = findViewById(R.id.editCharacter);
+        editQuote = findViewById(R.id.editQuote);
+        Button addQuote = findViewById(R.id.btnAdd);
+        progressBar = findViewById(R.id.progressBarQuotes);
+        listQuotes = findViewById(R.id.listQuotes);
 
         quotesList = new ArrayList<>();
 
@@ -133,7 +131,7 @@ public class QuotesActivity extends AppCompatActivity {
     /**
      * Refresh the quotes list
      * @param quotes JSONarray of quotes from remote database
-     * @throws JSONException
+     * @throws JSONException JSONException
      */
     private void refreshQuotesList(JSONArray quotes) throws JSONException {
         quotesList.clear();
@@ -156,9 +154,9 @@ public class QuotesActivity extends AppCompatActivity {
      * Class which calls the RequestHandler for the adequate request
      */
     private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
-        String url;
-        HashMap<String, String> params;
-        int requestCode;
+        final String url;
+        final HashMap<String, String> params;
+        final int requestCode;
 
         /**
          * Constructor of the API request
@@ -221,13 +219,13 @@ public class QuotesActivity extends AppCompatActivity {
      * The adapter for the quotes list
      */
     class QuotesAdapter extends ArrayAdapter<Quote> {
-        List<Quote> quotesList;
+        final List<Quote> quotesList;
 
         /**
          * Set up the adapter with the necessary configuration
          * @param quotesList list of quotes retrieved from the remote DB
          */
-        public QuotesAdapter(List<Quote> quotesList) {
+        QuotesAdapter(List<Quote> quotesList) {
             super(QuotesActivity.this, R.layout.quote_card, quotesList);
             this.quotesList = quotesList;
         }
@@ -235,9 +233,9 @@ public class QuotesActivity extends AppCompatActivity {
         /**
          * Sets the content of each quote card and return it
          * @param position in the list
-         * @param convertView
-         * @param parent
-         * @return
+         * @param convertView View
+         * @param parent Viewgroup
+         * @return a quote
          */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

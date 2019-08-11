@@ -41,7 +41,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -56,10 +55,6 @@ import static com.example.projetcci.utils.Constants.API_KEY;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseUser currentUser;
-    TextView userEmail;
-
-    private RecyclerView moviesView;
     private MoviesAdapter adapter;
     private GridLayoutManager gridLayoutManager;
 
@@ -96,9 +91,9 @@ public class MainActivity extends AppCompatActivity
         title.setTitle(s);
 
         View headerView = navigationView.getHeaderView(0);
-        userEmail = (TextView) headerView.findViewById(R.id.txtUserEmail);
+        TextView userEmail = headerView.findViewById(R.id.txtUserEmail);
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
             String currentUserEmail = currentUser.getEmail();
@@ -114,7 +109,7 @@ public class MainActivity extends AppCompatActivity
             new loadGenres().execute();
         }
 
-        moviesView = (RecyclerView) findViewById(R.id.movies_list);
+        RecyclerView moviesView = findViewById(R.id.movies_list);
         moviesList = new ArrayList<>();
         load_movies(currentPage);
         gridLayoutManager = new GridLayoutManager(this,2);
@@ -225,7 +220,7 @@ public class MainActivity extends AppCompatActivity
 
                         //Get the genre ids list of each movies
                         JSONArray genresIds = object.optJSONArray("genre_ids");
-                        ArrayList<String> genre = new ArrayList<String>();
+                        ArrayList<String> genre = new ArrayList<>();
 
                         for (int j = 0; j < genresIds.length(); j++) {
                             genre.add(genresIds.getString(j));
@@ -299,7 +294,7 @@ public class MainActivity extends AppCompatActivity
 
                             //Get the genre ids list of each movies
                             JSONArray genresIds = object.optJSONArray("genre_ids");
-                            ArrayList<String> genre = new ArrayList<String>();
+                            ArrayList<String> genre = new ArrayList<>();
 
                             for (int j = 0; j < genresIds.length(); j++) {
                                 genre.add(genresIds.getString(j));
@@ -417,7 +412,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Intent intent;
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             intent = new Intent(this, SettingsActivity.class);
             this.startActivity(intent);
@@ -429,7 +423,6 @@ public class MainActivity extends AppCompatActivity
     /**
      * Open the drawer menu and send user on the desired activity
      */
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -469,7 +462,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * Listener which checks if user is still logged or not
      */
-    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+    private final FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser user = firebaseAuth.getCurrentUser();

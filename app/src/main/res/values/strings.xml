@@ -8,7 +8,6 @@
     <string name="log_out_successful">Log out successful</string>
 
     <!-- nav_header_main.xml -->
-    <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
@@ -33,6 +32,7 @@
     <string name="no_description">No description available</string>
 
     <!-- activity_movie_detail, MovieDetailActivity -->
+    <string name="time">%1$d min</string>
     <string name="add_to_see">Added in To See list</string>
     <string name="remove_to_see">Removed from To See list</string>
     <string name="add_seen">Added in Seen list</string>
@@ -50,10 +50,6 @@
     <string name="stop_record">Stop record</string>
     <string name="play">Play</string>
     <string name="stop_playing">Stop playing</string>
-    <string name="button_record" translatable="false">Record</string>
-    <string name="button_stop_record" translatable="false">Stop recording</string>
-    <string name="button_play" translatable="false">Play</string>
-    <string name="button_stop_play" translatable="false">Stop playing</string>
     <string name="start_recording">Recording started</string>
     <string name="complete_recording">Recording Completed</string>
     <string name="play_recording">Recording Playing</string>

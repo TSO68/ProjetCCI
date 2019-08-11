@@ -27,10 +27,7 @@ import static com.example.projetcci.utils.Constants.CREATE_COMMENT_BASE_URL;
  */
 public class CommentActivity extends AppCompatActivity {
 
-    EditText editAuthor, editText;
-    Button btnSend;
-
-    FirebaseUser currentUser;
+    private EditText editAuthor, editText;
 
     private static final int CODE_POST_REQUEST = 1025;
     private static final String TAG = "CommentActivity";
@@ -44,12 +41,12 @@ public class CommentActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getString(R.string.menu_opinion));
 
-        editAuthor = (EditText) findViewById(R.id.editAuthor);
-        editText = (EditText) findViewById(R.id.editText);
+        editAuthor = findViewById(R.id.editAuthor);
+        editText = findViewById(R.id.editText);
 
-        btnSend = (Button) findViewById(R.id.btnSend);
+        Button btnSend = findViewById(R.id.btnSend);
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
             String currentUserEmail = currentUser.getEmail();
@@ -104,9 +101,9 @@ public class CommentActivity extends AppCompatActivity {
      * Class which calls the RequestHandler for the adequate request
      */
     private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
-        String url;
-        HashMap<String, String> params;
-        int requestCode;
+        final String url;
+        final HashMap<String, String> params;
+        final int requestCode;
 
         /**
          * Constructor of the API request
