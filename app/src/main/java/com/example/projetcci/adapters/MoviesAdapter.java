@@ -15,7 +15,6 @@ import com.example.projetcci.R;
 import com.example.projetcci.activities.MovieDetailActivity;
 import com.example.projetcci.models.Movie;
 
-import java.io.Serializable;
 import java.util.List;
 
 import static com.example.projetcci.utils.Constants.IMAGE_BASE_URL;

@@ -282,7 +282,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             StringBuilder genreStr = new StringBuilder();
             for (String str : genresArray) {
                 int genreId = 0;
-                String genreName = "";
+                String genreName;
 
                 //Needed if movie has no genre recorded by TMDB
                 if (!str.equals("")) {
