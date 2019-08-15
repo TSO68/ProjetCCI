@@ -275,7 +275,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             float f = (float) d;
             tmdbRating.setRating(f/2);
 
-            //Get the string of all genres and convert it in array of every genre splitted by a comma
+            //Get the string of all genres and convert it in array of every genre splitted with a comma
             String genresString = details.getGenres();
             ArrayList<String> genresArray = new ArrayList<>(Arrays.asList(genresString.split(",")));
 
@@ -296,19 +296,15 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                 //Needed if movie has no genre recorded by TMDB
                 if (genreId != 0) {
-                    //TODO : Think if it's not better to get directly the name from DB
                     //Get informations of each genre with his id
-                    Genre aGenre = g.getGenre(genreId);
-
-                    //Get the genre name
-                    genreName = aGenre.getName();
+                    genreName = mg.getGenreName(genreId, details.getId());
                 } else {
                     genreName = getResources().getString(R.string.no_genre);
                 }
 
-
                 genreStr.append(genreName).append(", ");
             }
+
             genreStr = new StringBuilder(genreStr.length() > 0 ? genreStr.substring(0, genreStr.length() - 2) : genreStr.toString());
             genresList.setText(genreStr.toString());
         }

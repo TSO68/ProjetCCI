@@ -80,7 +80,6 @@ public class MovieGenresManager {
         }
     }
 
-    //TODO : Correct this request and test it if necessary
     /**
      * Get the genre name
      * @param id_genre id of the genre
@@ -90,10 +89,11 @@ public class MovieGenresManager {
     public String getGenreName(int id_genre, int id_movie) {
         String name = "";
 
-        Cursor c = db.rawQuery("SELECT genre.name FROM genre INNER JOIN movie_genres ON genres.id_genre = movie_genres.genre_id WHERE "+ TABLE_NAME +" WHERE movie_genres.genre_id =" + id_genre + " movie_genres.id_movie =" + id_movie, null);
+        Cursor c = db.rawQuery("SELECT genres.name FROM genres INNER JOIN " + TABLE_NAME + " ON genres.id_genre = " + KEY_ID_GENRE
+                + " WHERE " + KEY_ID_GENRE + " = " + id_genre + " AND " + KEY_ID_MOVIE + " = " + id_movie, null);
 
         if(c.moveToFirst()){
-            name = c.getString(c.getColumnIndex("genre.name"));
+            name = c.getString(c.getColumnIndex("genres.name"));
         }
         c.close();
 
@@ -110,8 +110,8 @@ public class MovieGenresManager {
      */
     public int getFavoriteGenre() {
 
-        //TODO : Upgrade the request to get only seen movies
         Cursor c = db.rawQuery("SELECT " +  KEY_ID_GENRE + ", COUNT(*) AS count FROM " + TABLE_NAME
+                + " WHERE " + KEY_ID_MOVIE + " IN (SELECT movies.id_movie FROM movies WHERE seen = 1) "
                 + " GROUP BY " + KEY_ID_GENRE + " ORDER BY count DESC LIMIT 1", null);
 
         int genre = 0;
