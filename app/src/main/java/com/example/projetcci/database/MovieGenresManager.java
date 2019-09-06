@@ -93,7 +93,7 @@ public class MovieGenresManager {
                 + " WHERE " + KEY_ID_GENRE + " = " + id_genre + " AND " + KEY_ID_MOVIE + " = " + id_movie, null);
 
         if(c.moveToFirst()){
-            name = c.getString(c.getColumnIndex("genres.name"));
+            name = c.getString(0);
         }
         c.close();
 
