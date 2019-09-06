@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjetCCI</string>
+    <string name="app_name">Movie7</string>
 
     <!-- MainActivity, ToSeeActivity, SeenActivity, FavoritesActivity -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -71,14 +71,14 @@
 
     <!-- activity_login.xml -->
     <!-- activity_signup.xml -->
-    <string name="log_in_to_projetcci">Log in to ProjetCCI</string>
+    <string name="log_in_to_projetcci">Log in to Movie7</string>
     <string name="your_email">Your email</string>
     <string name="your_password">Your password</string>
     <string name="log_in">Log in</string>
     <string name="no_account_yet_create_one">No account yet ? Create one</string>
     <string name="forgot_password">Forgot your password ?</string>
-    <string name="sign_up_to_projetcci">Sign up to ProjetCCI</string>
-    <string name="discover_projetcci">What is ProjetCCI ? Find out !</string>
+    <string name="sign_up_to_projetcci">Sign up to Movie7</string>
+    <string name="discover_projetcci">What is Movie7 ? Find out !</string>
     <string name="confirm_your_password">Confirm your password</string>
     <string name="sign_up">Sign up</string>
     <string name="already_a_member_login">Already a member ? Log in</string>

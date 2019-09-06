@@ -36,7 +36,7 @@ public class LoginActivityTest {
         LoginActivity activity = rule.getActivity();
         TextView tvIntro = activity.findViewById(R.id.titleLogin);
 
-        assertThat(tvIntro.getText().toString(), is("Se connecter à ProjetCCI"));
+        assertThat(tvIntro.getText().toString(), is("Se connecter à Movie7"));
     }
 
 }

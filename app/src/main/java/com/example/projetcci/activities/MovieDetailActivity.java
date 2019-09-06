@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.projetcci.models.Genre;
 import com.example.projetcci.database.GenreManager;
 import com.example.projetcci.models.Movie;
 import com.example.projetcci.database.MovieGenresManager;
@@ -316,7 +315,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 if (checkPermission()) {
 
                     //Create root directory for the app, if it doesn't exist yet
-                    String rootFolder = File.separator + "ProjetCCI";
+                    String rootFolder = File.separator + "Movie7";
                     File dirApp = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), rootFolder);
                     if (!dirApp.exists())
                     {
@@ -399,7 +398,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                 try {
                     //Get root, user and movie directories, and file path
-                    String rootFolder = File.separator + "ProjetCCI";
+                    String rootFolder = File.separator + "Movie7";
                     String userFolder = File.separator + user;
                     String movieFolder = File.separator + details.getId();
                     File dirMovie = new File(Environment.getExternalStorageDirectory().getAbsolutePath()

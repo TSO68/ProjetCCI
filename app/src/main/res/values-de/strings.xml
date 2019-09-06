@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProjetCCI</string>
+    <string name="app_name">Movie7</string>
     <string name="action_settings">Einstellungen</string>
     <string name="add_favorite">Zu Favoriten hinzugefügt</string>
     <string name="add_seen">Zu gesehenen Filmen hinzugefügt</string>
@@ -35,10 +35,10 @@
     <string name="communicate">Kommunizieren</string>
     <string name="log_out">Abmelden</string>
     <string name="already_a_member_login">Sie sind bereits Kunde ?</string>
-    <string name="log_in_to_projetcci">Anmeldung zu ProjetCCI</string>
-    <string name="no_account_yet_create_one">Neu bei ProjetCCI ? Konto erstellen</string>
+    <string name="log_in_to_projetcci">Anmeldung zu Movie7</string>
+    <string name="no_account_yet_create_one">Neu bei Movie7 ? Konto erstellen</string>
     <string name="sign_up">Registrieren</string>
-    <string name="sign_up_to_projetcci">Registrierung zu ProjetCCI</string>
+    <string name="sign_up_to_projetcci">Registrierung zu Movie7</string>
     <string name="your_email">Ihre Email Adresse</string>
     <string name="your_password">Ihr Passwort</string>
     <string name="authenticating">Verbindung…</string>
@@ -97,6 +97,6 @@
     <string name="add_quote">Ein Zitat hinzufügen</string>
     <string name="set_character">Bitte geben Sie den Namen einer Figur ein</string>
     <string name="total_viewing">Gesamtzeit der Vorfürung</string>
-    <string name="discover_projetcci">Was ist ProjetCCI ? Finden Sie heraus !</string>
+    <string name="discover_projetcci">Was ist Movie7 ? Finden Sie heraus !</string>
     <string name="time">%1$d min</string>
 </resources>

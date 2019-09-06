@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProjetCCI</string>
+    <string name="app_name">Movie7</string>
     <string name="action_settings">Paramètres</string>
     <string name="add_favorite">Ajouté aux favoris</string>
     <string name="add_seen">Ajouté aux films vus</string>
@@ -36,11 +36,11 @@
     <string name="log_out">Se déconnecter</string>
     <string name="already_a_member_login">Déjà membre ? Se connecter</string>
     <string name="log_in">Se connecter</string>
-    <string name="log_in_to_projetcci">Se connecter à ProjetCCI</string>
+    <string name="log_in_to_projetcci">Se connecter à Movie7</string>
     <string name="no_account_yet_create_one">Pas encore de compte ? S\'inscrire</string>
     <string name="confirm_your_password">Confirmer le mot de passe</string>
     <string name="sign_up">S\'inscrire</string>
-    <string name="sign_up_to_projetcci">S\'inscrire à ProjetCCI</string>
+    <string name="sign_up_to_projetcci">S\'inscrire à Movie7</string>
     <string name="your_email">Votre email</string>
     <string name="your_password">Votre mot de passe</string>
     <string name="authenticating">Connexion…</string>
@@ -97,6 +97,6 @@
     <string name="see_quotes">Voir les citations</string>
     <string name="set_character">Veuillez saisir le nom d\'un personnage</string>
     <string name="set_quote">Veuillez saisir une citation</string>
-    <string name="discover_projetcci">C\'est quoi ProjetCCI ? Découvrir !</string>
+    <string name="discover_projetcci">C\'est quoi Movie7 ? Découvrir !</string>
     <string name="time">%1$d min</string>
 </resources>
