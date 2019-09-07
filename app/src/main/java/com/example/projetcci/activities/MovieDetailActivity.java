@@ -13,6 +13,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -655,5 +657,45 @@ public class MovieDetailActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp(){
         finish();
         return true;
+    }
+
+    /**
+     * Inflate the menu; this adds items to the action bar if it is present.
+     * @param menu A Menu
+     * @return boolean
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.share, menu);
+        return true;
+    }
+
+    /**
+     * Set the action depanding on the item
+     * @param item a item in the menu
+     * @return the item
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        final Movie details = (Movie) getIntent().getExtras().getSerializable("MOVIE_DETAILS");
+        String movieTitle = details.getTitle();
+
+        //Open the share action with the movie title
+        if (id == R.id.action_share) {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.viewing_sharing, movieTitle));
+            sendIntent.setType("text/plain");
+
+            //Open a chooser between different app (Twitter, Messages, Whatsapp etc.)
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

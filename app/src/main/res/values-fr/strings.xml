@@ -99,4 +99,6 @@
     <string name="set_quote">Veuillez saisir une citation</string>
     <string name="discover_projetcci">C\'est quoi Movie7 ? Découvrir !</string>
     <string name="time">%1$d min</string>
+    <string name="menu_share">Partager le visionnage</string>
+    <string name="viewing_sharing">Je viens de voir le film %1$s</string>
 </resources>

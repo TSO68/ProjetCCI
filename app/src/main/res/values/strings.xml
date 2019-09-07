@@ -28,6 +28,9 @@
     <!-- activity_movie_detail.xml, movie_card.xml -->
     <string name="movie_image_description">Image from the show</string>
 
+    <!-- share.xml -->
+    <string name="menu_share">Share the viewing</string>
+
     <!-- MainActivity -->
     <string name="no_description">No description available</string>
 
@@ -57,6 +60,7 @@
     <string name="play_stopped">Playing stopped</string>
     <string name="permissions_granted">Permissions granted</string>
     <string name="permissions_denied">Permissions denied</string>
+    <string name="viewing_sharing">I just saw the movie %1$s</string>
 
     <!-- activity_comment.xml -->
     <string name="comment_explanation">This space allows you to give your opinion on this application, your ideas for improvements, or anything that can help our team of elite developers</string>

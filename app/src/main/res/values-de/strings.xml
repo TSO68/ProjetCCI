@@ -99,4 +99,6 @@
     <string name="total_viewing">Gesamtzeit der Vorfürung</string>
     <string name="discover_projetcci">Was ist Movie7 ? Finden Sie heraus !</string>
     <string name="time">%1$d min</string>
+    <string name="menu_share">Anzeige teilen</string>
+    <string name="viewing_sharing">Ich habe gerade %1$s gesehen</string>
 </resources>
