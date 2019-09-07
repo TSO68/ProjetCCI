@@ -397,13 +397,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Inflate the menu; this adds items to the action bar if it is present.
+     * @param menu A Menu
+     * @return boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    /**
+     * Set the action depanding on the item
+     * @param item a item in the menu
+     * @return the item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
