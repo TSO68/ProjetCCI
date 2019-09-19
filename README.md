@@ -1,7 +1,7 @@
 # Projet d'application Android / CCI
 
 ## Roadmap
-* [x] Envoi d'une notification de rappel si l'application n'est pas utilisée depuis 7 jours
+* [x] Gestion des notifications Firebase
 * [x] Partage d'une visionnage d'un film sur les réseaux sociaux
 * [x] Gestion des citations
 * [x] Création d'une page de présentation de l'application
