@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -39,7 +38,7 @@ public class RequestHandler {
             url = new URL(requestURL);
 
             //Creating an htmlurl connection
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 
             //Configuring connection properties
             conn.setReadTimeout(15000);
@@ -88,7 +87,7 @@ public class RequestHandler {
         StringBuilder sb = new StringBuilder();
         try {
             URL url = new URL(requestURL);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
             String s;

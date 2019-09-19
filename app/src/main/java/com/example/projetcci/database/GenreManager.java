@@ -70,7 +70,9 @@ public class GenreManager {
 
         Genre g = new Genre(0,"");
 
-        Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME +" WHERE "+ KEY_ID_GENRE + "="+id, null);
+        Cursor c = db.query(TABLE_NAME, null, KEY_ID_GENRE + " = ?",
+                new String[] {String.valueOf(id)}, null, null, null);
+
         if (c.moveToFirst()) {
             g.setId(c.getInt(c.getColumnIndex(KEY_ID_GENRE)));
             g.setName(c.getString(c.getColumnIndex(KEY_NAME)));

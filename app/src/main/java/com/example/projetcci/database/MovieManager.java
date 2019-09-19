@@ -155,7 +155,9 @@ public class MovieManager {
         Movie a = new Movie(0,"","","","",0,0,
                 "", "", 0,0, 0 ,0);
 
-        Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME +" WHERE "+KEY_ID_MOVIE + "="+id, null);
+        Cursor c = db.query(TABLE_NAME, null, KEY_ID_MOVIE + " = ?",
+                new String[] {String.valueOf(id)}, null, null, null);
+
         if (c.moveToFirst()) {
             a.setId(c.getInt(c.getColumnIndex(KEY_ID_MOVIE)));
             a.setTitle(c.getString(c.getColumnIndex(KEY_TITLE)));
@@ -182,7 +184,8 @@ public class MovieManager {
      */
     public Boolean checkMovie(int id) {
 
-        Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE " + KEY_ID_MOVIE + "=" +id, null);
+        Cursor c = db.query(TABLE_NAME, null, KEY_ID_MOVIE + " = ?",
+                new String[] {String.valueOf(id)}, null, null, null);
 
         if (c.moveToFirst()) {
             c.close();
@@ -231,7 +234,8 @@ public class MovieManager {
         Movie a = new Movie(0,"","","","",0,0,
                 "", "", 0,0, 0 ,0);
 
-        Cursor c = db.rawQuery("SELECT " + KEY_MY_RATING + " FROM " + TABLE_NAME + " WHERE " + KEY_ID_MOVIE + "=" +id, null);
+        Cursor c = db.rawQuery("SELECT " + KEY_MY_RATING + " FROM " + TABLE_NAME + " WHERE " + KEY_ID_MOVIE + " = ?",
+                new String[] {String.valueOf(id)});
 
         if (c.moveToFirst()) {
             a.setMyRating(c.getDouble(c.getColumnIndex(KEY_MY_RATING)));

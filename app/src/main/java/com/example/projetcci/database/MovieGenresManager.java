@@ -62,14 +62,14 @@ public class MovieGenresManager {
 
     /**
      * Check if couple with id of the genre and id of the movie already exists in DB
-     * @param idGenre id of the genre
-     * @param idMovie id of the movie
+     * @param id_genre id of the genre
+     * @param id_movie id of the movie
      * @return a boolean
      */
-    public Boolean checkMovieGenres(int idGenre, int idMovie) {
+    public Boolean checkMovieGenres(int id_genre, int id_movie) {
 
-        Cursor c = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE " + KEY_ID_GENRE
-                + "=" + idGenre + " AND " + KEY_ID_MOVIE + "=" + idMovie, null);
+        Cursor c = db.query(TABLE_NAME, null, KEY_ID_GENRE + " = ? AND " + KEY_ID_MOVIE + " = ?",
+                new String[] {String.valueOf(id_genre), String.valueOf(id_movie)}, null, null, null);
 
         if (c.moveToFirst()) {
             c.close();
@@ -90,7 +90,8 @@ public class MovieGenresManager {
         String name = "";
 
         Cursor c = db.rawQuery("SELECT genres.name FROM genres INNER JOIN " + TABLE_NAME + " ON genres.id_genre = " + KEY_ID_GENRE
-                + " WHERE " + KEY_ID_GENRE + " = " + id_genre + " AND " + KEY_ID_MOVIE + " = " + id_movie, null);
+                + " WHERE " + KEY_ID_GENRE + " = ? AND " + KEY_ID_MOVIE + " = ?",
+                new String[] {String.valueOf(id_genre), String.valueOf(id_movie)});
 
         if(c.moveToFirst()){
             name = c.getString(0);
