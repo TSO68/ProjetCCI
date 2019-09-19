@@ -140,4 +140,7 @@
     <string name="quote_added">Quote added</string>
     <string name="set_character">Please set a character name</string>
     <string name="set_quote">Please set a quote</string>
+
+    <!-- NotificationsService -->
+    <string name="hey" translatable="false">Hey !</string>
 </resources>
