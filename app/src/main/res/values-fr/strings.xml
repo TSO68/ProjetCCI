@@ -102,8 +102,8 @@
     <string name="menu_share">Partager le visionnage</string>
     <string name="viewing_sharing">Je viens de voir le film %1$s</string>
     <string name="create_account">Créez un compte, obtenez une liste de films populaires ou cherchez ce que vous voulez !</string>
-    <string name="discover_movies">Découvrez les films du moment</string>
-    <string name="get_details">Obtenez les infos sur un fim</string>
+    <string name="discover_movies">Découvrez les films populaires du moment</string>
+    <string name="get_details">Obtenez les infos sur un film</string>
     <string name="get_statistics">Obtenez des statistiques sur votre bibliothèque de films !</string>
     <string name="get_stats">Obtenez des statistiques</string>
     <string name="like_movie">Vous aimez un film ?</string>
