@@ -1,6 +1,8 @@
 package com.example.projetcci.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         /*
          * Sets the time that the screen does appear before sending user
          * on MainActivity if he's connected
+         * on IntroActivity the first time the app is opened
          * on LoginActivity if he's not connected
          */
         new Handler().postDelayed(new Runnable() {
@@ -37,7 +40,20 @@ public class SplashScreenActivity extends AppCompatActivity {
                 if (mUser != null) {
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 } else {
-                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                    //Get shared preferences
+                    SharedPreferences sp = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+
+                    //Check if the app has been opened before, if not open IntroActivity, else open LoginActivity
+                    if (!sp.getBoolean("first", false)) {
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putBoolean("first", true);
+                        editor.apply();
+                        Intent intent = new Intent(SplashScreenActivity.this, IntroActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                    }
                 }
                 finish();
             }
