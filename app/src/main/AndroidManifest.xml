@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.IntroActivity" />
+        <activity
+            android:name=".activities.IntroActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.QuotesActivity" />
         <activity android:name=".activities.DiscoverActivity" />
         <activity
