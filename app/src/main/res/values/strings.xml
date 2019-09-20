@@ -143,4 +143,16 @@
 
     <!-- NotificationsService -->
     <string name="hey" translatable="false">Hey !</string>
+
+    <!-- Intro Activity -->
+    <string name="discover_movies">Discover popular movies</string>
+    <string name="create_account">Create an account, get a list of movies, or search what you want !</string>
+    <string name="movie_details">More details about a movie ?</string>
+    <string name="get_details">Get details about a movie</string>
+    <string name="like_movie">Like a movie ?</string>
+    <string name="mark_movie">Mark a movie as favorite, seen or to see, rate it or give your opinion</string>
+    <string name="vader_quote">No, I am your father !</string>
+    <string name="share_quotes">Share movie quotes with the community !</string>
+    <string name="get_stats">Get statistics</string>
+    <string name="get_statistics">Get statistics about your movie library !</string>
 </resources>

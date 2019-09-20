@@ -101,4 +101,14 @@
     <string name="time">%1$d min</string>
     <string name="menu_share">Anzeige teilen</string>
     <string name="viewing_sharing">Ich habe gerade %1$s gesehen</string>
+    <string name="vader_quote">Nein, ich bin dein Vater !</string>
+    <string name="share_quotes">Die Filmzitate mit der Community teilen !</string>
+    <string name="movie_details">Mehr Details über einen Film ?</string>
+    <string name="like_movie">Haben Sie den Film geschätzt ?</string>
+    <string name="mark_movie">Bewerten Sie einen Film als Favorit, gesehen oder gesehen, bewerten Sie oder geben Sie Ihre Meinung</string>
+    <string name="get_stats">Statistiken abrufen</string>
+    <string name="get_statistics">Holen Sie sich Statistiken in Ihre Filmbibliothek !</string>
+    <string name="get_details">Holen Sie sich Informationen zu einem Film</string>
+    <string name="discover_movies">Entdecken Sie die beliebtesten Filme des Augenblicks</string>
+    <string name="create_account">"Erstellen Sie ein Konto, holen Sie sich eine Liste der beliebtesten Filme oder finden Sie, was Sie möchten ! "</string>
 </resources>
